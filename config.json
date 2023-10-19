@@ -1,0 +1,9 @@
+{
+    "development": {
+      "username": "root",
+      "password": "mysql123.",
+      "database": "drawdbnode",
+      "host": "localhost",
+      "dialect": "mysql"
+    }
+}
