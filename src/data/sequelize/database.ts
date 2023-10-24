@@ -9,7 +9,6 @@ const sequelize = new Sequelize(config.database, config.username,config.password
 import './models/ModelsInit' // initialize models
 
 
-
 sequelize
   // .sync({force:true})
   .sync()

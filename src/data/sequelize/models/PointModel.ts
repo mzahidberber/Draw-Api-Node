@@ -1,11 +1,15 @@
 import { DataTypes,Model } from 'sequelize'
 import { sequelize } from '../database'
+import Point from '../../../core/models/concrete/Point';
 
-class PointModel extends Model
+class PointModel extends Model implements Point
 {
     id!:number
-    public readonly createdAt!: Date;
-    public readonly updatedAt!: Date;
+    x!: number;
+    y!: number;
+    ElementId!:number
+    readonly createdAt!: Date;
+    readonly updatedAt!: Date;
 }
 
 PointModel.init({
@@ -15,6 +19,8 @@ PointModel.init({
         allowNull:false,
         primaryKey:true
     },
+    x:DataTypes.DOUBLE,
+    y:DataTypes.DOUBLE,
 },{
     sequelize: sequelize,
     modelName: 'Point',

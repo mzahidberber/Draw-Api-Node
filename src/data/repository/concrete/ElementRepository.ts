@@ -1,31 +1,15 @@
-import { injectable } from 'inversify'
-import {IElementRepository} from '../../../core/data/abstract/IElementRepository'
+import { inject, injectable } from 'inversify'
+import {IElementRepository} from '../abstract/IElementRepository'
 import Element from '../../../core/models/concrete/Element'
+import EntityRepositoryAbstract from '../abstract/EntityRepositoryAbstract'
+import { Model, ModelCtor } from 'sequelize-typescript'
+import TYPES from '../../dependencyresolvers/data-types'
 
 @injectable()
-class ElementRepository  implements IElementRepository {
-    GetAllAsync(): Promise<Element[]> {
-        throw new Error('Method not implemented.')
+class ElementRepository extends EntityRepositoryAbstract<Element>  implements IElementRepository {
+    constructor(@inject(TYPES.ElementModel) private model: ModelCtor<Model> ){
+        super(model)
     }
-    GetWhereAsync(filter: {}): Promise<Element[]> {
-        throw new Error('Method not implemented.')
-    }
-    GetByIdAsync(id: number): Promise<Element> {
-        throw new Error('Method not implemented.')
-    }
-    AddAsync(entity: Element): Promise<void> {
-        throw new Error('Method not implemented.')
-    }
-    Update(entity: Element): void {
-        throw new Error('Method not implemented.')
-    }
-    Delete(entity: Element): void {
-        throw new Error('Method not implemented.')
-    }
-    CommitAsync(state: boolean): Promise<boolean> {
-        throw new Error('Method not implemented.')
-    }
-   
 }
 
 export default ElementRepository

@@ -1,28 +1,16 @@
 
-import {IElementRepository} from '../../../core/data/abstract/IElementRepository'
-import Element from '../../../core/models/concrete/Element'
+import { Model, ModelCtor } from 'sequelize-typescript'
+import Point from '../../../core/models/concrete/Point'
+import EntityRepositoryAbstract from '../abstract/EntityRepositoryAbstract'
+import { inject, injectable } from 'inversify'
+import { IPointRepository } from '../abstract/IPointRepository'
+import TYPES from '../../dependencyresolvers/data-types'
 
-class PointRepository implements IElementRepository {
-    GetAllAsync(): Promise<Element[]> {
-        throw new Error('Method not implemented.')
-    }
-    GetWhereAsync(filter: {}): Promise<Element[]> {
-        throw new Error('Method not implemented.')
-    }
-    GetByIdAsync(id: number): Promise<Element> {
-        throw new Error('Method not implemented.')
-    }
-    AddAsync(entity: Element): Promise<void> {
-        throw new Error('Method not implemented.')
-    }
-    Update(entity: Element): void {
-        throw new Error('Method not implemented.')
-    }
-    Delete(entity: Element): void {
-        throw new Error('Method not implemented.')
-    }
-    CommitAsync(state: boolean): Promise<boolean> {
-        throw new Error('Method not implemented.')
+@injectable()
+class PointRepository extends EntityRepositoryAbstract<Point> implements IPointRepository {
+    constructor(@inject(TYPES.PointModel) private model: ModelCtor<Model> ){
+        super(model)
+
     }
     
     
