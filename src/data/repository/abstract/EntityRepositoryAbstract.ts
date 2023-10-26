@@ -3,15 +3,18 @@ import {  Sequelize, Transaction } from 'sequelize';
 import IEntityReposity from './IEntityRepository'
 import IEntity from '../../../core/models/abstract/IEntity';
 import { ModelCtor, Model} from 'sequelize-typescript'
+import { dataMapper } from '../../mapper/dataMapper';
 import { injectable } from 'inversify';
 
 @injectable()
-abstract class EntityRepositoryAbstract<T extends IEntity> implements IEntityReposity<T>{
+abstract class EntityRepositoryAbstract<T extends IEntity<any>> implements IEntityReposity<T>{
     private readonly _context:Sequelize
     private _transaction:Transaction | undefined
     private _model : ModelCtor<Model>
+    private _type:new ()=>T
     
-    constructor(model:ModelCtor<Model>){
+    constructor(model:ModelCtor<Model>,type:new ()=>T){
+        this._type=type
         this._context=sequelize
         this._model=model
         this._context.transaction()
@@ -31,23 +34,15 @@ abstract class EntityRepositoryAbstract<T extends IEntity> implements IEntityRep
     }
     async GetAllAsync(): Promise<T[]> {
         let entities=await this._model.findAll()
-        let newEntities:T[]=[]
-        entities.forEach(entity => {
-            newEntities.push(this.trasformModelToModel(entity.dataValues))
-        })
-        return newEntities
+        return await dataMapper.mapArrayAsync<Model,T>(entities,this._model,this._type)
     }
     async GetWhereAsync(filter: Partial<T>): Promise<T[]> {
         let entites=await this._model.findAll({where:filter})
-        let newEntities:T[]=[]
-        entites.forEach(entity => {
-            newEntities.push(this.trasformModelToModel(entity.dataValues))
-        })
-        return newEntities
+        return await dataMapper.mapArrayAsync<Model,T>(entites,this._model,this._type)
     }
     async GetByIdAsync(id: number): Promise<T | null> {
         let entity=await this._model.findByPk(id)
-        if (entity) return this.trasformModelToModel(entity.dataValues)
+        if (entity) return await dataMapper.mapAsync<Model,T>(entity,this._model,this._type)
         return null
     }
     
@@ -77,23 +72,6 @@ abstract class EntityRepositoryAbstract<T extends IEntity> implements IEntityRep
             lastEntity?.destroy()
         }
         return await this.CommitAsync()
-    }
-
-    protected transformModelsToModels(entities:Record<keyof T, any>[]):T[]{
-        let newEntities:T[]=[]
-        entities.forEach(entity => {
-            newEntities.push(this.trasformModelToModel(entity))
-        })
-        return newEntities
-    }
-
-    protected trasformModelToModel(data:Record<keyof T, any>):T{
-        let model={} as T
-        for(const key in data){
-            model[key]=data[key]
-        }
-
-        return model
     }
 
     protected objectFromDictionary<T>(obj: T): Record<keyof T, any> {

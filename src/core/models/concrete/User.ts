@@ -1,14 +1,11 @@
-import IEntity from "../abstract/IEntity"
+import EntityAbstract from "../abstract/EntityAbstract"
 
 
-class User implements IEntity{
-    id!: number
+class User extends EntityAbstract<number>{
     firstName!:string
     lastName!:string
     email!:string
     password!:string
-    readonly createdAt!: Date
-    readonly updatedAt!: Date
 }
 
 export default User

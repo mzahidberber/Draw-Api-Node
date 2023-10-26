@@ -3,21 +3,22 @@ import EntityRepositoryAbstract from '../abstract/EntityRepositoryAbstract'
 import { Model, ModelCtor } from 'sequelize-typescript'
 import Layer from '../../../core/models/concrete/Layer'
 import { ILayerRepository } from '../abstract/ILayerRepository'
-import TYPES from '../../dependencyresolvers/data-types'
+import DataTypes from '../../dependencyresolvers/DataTypes'
 import ElementModel from '../../sequelize/models/ElementModel'
+import { dataMapper } from '../../mapper/dataMapper'
+import LayerModel from '../../sequelize/models/LayerModel'
 
 @injectable()
 class LayerRepository extends EntityRepositoryAbstract<Layer>  implements ILayerRepository {
-    constructor(@inject(TYPES.LayerModel) private model: ModelCtor<Model> ){
-        super(model)
+    constructor(
+        @inject(DataTypes.LayerModel) private model: ModelCtor<Model>,
+        @inject(DataTypes.Layer) private type:new () => Layer){
+        super(model,type)
+
     }
     async GetAllWithElementsAsync(): Promise<Layer[]> {
         let entities=await this.model.findAll({include:ElementModel})
-        let newEntities:Layer[]=[]
-        entities.forEach(entity => {
-            newEntities.push(this.trasformModelToModel(entity.dataValues))
-        })
-        return newEntities
+        return await dataMapper.mapArrayAsync<Model,Layer>(entities,this.model,Layer)
     }
 }
 

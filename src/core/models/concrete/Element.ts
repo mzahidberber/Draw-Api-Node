@@ -1,12 +1,14 @@
-import IEntity from "../abstract/IEntity"
+import { AutoMap } from "@automapper/classes"
+import EntityAbstract from "../abstract/EntityAbstract"
+import Point from "./Point";
 
 
 
-class Element implements IEntity{
-    id!: number
+class Element extends EntityAbstract<number>{
+    @AutoMap()
     LayerId!:number
-    readonly createdAt!: Date
-    readonly updatedAt!: Date
+    @AutoMap(()=>[Point])
+    Points: Point[]=[];
     
 }
 

@@ -1,7 +1,7 @@
 
 
-interface IEntity{
-    id:number
+interface IEntity<T>{
+    id:T
     createdAt:Date
     updatedAt:Date
 }

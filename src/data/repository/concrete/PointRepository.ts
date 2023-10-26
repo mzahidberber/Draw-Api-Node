@@ -4,12 +4,14 @@ import Point from '../../../core/models/concrete/Point'
 import EntityRepositoryAbstract from '../abstract/EntityRepositoryAbstract'
 import { inject, injectable } from 'inversify'
 import { IPointRepository } from '../abstract/IPointRepository'
-import TYPES from '../../dependencyresolvers/data-types'
+import DataTypes from '../../dependencyresolvers/DataTypes'
+
 
 @injectable()
 class PointRepository extends EntityRepositoryAbstract<Point> implements IPointRepository {
-    constructor(@inject(TYPES.PointModel) private model: ModelCtor<Model> ){
-        super(model)
+    constructor(@inject(DataTypes.PointModel) private model: ModelCtor<Model>,
+    @inject(DataTypes.Point) private type:new () => Point ){
+        super(model,type)
 
     }
     

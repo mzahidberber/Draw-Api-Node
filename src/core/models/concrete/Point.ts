@@ -1,14 +1,15 @@
-import IEntity from "../abstract/IEntity"
+import { AutoMap } from "@automapper/classes"
+import EntityAbstract from "../abstract/EntityAbstract"
 
 
 
-class Point implements IEntity{
-    id!: number
+class Point extends EntityAbstract<number>{
+    @AutoMap()
     x!:number
+    @AutoMap()
     y!:number
+    @AutoMap()
     ElementId!:number
-    readonly createdAt!: Date
-    readonly updatedAt!: Date
 }
 
 export default Point

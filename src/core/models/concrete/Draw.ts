@@ -1,14 +1,12 @@
-import IEntity from "../abstract/IEntity"
+import { AutoMap } from "@automapper/classes"
+import EntityAbstract from "../abstract/EntityAbstract"
 import Layer from "./Layer"
 
 
-class Draw implements IEntity{
-    id!: number
+class Draw extends EntityAbstract<number>{
     name!:string
     UserId!:number
     Layers:Layer[] = []
-    readonly createdAt!: Date
-    readonly updatedAt!: Date
 }
 
 export default Draw
