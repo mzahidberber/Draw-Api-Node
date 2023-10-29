@@ -5,17 +5,19 @@ import Element from "./Element"
 
 class Layer extends EntityAbstract<number>{
     @AutoMap()
-    name!:string
+    Name!:string
     @AutoMap()
-    lock!:boolean
+    Lock!:boolean
     @AutoMap()
-    visibility!:boolean
+    Visibility!:boolean
     @AutoMap()
-    thickness!:number
+    Thickness!:number
     @AutoMap()
-    numberOfElements!:number
+    NumberOfElements!:number
     @AutoMap()
     DrawId!:number
+    @AutoMap()
+    PenId!:number
     @AutoMap(()=>[Element])
     Elements:Element[]
 

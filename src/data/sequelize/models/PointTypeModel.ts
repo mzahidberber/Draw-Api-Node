@@ -1,27 +1,31 @@
 import { DataTypes,Model } from 'sequelize'
 import { sequelize } from '../database'
-import Point from '../../../core/models/concrete/Point';
 import { AutoMap } from '@automapper/classes';
+import PointType from '../../../core/models/concrete/PointType';
+import PointModel from './PointModel';
 
-class PointModel extends Model implements Point
+class PointTypeModel extends Model implements PointType
 {
+    
     @AutoMap()
     Id!:number
     @AutoMap()
-    X!: number;
-    @AutoMap()
-    Y!: number;
-    @AutoMap()
-    ElementId!:number
-    @AutoMap()
-    PointTypeId!: number;
+    Name!: string;
+    @AutoMap(()=>[PointModel])
+    Points: PointModel[];
     @AutoMap()
     readonly createdAt!: Date;
     @AutoMap()
     readonly updatedAt!: Date;
+
+    constructor() {
+        super();
+        this.Points=[]
+    }
+    
 }
 
-PointModel.init({
+PointTypeModel.init({
     Id:{
         type:DataTypes.INTEGER,
         autoIncrement:true,
@@ -29,19 +33,15 @@ PointModel.init({
         primaryKey:true,
         unique:true
     },
-    X:{
-        type:DataTypes.DOUBLE,
-        allowNull:false
-    },
-    Y:{
-        type:DataTypes.DOUBLE,
+    Name:{
+        type:DataTypes.STRING,
         allowNull:false
     },
 },{
     sequelize: sequelize,
-    modelName: 'Point',
-    tableName: 'Points'
+    modelName: 'PointType',
+    tableName: 'PointTypes'
 })
 
-export default PointModel
+export default PointTypeModel
 

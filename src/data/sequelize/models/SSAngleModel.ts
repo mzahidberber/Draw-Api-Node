@@ -1,27 +1,27 @@
 import { DataTypes,Model } from 'sequelize'
 import { sequelize } from '../database'
-import Point from '../../../core/models/concrete/Point';
 import { AutoMap } from '@automapper/classes';
+import SSAngle from '../../../core/models/concrete/SSAngle';
 
-class PointModel extends Model implements Point
+class SSAngleModel extends Model implements SSAngle
 {
+    
+    
     @AutoMap()
     Id!:number
     @AutoMap()
-    X!: number;
+    Type!: string;
     @AutoMap()
-    Y!: number;
+    Value!: number;
     @AutoMap()
     ElementId!:number
-    @AutoMap()
-    PointTypeId!: number;
     @AutoMap()
     readonly createdAt!: Date;
     @AutoMap()
     readonly updatedAt!: Date;
 }
 
-PointModel.init({
+SSAngleModel.init({
     Id:{
         type:DataTypes.INTEGER,
         autoIncrement:true,
@@ -29,19 +29,19 @@ PointModel.init({
         primaryKey:true,
         unique:true
     },
-    X:{
+    Value:{
         type:DataTypes.DOUBLE,
         allowNull:false
     },
-    Y:{
-        type:DataTypes.DOUBLE,
+    Type:{
+        type:DataTypes.STRING,
         allowNull:false
-    },
+    }
 },{
     sequelize: sequelize,
-    modelName: 'Point',
-    tableName: 'Points'
+    modelName: 'SSAngle',
+    tableName: 'SSAngles'
 })
 
-export default PointModel
+export default SSAngleModel
 

@@ -1,7 +1,7 @@
 
 
 interface IEntity<T>{
-    id:T
+    Id:T
     createdAt:Date
     updatedAt:Date
 }

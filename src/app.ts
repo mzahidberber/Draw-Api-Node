@@ -1,30 +1,30 @@
+import DataTypes from './data/dependencyresolvers/DataTypes';
+import DataContainer from './data/dependencyresolvers/dataInstanceFactory.config';
+import { IElementRepository } from './data/repository/abstract/IElementRepository';
+import { ILayerRepository } from './data/repository/abstract/ILayerRepository';
+import { IUserRepository } from './data/repository/abstract/IUserRepository';
 import './data/sequelize/database'
 import "reflect-metadata";
-import DataContainer from './data/dependencyresolvers/dataInstanceFactory.config';
-import DataTypes from './data/dependencyresolvers/DataTypes'
-import { IPointRepository } from './data/repository/abstract/IPointRepository';
-import Element from './core/models/concrete/Element'
-import Point from './core/models/concrete/Point';
-import { ILayerRepository } from './data/repository/abstract/ILayerRepository';
-import Layer from './core/models/concrete/Layer';
-import { createMap } from '@automapper/core';
-import { dataMapper } from './data/mapper/dataMapper';
-import LayerModel from './data/sequelize/models/LayerModel';
-import { IElementRepository } from './data/repository/abstract/IElementRepository';
 
 
 
 
-const r = DataContainer.get<ILayerRepository>(DataTypes.LayerRepository)
+
+// const r = DataContainer.get<IUserRepository>(DataTypes.UserRepository)
 // r.GetAllAsync().then(data => {
 //     console.log(data)
 // }).catch()
-// r.GetAllWithElementsAsync().then(data => {
-//     console.log(data)
-// }).catch()
+// // r.GetAllWithElementsAsync().then(data => {
+// //     console.log(data)
+// // }).catch()
 
-const r1 = DataContainer.get<IElementRepository>(DataTypes.ElementRepository)
-r1.GetAllWithPointsAsync().then(data => {
+// UserModel.findAll().then(e=>{
+//     console.log(e)
+// })
+
+
+const r1 = DataContainer.get<ILayerRepository>(DataTypes.LayerRepository)
+r1.GetAllWithElementsAsync().then(data => {
     console.log(data)
 }).catch()
 

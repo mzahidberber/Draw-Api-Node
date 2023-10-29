@@ -1,0 +1,6 @@
+npx sequelize-cli db:seed:all cd /src/data/sequelize olmalı
+npx sequelize-cli db:seed:undo geri alma
+npx sequelize-cli db:seed:undo --seed name-of-seed-as-in-data,
+npx sequelize-cli db:seed:undo:all
+
+npx sequelize-cli seed:generate --name demo-user seed oluşturma cd /src/data/sequelize olmalı

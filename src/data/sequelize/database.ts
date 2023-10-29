@@ -1,12 +1,17 @@
-const { Sequelize } = require('sequelize')
-import { Config } from 'sequelize/types'
-import * as path from 'path'
+import { Dialect, Sequelize } from 'sequelize'
+import configJson from './config/config.json'
+
 
 const env = process.env.NODE_ENV || 'development'
-const config: Config = require(path.join(__dirname, '../../../config.json'))[env]
+const config = configJson['development']
 
-const sequelize = new Sequelize(config.database, config.username,config.password, config)
+const sequelize = new Sequelize(config.database, config.username,config.password, {
+  host:config.host,
+  dialect:config.dialect as Dialect,
+  logging:config.logging
+})
 import './models/ModelsInit' // initialize models
+
 
 
 sequelize
@@ -16,5 +21,7 @@ sequelize
   .catch((err:any)=>{
       console.error(err)
   })
+
+
 
 export { sequelize }

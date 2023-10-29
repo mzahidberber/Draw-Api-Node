@@ -1,27 +1,24 @@
 import { DataTypes,Model } from 'sequelize'
 import { sequelize } from '../database'
-import Point from '../../../core/models/concrete/Point';
 import { AutoMap } from '@automapper/classes';
+import Radius from '../../../core/models/concrete/Radius';
 
-class PointModel extends Model implements Point
+class RadiusModel extends Model implements Radius
 {
+    
     @AutoMap()
     Id!:number
     @AutoMap()
-    X!: number;
-    @AutoMap()
-    Y!: number;
+    Value!: number;
     @AutoMap()
     ElementId!:number
-    @AutoMap()
-    PointTypeId!: number;
     @AutoMap()
     readonly createdAt!: Date;
     @AutoMap()
     readonly updatedAt!: Date;
 }
 
-PointModel.init({
+RadiusModel.init({
     Id:{
         type:DataTypes.INTEGER,
         autoIncrement:true,
@@ -29,19 +26,15 @@ PointModel.init({
         primaryKey:true,
         unique:true
     },
-    X:{
+    Value:{
         type:DataTypes.DOUBLE,
         allowNull:false
-    },
-    Y:{
-        type:DataTypes.DOUBLE,
-        allowNull:false
-    },
+    }
 },{
     sequelize: sequelize,
-    modelName: 'Point',
-    tableName: 'Points'
+    modelName: 'Radius',
+    tableName: 'Radiuses'
 })
 
-export default PointModel
+export default RadiusModel
 

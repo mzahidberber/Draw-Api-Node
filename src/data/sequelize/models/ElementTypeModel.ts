@@ -1,28 +1,25 @@
 import { DataTypes,Model } from 'sequelize'
 import { sequelize } from '../database'
-import Draw from '../../../core/models/concrete/Draw';
 import { AutoMap } from '@automapper/classes';
-import LayerModel from './LayerModel';
+import ElementType from '../../../core/models/concrete/ElementType';
+import ElementModel from './ElementModel';
 
-class DrawModel extends Model implements Draw
+class ElementTypeModel extends Model implements ElementType
 {
     @AutoMap()
     Id!:number
     @AutoMap()
     Name!: string;
-    @AutoMap()
-    UserId!: string;
-    @AutoMap(()=>[LayerModel])
-    Layers: LayerModel[]=[]
-    @AutoMap()
-    NumberOfLayerElements!:number
+    @AutoMap(()=>[ElementModel])
+    Elements: ElementModel[]=[]
     @AutoMap()
     readonly createdAt!: Date
     @AutoMap()
     readonly updatedAt!: Date
+    
 }
 
-DrawModel.init({
+ElementTypeModel.init({
     Id:{
         type:DataTypes.INTEGER,
         autoIncrement:true,
@@ -33,17 +30,12 @@ DrawModel.init({
     Name:{
         type:DataTypes.STRING,
         allowNull:false
-    },
-    NumberOfLayerElements:{
-        type:DataTypes.INTEGER,
-        allowNull:false,
-        defaultValue:0
-    },
+    }
 },{
     sequelize: sequelize,
-    modelName: 'Draw',
-    tableName: 'Draws'
+    modelName: 'ElementType',
+    tableName: 'ElementTypes'
 })
 
-export default DrawModel
+export default ElementTypeModel
 

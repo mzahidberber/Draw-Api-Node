@@ -1,39 +1,42 @@
 import { DataTypes,Model } from 'sequelize'
 import { sequelize } from '../database'
-import Layer from '../../../core/models/concrete/Layer';
 import { AutoMap } from '@automapper/classes';
+import PointModel from './PointModel';
+import SSAngleModel from './SSAngleModel';
+import RadiusModel from './RadiusModel';
+import Pen from '../../../core/models/concrete/Pen';
+import Element from '../../../core/models/concrete/Element';
+import Layer from '../../../core/models/concrete/Layer';
 import ElementModel from './ElementModel';
 
-class LayerModel extends Model implements Layer
+class PenModel extends Model implements Pen
 {
-    
     @AutoMap()
     Id!:number
     @AutoMap()
     Name!: string;
     @AutoMap()
-    Lock!: boolean;
+    Red!: number;
     @AutoMap()
-    Visibility!: boolean;
+    Blue!: number;
     @AutoMap()
-    Thickness!: number;
+    Green!: number;
     @AutoMap()
-    NumberOfElements!: number;
+    UserId!: string;
     @AutoMap()
-    DrawId!: number;
+    PenStyleId!: number;
     @AutoMap()
-    PenId!: number;
+    Layers: Layer[]=[]
     @AutoMap(()=>[ElementModel])
     Elements: ElementModel[]=[]
     @AutoMap()
     readonly createdAt!: Date
     @AutoMap()
     readonly updatedAt!: Date
-
     
 }
 
-LayerModel.init({
+PenModel.init({
     Id:{
         type:DataTypes.INTEGER,
         autoIncrement:true,
@@ -43,30 +46,25 @@ LayerModel.init({
     },
     Name:{
         type:DataTypes.STRING,
-        allowNull:false,
-    },
-    Lock:{
-        type:DataTypes.BOOLEAN,
         allowNull:false
     },
-    Visibility:{
-        type:DataTypes.BOOLEAN,
-        allowNull:false
-    },
-    Thickness:{
-        type:DataTypes.DOUBLE,
-        allowNull:false,
-    },
-    NumberOfElements:{
+    Red:{
         type:DataTypes.INTEGER,
-        allowNull:false,
-        defaultValue:0
-    }
+        allowNull:false
+    },
+    Blue:{
+        type:DataTypes.INTEGER,
+        allowNull:false
+    },
+    Green:{
+        type:DataTypes.INTEGER,
+        allowNull:false
+    },
 },{
     sequelize: sequelize,
-    modelName: 'Layer',
-    tableName: 'Layers'
+    modelName: 'Pen',
+    tableName: 'Pens'
 })
 
-export default LayerModel
+export default PenModel
 

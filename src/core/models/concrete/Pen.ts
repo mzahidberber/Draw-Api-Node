@@ -1,22 +1,33 @@
 import { AutoMap } from "@automapper/classes"
 import EntityAbstract from "../abstract/EntityAbstract"
 import Layer from "./Layer"
+import Element from "./Element"
 
 
-class Draw extends EntityAbstract<number>{
+
+class Pen extends EntityAbstract<number>{
     @AutoMap()
     Name!:string
     @AutoMap()
+    Red!:number
+    @AutoMap()
+    Blue!:number
+    @AutoMap()
+    Green!:number
+    @AutoMap()
     UserId!:string
+    @AutoMap()
+    PenStyleId!:number
     @AutoMap(()=>[Layer])
     Layers:Layer[]
-    @AutoMap()
-    NumberOfLayerElements!:number
+    @AutoMap(()=>[Element])
+    Elements:Element[]
 
     constructor(){
         super()
         this.Layers=[]
+        this.Elements=[]
     }
 }
 
-export default Draw
+export default Pen

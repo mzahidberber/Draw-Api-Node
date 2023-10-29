@@ -9,8 +9,9 @@ import DataTypes from '../../dependencyresolvers/DataTypes'
 
 @injectable()
 class PointRepository extends EntityRepositoryAbstract<Point> implements IPointRepository {
-    constructor(@inject(DataTypes.PointModel) private model: ModelCtor<Model>,
-    @inject(DataTypes.Point) private type:new () => Point ){
+    constructor(
+        @inject(DataTypes.PointModel) private model: ModelCtor<Model>,
+        @inject(DataTypes.Point) private type:new () => Point ){
         super(model,type)
 
     }

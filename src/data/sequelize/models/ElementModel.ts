@@ -3,15 +3,25 @@ import { sequelize } from '../database'
 import Element from '../../../core/models/concrete/Element';
 import { AutoMap } from '@automapper/classes';
 import PointModel from './PointModel';
+import SSAngleModel from './SSAngleModel';
+import RadiusModel from './RadiusModel';
 
 class ElementModel extends Model implements Element
 {
     @AutoMap()
-    id!:number
+    Id!:number
     @AutoMap()
     LayerId!:number
+    @AutoMap()
+    PenId!: number;
+    @AutoMap()
+    TypeId!: number;
     @AutoMap(()=>[PointModel])
     Points: PointModel[]=[]
+    @AutoMap(()=>[SSAngleModel])
+    SSAngles: SSAngleModel[]=[]
+    @AutoMap(()=>[RadiusModel])
+    Radiuses: RadiusModel[]=[]
     @AutoMap()
     readonly createdAt!: Date
     @AutoMap()
@@ -19,16 +29,17 @@ class ElementModel extends Model implements Element
 }
 
 ElementModel.init({
-    id:{
+    Id:{
         type:DataTypes.INTEGER,
         autoIncrement:true,
         allowNull:false,
-        primaryKey:true
+        primaryKey:true,
+        unique:true
     }
 },{
     sequelize: sequelize,
     modelName: 'Element',
-    tableName: 'elements'
+    tableName: 'Elements'
 })
 
 export default ElementModel

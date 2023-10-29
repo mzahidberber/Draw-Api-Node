@@ -3,15 +3,11 @@ import EntityAbstract from "../abstract/EntityAbstract"
 
 
 
-class Point extends EntityAbstract<number>{
+class Radius extends EntityAbstract<number>{
     @AutoMap()
-    X!:number
-    @AutoMap()
-    Y!:number
+    Value!:number
     @AutoMap()
     ElementId!:number
-    @AutoMap()
-    PointTypeId!:number
 }
 
-export default Point
+export default Radius

@@ -3,15 +3,13 @@ import EntityAbstract from "../abstract/EntityAbstract"
 
 
 
-class Point extends EntityAbstract<number>{
+class SSAngle extends EntityAbstract<number>{
     @AutoMap()
-    X!:number
+    Type!:string
     @AutoMap()
-    Y!:number
+    Value!:number
     @AutoMap()
     ElementId!:number
-    @AutoMap()
-    PointTypeId!:number
 }
 
-export default Point
+export default SSAngle

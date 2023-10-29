@@ -57,7 +57,7 @@ abstract class EntityRepositoryAbstract<T extends IEntity<any>> implements IEnti
         //düzenle
         for (let i = 0; i < entities.length; i++) {
             const newEntity = entities[i];
-            let lastEntity= await this._model.findByPk(newEntity.id,{transaction:this._transaction})
+            let lastEntity= await this._model.findByPk(newEntity.Id,{transaction:this._transaction})
             for(const key in lastEntity?.dataValues){
                 console.log(key)
             }
@@ -68,7 +68,7 @@ abstract class EntityRepositoryAbstract<T extends IEntity<any>> implements IEnti
     async DeleteAsync(entities: T[]): Promise<boolean> {
         for (let i = 0; i < entities.length; i++) {
             const newEntity = entities[i];
-            let lastEntity= await this._model.findByPk(newEntity.id,{transaction:this._transaction})
+            let lastEntity= await this._model.findByPk(newEntity.Id,{transaction:this._transaction})
             lastEntity?.destroy()
         }
         return await this.CommitAsync()

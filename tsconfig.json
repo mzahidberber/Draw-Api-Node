@@ -3,7 +3,7 @@
     "target": "ES6",  
     "module": "CommonJS",    
     "lib": ["es6", "dom"],   
-    "types": ["reflect-metadata","node"],
+    "types": ["reflect-metadata","node","jest"],
     "outDir": "./dist",                         
     "rootDir": "./src",                                      
     "esModuleInterop": true,                      
@@ -11,5 +11,8 @@
     "skipLibCheck": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
-  }
+    "resolveJsonModule": true,
+  },
+  "include": ["src/**/*.ts", "tests/**/*.test.ts", "src/data/sequelize/seeders/20231029202914-test-data.js"]
+  
 }
