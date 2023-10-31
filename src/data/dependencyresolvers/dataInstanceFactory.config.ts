@@ -1,73 +1,72 @@
 import { Container } from "inversify"
 import "reflect-metadata";
-import { IElementRepository } from "../repository/abstract/IElementRepository";
-import ElementRepository from "../repository/concrete/ElementRepository";
-import DataTypes from './DataTypes'
-import { Model, ModelCtor } from "sequelize-typescript";
-import PointModel from "../sequelize/models/PointModel";
-import { IPointRepository } from "../repository/abstract/IPointRepository";
-import PointRepository from "../repository/concrete/PointRepository";
-import ElementModel from "../sequelize/models/ElementModel";
-import UserModel from "../sequelize/models/UserModel";
-import DrawModel from "../sequelize/models/DrawModel";
-import LayerModel from "../sequelize/models/LayerModel";
-import { IUserRepository } from "../repository/abstract/IUserRepository";
-import UserRepository from "../repository/concrete/UserRepository";
+import { ISSAngleRepository } from "../repository/abstract/ISSAngleRepository";
+import { Draw } from "../../core/models/concrete/Draw";
+import { ElementType } from "../../core/models/concrete/ElementType";
+import { Layer } from "../../core/models/concrete/Layer";
+import { Pen } from "../../core/models/concrete/Pen";
+import { PenStyle } from "../../core/models/concrete/PenStyle";
+import { Point } from "../../core/models/concrete/Point";
+import { PointType } from "../../core/models/concrete/PointType";
+import { Radius } from "../../core/models/concrete/Radius";
+import { SSAngle } from "../../core/models/concrete/SSAngle";
+import { User } from "../../core/models/concrete/User";
+import { UserRefreshToken } from "../../core/models/concrete/UserRefreshToken";
+import { UserRole } from "../../core/models/concrete/UserRole";
+import { UserRoles } from "../../core/models/concrete/UserRoles";
+import { Element } from "../../core/models/concrete/Element";
+import { DataTypes } from "./DataTypes";
 import { IDrawRepository } from "../repository/abstract/IDrawRepository";
-import DrawRepository from "../repository/concrete/DrawRepository";
+import { IElementRepository } from "../repository/abstract/IElementRepository";
+import { IElementTypeRepository } from "../repository/abstract/IElementTypeRepository";
 import { ILayerRepository } from "../repository/abstract/ILayerRepository";
-import LayerRepository from "../repository/concrete/LayerRepository";
-import Layer from "../../core/models/concrete/Layer";
-import Element from "../../core/models/concrete/Element";
-import Draw from "../../core/models/concrete/Draw";
-import Point from "../../core/models/concrete/Point";
-import User from "../../core/models/concrete/User";
-import ElementType from "../../core/models/concrete/ElementType";
-import Pen from "../../core/models/concrete/Pen";
-import PenStyle from "../../core/models/concrete/PenStyle";
-import PointType from "../../core/models/concrete/PointType";
-import Radius from "../../core/models/concrete/Radius";
-import SSAngle from "../../core/models/concrete/SSAngle";
-import UserRefreshToken from "../../core/models/concrete/UserRefreshToken";
-import UserRole from "../../core/models/concrete/UserRole";
-import UserRoles from "../../core/models/concrete/UserRoles";
+import { IPenRepository } from "../repository/abstract/IPenRepository";
+import { IPenStyleRepository } from "../repository/abstract/IPenStyleRepository";
+import { IPointRepository } from "../repository/abstract/IPointRepository";
+import { IPointTypeRepository } from "../repository/abstract/IPointTypeRepository";
+import { IRadiusRepository } from "../repository/abstract/IRadiusRepository";
+import { IUserRepository } from "../repository/abstract/IUserRepository";
+import { UserRepository } from "../repository/concrete/UserRepository";
+import { SSAngleRepository } from "../repository/concrete/SSAngleRepository";
+import { RadiusRepository } from "../repository/concrete/RadiusRepository";
+import { PointTypeRepository } from "../repository/concrete/PointTypeRepository";
+import { PointRepository } from "../repository/concrete/PointRepository";
+import { PenStyleRepository } from "../repository/concrete/PenStyleRepository";
+import { PenRepository } from "../repository/concrete/PenRepository";
+import { LayerRepository } from "../repository/concrete/LayerRepository";
+import { ElementTypeRepository } from "../repository/concrete/ElementTypeRepository";
+import { ElementRepository } from "../repository/concrete/ElementRepository";
+import { DrawRepository } from "../repository/concrete/DrawRepository";
+import { Model, ModelCtor } from "sequelize-typescript";
+import DrawModel from "../sequelize/models/DrawModel";
+import ElementModel from "../sequelize/models/ElementModel";
 import ElementTypeModel from "../sequelize/models/ElementTypeModel";
+import LayerModel from "../sequelize/models/LayerModel";
 import PenModel from "../sequelize/models/PenModel";
 import PenStyleModel from "../sequelize/models/PenStyleModel";
+import PointModel from "../sequelize/models/PointModel";
 import PointTypeModel from "../sequelize/models/PointTypeModel";
 import RadiusModel from "../sequelize/models/RadiusModel";
 import SSAngleModel from "../sequelize/models/SSAngleModel";
-import { IElementTypeRepository } from "../repository/abstract/IElementTypeRepository";
-import ElementTypeRepository from "../repository/concrete/ElementTypeRepository";
-import { IPenRepository } from "../repository/abstract/IPenRepository";
-import PenRepository from "../repository/concrete/PenRepository";
-import { IPenStyleRepository } from "../repository/abstract/IPenStyleRepository";
-import PenStyleRepository from "../repository/concrete/PenStyleRepository";
-import PointTypeRepository from "../repository/concrete/PointTypeRepository";
-import { IPointTypeRepository } from "../repository/abstract/IPointTypeRepository";
-import { IRadiusRepository } from "../repository/abstract/IRadiusRepository";
-import RadiusRepository from "../repository/concrete/RadiusRepository";
-import SSAngleRepository from "../repository/concrete/SSAngleRepository";
-import { ISSAngleRepository } from "../repository/abstract/ISSAngleRepository";
+import UserModel from "../sequelize/models/UserModel";
 
 
-
-const DataContainer = new Container()
+export const DataContainer = new Container()
 
 
 
 //repositories
-DataContainer.bind<IDrawRepository>(DataTypes.DrawRepository).to(DrawRepository)
-DataContainer.bind<IElementRepository>(DataTypes.ElementRepository).to(ElementRepository)
-DataContainer.bind<IElementTypeRepository>(DataTypes.ElementTypeRepository).to(ElementTypeRepository)
-DataContainer.bind<ILayerRepository>(DataTypes.LayerRepository).to(LayerRepository)
-DataContainer.bind<IPenRepository>(DataTypes.PenRepository).to(PenRepository)
-DataContainer.bind<IPenStyleRepository>(DataTypes.PenStyleRepository).to(PenStyleRepository)
-DataContainer.bind<IPointRepository>(DataTypes.PointRepository).to(PointRepository)
-DataContainer.bind<IPointTypeRepository>(DataTypes.PointTypeRepository).to(PointTypeRepository)
-DataContainer.bind<IRadiusRepository>(DataTypes.RadiusRepository).to(RadiusRepository)
-DataContainer.bind<ISSAngleRepository>(DataTypes.SSAngleRepository).to(SSAngleRepository)
-DataContainer.bind<IUserRepository>(DataTypes.UserRepository).to(UserRepository)
+DataContainer.bind<IDrawRepository>(DataTypes.IDrawRepository).to(DrawRepository)
+DataContainer.bind<IElementRepository>(DataTypes.IElementRepository).to(ElementRepository)
+DataContainer.bind<IElementTypeRepository>(DataTypes.IElementTypeRepository).to(ElementTypeRepository)
+DataContainer.bind<ILayerRepository>(DataTypes.ILayerRepository).to(LayerRepository)
+DataContainer.bind<IPenRepository>(DataTypes.IPenRepository).to(PenRepository)
+DataContainer.bind<IPenStyleRepository>(DataTypes.IPenStyleRepository).to(PenStyleRepository)
+DataContainer.bind<IPointRepository>(DataTypes.IPointRepository).to(PointRepository)
+DataContainer.bind<IPointTypeRepository>(DataTypes.IPointTypeRepository).to(PointTypeRepository)
+DataContainer.bind<IRadiusRepository>(DataTypes.IRadiusRepository).to(RadiusRepository)
+DataContainer.bind<ISSAngleRepository>(DataTypes.ISSAngleRepository).to(SSAngleRepository)
+DataContainer.bind<IUserRepository>(DataTypes.IUserRepository).to(UserRepository)
 
 
 
@@ -104,7 +103,3 @@ DataContainer.bind<new ()=> UserRole>(DataTypes.UserRole).toConstantValue(UserRo
 DataContainer.bind<new ()=> UserRoles>(DataTypes.UserRoles).toConstantValue(UserRoles);
 
 
-
-
-
-export default DataContainer;

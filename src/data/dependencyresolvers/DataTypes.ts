@@ -1,15 +1,15 @@
-let DataTypes = {
-    DrawRepository: Symbol("DrawRepository"),
-    ElementRepository: Symbol("ElementRepository"),
-    ElementTypeRepository: Symbol("ElementTypeRepository"),
-    LayerRepository: Symbol("LayerRepository"),
-    PenRepository: Symbol("PenRepository"),
-    PenStyleRepository: Symbol("PenStyleRepository"),
-    PointRepository: Symbol("PointRepository"),
-    PointTypeRepository: Symbol("PointTypeRepository"),
-    RadiusRepository: Symbol("RadiusRepository"),
-    SSAngleRepository: Symbol("SSAngleRepository"),
-    UserRepository: Symbol("UserRepository"),
+export const DataTypes = {
+    IDrawRepository: Symbol("IDrawRepository"),
+    IElementRepository: Symbol("IElementRepository"),
+    IElementTypeRepository: Symbol("IElementTypeRepository"),
+    ILayerRepository: Symbol("ILayerRepository"),
+    IPenRepository: Symbol("IPenRepository"),
+    IPenStyleRepository: Symbol("IPenStyleRepository"),
+    IPointRepository: Symbol("IPointRepository"),
+    IPointTypeRepository: Symbol("IPointTypeRepository"),
+    IRadiusRepository: Symbol("IRadiusRepository"),
+    ISSAngleRepository: Symbol("ISSAngleRepository"),
+    IUserRepository: Symbol("IUserRepository"),
     
     
     //sequalize models
@@ -40,6 +40,4 @@ let DataTypes = {
     UserRefreshToken:Symbol('UserRefreshToken'),
     UserRole:Symbol('UserRole'),
     UserRoles:Symbol('UserRoles'),
-};
-
-export default DataTypes;
+}

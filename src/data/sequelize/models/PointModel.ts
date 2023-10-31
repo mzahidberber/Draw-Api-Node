@@ -1,6 +1,6 @@
 import { DataTypes,Model } from 'sequelize'
 import { sequelize } from '../database'
-import Point from '../../../core/models/concrete/Point';
+import {Point} from '../../../core/models/concrete/Point';
 import { AutoMap } from '@automapper/classes';
 
 class PointModel extends Model implements Point

@@ -1,12 +1,8 @@
 import { DataTypes,Model } from 'sequelize'
 import { sequelize } from '../database'
 import { AutoMap } from '@automapper/classes';
-import PointModel from './PointModel';
-import SSAngleModel from './SSAngleModel';
-import RadiusModel from './RadiusModel';
-import Pen from '../../../core/models/concrete/Pen';
-import Element from '../../../core/models/concrete/Element';
-import Layer from '../../../core/models/concrete/Layer';
+import {Pen} from '../../../core/models/concrete/Pen';
+import {Layer} from '../../../core/models/concrete/Layer';
 import ElementModel from './ElementModel';
 
 class PenModel extends Model implements Pen

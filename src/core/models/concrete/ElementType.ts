@@ -1,10 +1,9 @@
 import { AutoMap } from "@automapper/classes"
-import EntityAbstract from "../abstract/EntityAbstract"
-import Element from "./Element";
+import { EntityAbstract } from "../abstract/EntityAbstract"
+import { Element } from "./Element"
 
 
-
-class ElementType extends EntityAbstract<number>{
+export class ElementType extends EntityAbstract<number>{
     @AutoMap()
     Name!:string
     @AutoMap(()=>[Element])
@@ -17,5 +16,3 @@ class ElementType extends EntityAbstract<number>{
 
     
 }
-
-export default ElementType

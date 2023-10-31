@@ -1,14 +1,14 @@
 
 import { Model, ModelCtor } from 'sequelize-typescript'
-import EntityRepositoryAbstract from '../abstract/EntityRepositoryAbstract'
+import {EntityRepositoryAbstract} from '../abstract/EntityRepositoryAbstract'
 import { inject, injectable } from 'inversify'
-import DataTypes from '../../dependencyresolvers/DataTypes'
+import {DataTypes} from '../../dependencyresolvers/DataTypes'
 import { ISSAngleRepository } from '../abstract/ISSAngleRepository'
-import SSAngle from '../../../core/models/concrete/SSAngle'
+import {SSAngle} from '../../../core/models/concrete/SSAngle'
 
 
 @injectable()
-class SSAngleRepository extends EntityRepositoryAbstract<SSAngle> implements ISSAngleRepository {
+export class SSAngleRepository extends EntityRepositoryAbstract<SSAngle> implements ISSAngleRepository {
     constructor(
         @inject(DataTypes.SSAngleModel) private model: ModelCtor<Model>,
         @inject(DataTypes.SSAngle) private type:new () => SSAngle ){
@@ -18,5 +18,3 @@ class SSAngleRepository extends EntityRepositoryAbstract<SSAngle> implements ISS
     
     
 }
-
-export default SSAngleRepository

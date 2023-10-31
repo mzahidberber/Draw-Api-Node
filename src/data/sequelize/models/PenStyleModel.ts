@@ -1,8 +1,7 @@
 import { DataTypes,Model } from 'sequelize'
 import { sequelize } from '../database'
 import { AutoMap } from '@automapper/classes';
-import PenStyle from '../../../core/models/concrete/PenStyle';
-import Pen from '../../../core/models/concrete/Pen';
+import {PenStyle} from '../../../core/models/concrete/PenStyle';
 import PenModel from './PenModel';
 
 class PenStyleModel extends Model implements PenStyle

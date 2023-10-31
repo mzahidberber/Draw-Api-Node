@@ -1,7 +1,7 @@
 import { DataTypes,Model } from 'sequelize'
 import { sequelize } from '../database'
 import { AutoMap } from '@automapper/classes';
-import ElementType from '../../../core/models/concrete/ElementType';
+import {ElementType} from '../../../core/models/concrete/ElementType';
 import ElementModel from './ElementModel';
 
 class ElementTypeModel extends Model implements ElementType

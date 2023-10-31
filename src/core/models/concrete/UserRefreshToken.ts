@@ -1,8 +1,8 @@
 import { AutoMap } from "@automapper/classes"
-import EntityAbstract from "../abstract/EntityAbstract"
+import { EntityAbstract } from "../abstract/EntityAbstract"
 
 
-class UserRefreshToken extends EntityAbstract<string>{
+export class UserRefreshToken extends EntityAbstract<string>{
     @AutoMap()
     UserId!:number
     @AutoMap()
@@ -10,5 +10,3 @@ class UserRefreshToken extends EntityAbstract<string>{
     @AutoMap()
     Expiration!:Date
 }
-
-export default UserRefreshToken

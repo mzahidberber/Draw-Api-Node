@@ -1,7 +1,7 @@
 import { DataTypes,Model } from 'sequelize'
 import { sequelize } from '../database'
 import { AutoMap } from '@automapper/classes';
-import SSAngle from '../../../core/models/concrete/SSAngle';
+import {SSAngle} from '../../../core/models/concrete/SSAngle';
 
 class SSAngleModel extends Model implements SSAngle
 {

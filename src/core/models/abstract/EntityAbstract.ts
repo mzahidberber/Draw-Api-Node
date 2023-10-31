@@ -1,8 +1,8 @@
 import { AutoMap } from "@automapper/classes";
-import IEntity from "./IEntity";
+import { IEntity } from "./IEntity";
 
 
-abstract class EntityAbstract<T> implements IEntity<T>{
+export abstract class EntityAbstract<T> implements IEntity<T>{
     @AutoMap()
     Id!: T;
     @AutoMap()
@@ -11,5 +11,3 @@ abstract class EntityAbstract<T> implements IEntity<T>{
     updatedAt!: Date;
     
 }
-
-export default EntityAbstract

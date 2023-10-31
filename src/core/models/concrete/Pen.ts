@@ -1,11 +1,11 @@
 import { AutoMap } from "@automapper/classes"
-import EntityAbstract from "../abstract/EntityAbstract"
-import Layer from "./Layer"
-import Element from "./Element"
+import { EntityAbstract } from "../abstract/EntityAbstract"
+import { Layer } from "./Layer"
+import { Element } from "./Element"
 
 
 
-class Pen extends EntityAbstract<number>{
+export class Pen extends EntityAbstract<number>{
     @AutoMap()
     Name!:string
     @AutoMap()
@@ -29,5 +29,3 @@ class Pen extends EntityAbstract<number>{
         this.Elements=[]
     }
 }
-
-export default Pen

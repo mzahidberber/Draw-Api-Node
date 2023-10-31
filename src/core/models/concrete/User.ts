@@ -1,9 +1,9 @@
 import { AutoMap } from "@automapper/classes"
-import EntityAbstract from "../abstract/EntityAbstract"
-import Draw from "./Draw"
+import { EntityAbstract } from "../abstract/EntityAbstract"
+import { Draw } from "./Draw"
 
 
-class User extends EntityAbstract<string>{
+export class User extends EntityAbstract<string>{
     @AutoMap()
     FirstName!:string
     @AutoMap()
@@ -23,5 +23,3 @@ class User extends EntityAbstract<string>{
         this.DrawElements=[]
     }
 }
-
-export default User

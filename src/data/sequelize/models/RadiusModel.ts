@@ -1,7 +1,7 @@
 import { DataTypes,Model } from 'sequelize'
 import { sequelize } from '../database'
 import { AutoMap } from '@automapper/classes';
-import Radius from '../../../core/models/concrete/Radius';
+import {Radius} from '../../../core/models/concrete/Radius';
 
 class RadiusModel extends Model implements Radius
 {

@@ -1,13 +1,13 @@
 import { sequelize } from '../../sequelize/database';
 import {  Sequelize, Transaction } from 'sequelize';
-import IEntityReposity from './IEntityRepository'
-import IEntity from '../../../core/models/abstract/IEntity';
 import { ModelCtor, Model} from 'sequelize-typescript'
 import { dataMapper } from '../../mapper/dataMapper';
 import { injectable } from 'inversify';
+import { IEntity } from '../../../core/models/abstract/IEntity';
+import { IEntityRepository } from './IEntityRepository';
 
 @injectable()
-abstract class EntityRepositoryAbstract<T extends IEntity<any>> implements IEntityReposity<T>{
+export abstract class EntityRepositoryAbstract<T extends IEntity<any>> implements IEntityRepository<T>{
     private readonly _context:Sequelize
     private _transaction:Transaction | undefined
     private _model : ModelCtor<Model>
@@ -51,7 +51,8 @@ abstract class EntityRepositoryAbstract<T extends IEntity<any>> implements IEnti
             const entity = entities[i];
             await this._model.create(this.objectFromDictionary(entity),{transaction:this._transaction})
         }
-        return await this.CommitAsync()
+        //düzenle
+        return true
     }
     async UpdateAsync(entities: T[]): Promise<boolean> {
         //düzenle
@@ -65,13 +66,13 @@ abstract class EntityRepositoryAbstract<T extends IEntity<any>> implements IEnti
         }
         return await this.CommitAsync()
     }
-    async DeleteAsync(entities: T[]): Promise<boolean> {
-        for (let i = 0; i < entities.length; i++) {
-            const newEntity = entities[i];
-            let lastEntity= await this._model.findByPk(newEntity.Id,{transaction:this._transaction})
+    async DeleteAsync(ids: number[]): Promise<boolean> {
+        for (let i = 0; i < ids.length; i++) {
+            const id = ids[i];
+            let lastEntity= await this._model.findByPk(id,{transaction:this._transaction})
             lastEntity?.destroy()
         }
-        return await this.CommitAsync()
+        return true
     }
 
     protected objectFromDictionary<T>(obj: T): Record<keyof T, any> {
@@ -83,5 +84,3 @@ abstract class EntityRepositoryAbstract<T extends IEntity<any>> implements IEnti
     }
 
 }
-
-export default EntityRepositoryAbstract

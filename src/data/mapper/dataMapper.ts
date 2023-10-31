@@ -1,28 +1,27 @@
 import { createMap, createMapper } from "@automapper/core";
 import { sequelize } from "@automapper/sequelize";
 import LayerModel from "../sequelize/models/LayerModel";
-import Layer from "../../core/models/concrete/Layer";
-import Element from "../../core/models/concrete/Element";
 import ElementModel from "../sequelize/models/ElementModel";
 import PointModel from "../sequelize/models/PointModel";
-import Point from "../../core/models/concrete/Point";
 import DrawModel from "../sequelize/models/DrawModel";
-import Draw from "../../core/models/concrete/Draw";
 import UserModel from "../sequelize/models/UserModel";
-import User from "../../core/models/concrete/User";
 import ElementTypeModel from "../sequelize/models/ElementTypeModel";
-import ElementType from "../../core/models/concrete/ElementType";
 import PenModel from "../sequelize/models/PenModel";
-import Pen from "../../core/models/concrete/Pen";
-import PenStyle from "../../core/models/concrete/PenStyle";
 import PenStyleModel from "../sequelize/models/PenStyleModel";
 import PointTypeModel from "../sequelize/models/PointTypeModel";
-import PointType from "../../core/models/concrete/PointType";
-import Radius from "../../core/models/concrete/Radius";
 import RadiusModel from "../sequelize/models/RadiusModel";
 import SSAngleModel from "../sequelize/models/SSAngleModel";
-import SSAngle from "../../core/models/concrete/SSAngle";
-
+import { Draw } from "../../core/models/concrete/Draw";
+import { ElementType } from "../../core/models/concrete/ElementType";
+import { Layer } from "../../core/models/concrete/Layer";
+import { Pen } from "../../core/models/concrete/Pen";
+import { PenStyle } from "../../core/models/concrete/PenStyle";
+import { Point } from "../../core/models/concrete/Point";
+import { PointType } from "../../core/models/concrete/PointType";
+import { Radius } from "../../core/models/concrete/Radius";
+import { SSAngle } from "../../core/models/concrete/SSAngle";
+import { User } from "../../core/models/concrete/User";
+import { Element } from "../../core/models/concrete/Element";
 export const dataMapper = createMapper({
     strategyInitializer:sequelize()
 });

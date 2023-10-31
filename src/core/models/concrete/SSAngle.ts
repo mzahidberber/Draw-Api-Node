@@ -1,9 +1,9 @@
 import { AutoMap } from "@automapper/classes"
-import EntityAbstract from "../abstract/EntityAbstract"
+import { EntityAbstract } from "../abstract/EntityAbstract"
 
 
 
-class SSAngle extends EntityAbstract<number>{
+export class SSAngle extends EntityAbstract<number>{
     @AutoMap()
     Type!:string
     @AutoMap()
@@ -11,5 +11,3 @@ class SSAngle extends EntityAbstract<number>{
     @AutoMap()
     ElementId!:number
 }
-
-export default SSAngle

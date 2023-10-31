@@ -1,9 +1,9 @@
 import { AutoMap } from "@automapper/classes"
-import EntityAbstract from "../abstract/EntityAbstract"
+import { EntityAbstract } from "../abstract/EntityAbstract"
 
 
 
-class Point extends EntityAbstract<number>{
+export class Point extends EntityAbstract<number>{
     @AutoMap()
     X!:number
     @AutoMap()
@@ -13,5 +13,3 @@ class Point extends EntityAbstract<number>{
     @AutoMap()
     PointTypeId!:number
 }
-
-export default Point

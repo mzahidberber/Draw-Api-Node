@@ -1,10 +1,10 @@
 import { AutoMap } from "@automapper/classes"
-import EntityAbstract from "../abstract/EntityAbstract"
-import Point from "./Point"
+import { EntityAbstract } from "../abstract/EntityAbstract"
+import { Point } from "./Point"
 
 
 
-class PointType extends EntityAbstract<number>{
+export class PointType extends EntityAbstract<number>{
     @AutoMap()
     Name!:string
     @AutoMap()
@@ -15,5 +15,3 @@ class PointType extends EntityAbstract<number>{
         this.Points=[]
     }
 }
-
-export default PointType

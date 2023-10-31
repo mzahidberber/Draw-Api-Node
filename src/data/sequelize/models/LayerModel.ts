@@ -1,6 +1,6 @@
 import { DataTypes,Model } from 'sequelize'
 import { sequelize } from '../database'
-import Layer from '../../../core/models/concrete/Layer';
+import {Layer} from '../../../core/models/concrete/Layer';
 import { AutoMap } from '@automapper/classes';
 import ElementModel from './ElementModel';
 

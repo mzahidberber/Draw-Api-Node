@@ -1,6 +1,6 @@
 import { DataTypes,Model } from 'sequelize'
 import { sequelize } from '../database'
-import Draw from '../../../core/models/concrete/Draw';
+import {Draw} from '../../../core/models/concrete/Draw';
 import { AutoMap } from '@automapper/classes';
 import LayerModel from './LayerModel';
 

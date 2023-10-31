@@ -1,6 +1,6 @@
 import { DataTypes,Model } from 'sequelize'
 import { sequelize } from '../database'
-import Element from '../../../core/models/concrete/Element';
+import {Element} from '../../../core/models/concrete/Element';
 import { AutoMap } from '@automapper/classes';
 import PointModel from './PointModel';
 import SSAngleModel from './SSAngleModel';
