@@ -9,3 +9,4 @@ export const serviceMapper = createMapper({
 });
 
 createMap(serviceMapper,Draw,DrawDTO)
+createMap(serviceMapper,DrawDTO,Draw)

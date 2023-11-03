@@ -5,6 +5,8 @@ import { Layer } from "./Layer"
 
 export class Draw extends EntityAbstract<number>{
     @AutoMap()
+    Id!: number;
+    @AutoMap()
     Name!:string
     @AutoMap()
     UserId!:string

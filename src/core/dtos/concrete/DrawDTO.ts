@@ -4,9 +4,11 @@ import { IDTOAbstract } from "../abstract/IDTOAbstract";
 
 export class DrawDTO extends IDTOAbstract<number>{
     @AutoMap()
-    Name!:string
+    Id!: number;
     @AutoMap()
-    UserId!:string
+    Name!:string
+    // @AutoMap()
+    UserId?:string
     // @AutoMap(()=>[Layer])
     // Layers:Layer[]
     @AutoMap()

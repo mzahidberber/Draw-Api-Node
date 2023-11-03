@@ -3,6 +3,7 @@ import { NextFunction, Request, Response } from "express";
 import { IDrawService } from "../../business/abstract/IDrawService";
 import  { ServiceContainer, ServiceTypes } from "../../business/dependencyresolvers/serviceInstanceFactory.config";
 
+
 @injectable()
 export class DrawContoller{
     private _drawService:IDrawService
@@ -12,8 +13,18 @@ export class DrawContoller{
     }
 
     async GetDraws(req: Request, res: Response, next: NextFunction):Promise<any>{
-        const result=await this._drawService.GetAllAsync("a")
-        res.status(result.statusCode).json(result)
+        // const result=await this._drawService.GetAllAsync("a")
+        // const result= await this._drawService.AddAllAsync([
+        //     {Id:0,Name:"asd",UserId:"a",NumberOfLayerElements:0,createdAt:new Date(),updatedAt:new Date()},
+        //     {Id:2,Name:"asd1",UserId:"a",NumberOfLayerElements:0,createdAt:new Date(),updatedAt:new Date()},
+        // ])
+
+        // const asd=await this._drawService.DeleteAllAsync("a",[7])
+        const asd=await this._drawService.UpdateAllAsync("a",[
+            {Id:1,Name:"asd",NumberOfLayerElements:0,createdAt:new Date(),updatedAt:new Date()}
+        ])
+        console.log("result ->>>>>>>",asd)
+        // res.status(result.statusCode).json(result)
         next()
     }
 

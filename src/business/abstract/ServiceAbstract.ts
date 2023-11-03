@@ -51,41 +51,49 @@ export class ServiceAbstract{
         typeDTO:new()=>TDTO):Promise<CustomResponse<TDTO[]>>
     {
         const result=await dal.AddAsync(await serviceMapper.mapArrayAsync(entities,typeDTO,type))
-        await dal.CommitAsync(true)
-        //düzenle eklenen entitileri geri dön
-        if (result)
-            return CustomResponse.Success()
+        await dal.CommitAsync(result.isSuccess)
+        if (result.isSuccess)
+            return CustomResponse.Success(result.data?await serviceMapper.mapArrayAsync(result.data,type,typeDTO):null)
         else
-            return CustomResponse.Fail(400,"Entities cant add")
+            return CustomResponse.Fail(400,result.error??"Entities cant add")
     }
 
     protected async BaseUpdateAllAsync<TDTO,T extends IEntity<any>>(
-        userId: string,
         entities: TDTO[],
         dal:IEntityRepository<T>,
         type:new()=>T,
-        typeDTO:new()=>TDTO):Promise<CustomResponse<TDTO[]>>
+        typeDTO:new()=>TDTO,
+        checkUserIds:(()=>Promise<boolean>) | null = null
+        
+        ):Promise<CustomResponse<TDTO[]>>
     {
+        if(checkUserIds) {
+            const checkResult=await checkUserIds()
+            if(!checkResult)
+                return CustomResponse.Fail(400,"Entities not found")
+        }
         const result=await dal.UpdateAsync(await serviceMapper.mapArrayAsync(entities,typeDTO,type))
-        await dal.CommitAsync(true)
-        //düzenle eklenen entitileri geri dön
-        if (result)
-            return CustomResponse.Success()
-        else
-            return CustomResponse.Fail(400,"Entities cant update")
+        await dal.CommitAsync(result.isSuccess)
+        if (result.isSuccess)
+            return CustomResponse.Success(result.data?await serviceMapper.mapArrayAsync(result.data,type,typeDTO):null)
+        
+        return CustomResponse.Fail(400,result.error??"Entities cant update")
     }
     protected async BaseDeleteAllAsync<TDTO,T extends IEntity<any>>(
-        userId: string,
         ids: number[],
-        dal:IEntityRepository<T>)
+        dal:IEntityRepository<T>,
+        checkUserIds:(()=>Promise<boolean>) | null = null)
     {
-        //idleri kontrol et
+        if(checkUserIds) {
+            const checkResult=await checkUserIds()
+            if(!checkResult)
+                return CustomResponse.Fail(400,"Entities not found")
+        }
         const result=await dal.DeleteAsync(ids)
         await dal.CommitAsync(true)
-        //düzenle eklenen entitileri geri dön
         if (result)
             return CustomResponse.Success()
-        else
-            return CustomResponse.Fail(400,"Entities cant delete")
+
+        return CustomResponse.Fail(400,"Entities cant delete")
     }
 }

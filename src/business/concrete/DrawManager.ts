@@ -33,10 +33,19 @@ export class DrawManager extends ServiceAbstract implements IDrawService{
         return await this.BaseAddAllAsync(entities,this._drawDal,Draw,DrawDTO)
     }
     async UpdateAllAsync(userId: string, entities: DrawDTO[]): Promise<CustomResponse<any>> {
-        return await this.BaseUpdateAllAsync(userId,entities,this._drawDal,Draw,DrawDTO)
+        return await this.BaseUpdateAllAsync(entities,this._drawDal,Draw,DrawDTO,async ()=>{
+            const result=await this._drawDal.GetWhereAsync({Id:entities.map(x=>x.Id),UserId:userId})
+            console.log("restl",result)
+            if (result.length != entities.length) return false
+            return true
+        })
     }
-    async DeleteAllAsync(userId: string, entities: number[]): Promise<CustomResponse<any>> {
-        return await this.BaseDeleteAllAsync(userId,entities,this._drawDal)
+    async DeleteAllAsync(userId: string, ids: number[]): Promise<CustomResponse<any>> {
+        return await this.BaseDeleteAllAsync(ids,this._drawDal,async ()=>{
+            const result=await this._drawDal.GetWhereAsync({id:ids,userId:userId})
+            if (result.length != ids.length) return false
+            return true
+        })
     }
 
 }
