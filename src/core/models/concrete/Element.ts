@@ -3,12 +3,15 @@ import { EntityAbstract } from "../abstract/EntityAbstract";
 import { Point } from "./Point";
 import { SSAngle } from "./SSAngle";
 import { Radius } from "./Radius";
+import { Layer } from "./Layer";
 
 
 
 export class Element extends EntityAbstract<number>{
     @AutoMap()
     LayerId!:number
+    @AutoMap(()=>Layer)
+    Layer!:Layer
     @AutoMap()
     PenId!:number
     @AutoMap()

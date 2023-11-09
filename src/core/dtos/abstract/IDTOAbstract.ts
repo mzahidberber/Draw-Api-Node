@@ -5,10 +5,10 @@ import { IDTO } from "./IDTO";
 
 export abstract class IDTOAbstract<T> implements IDTO<T>{
     @AutoMap()
-    Id!: T;
+    Id?: T;
     @AutoMap()
-    createdAt!: Date;
+    createdAt?: Date;
     @AutoMap()
-    updatedAt!: Date;
+    updatedAt?: Date;
     
 }

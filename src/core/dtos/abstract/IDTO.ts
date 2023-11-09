@@ -1,7 +1,7 @@
 
 
 export interface IDTO<T>{
-    Id:T
-    createdAt:Date
-    updatedAt:Date
+    Id?:T
+    createdAt?:Date
+    updatedAt?:Date
 }

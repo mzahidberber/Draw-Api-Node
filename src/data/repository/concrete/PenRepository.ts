@@ -4,6 +4,7 @@ import { Model, ModelCtor } from 'sequelize-typescript'
 import {DataTypes} from '../../dependencyresolvers/DataTypes'
 import { IPenRepository } from '../abstract/IPenRepository'
 import {Pen} from '../../../core/models/concrete/Pen'
+import { Includeable } from 'sequelize'
 
 @injectable()
 export class PenRepository extends EntityRepositoryAbstract<Pen>  implements IPenRepository {
@@ -13,4 +14,5 @@ export class PenRepository extends EntityRepositoryAbstract<Pen>  implements IPe
         super(model,type)
 
     }
+
 }

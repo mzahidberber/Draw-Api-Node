@@ -1,6 +1,7 @@
 import { AutoMap } from "@automapper/classes"
 import {Element} from "./Element"
 import { EntityAbstract } from "../abstract/EntityAbstract"
+import { Draw } from "./Draw"
 
 
 export class Layer extends EntityAbstract<number>{
@@ -14,6 +15,8 @@ export class Layer extends EntityAbstract<number>{
     Thickness!:number
     @AutoMap()
     NumberOfElements!:number
+    @AutoMap(()=>Draw)
+    Draw!:Draw
     @AutoMap()
     DrawId!:number
     @AutoMap()

@@ -1,5 +1,5 @@
 import { sequelize } from '../../sequelize/database';
-import {  Sequelize, Transaction } from 'sequelize';
+import {  Includeable, Sequelize, Transaction } from 'sequelize';
 import { ModelCtor, Model} from 'sequelize-typescript'
 import { dataMapper } from '../../mapper/dataMapper';
 import { injectable } from 'inversify';
@@ -35,22 +35,39 @@ export abstract class EntityRepositoryAbstract<T extends IEntity<any>> implement
         return true
         
     }
-    async GetAllAsync(): Promise<T[]> {
+
+    protected GetIncludeForUserId(userId:string):Includeable[]{
+        return []
+    }
+    protected CheckEntitiesUserId(entites:T[]):T[]{
+        return entites
+    }
+    protected CheckEntityUserId(entity:T):T | null{
+        return entity
+    }
+
+    async GetAllAsync(userId:string): Promise<T[]> {
         await this.CreateTransaction()
-        let entities=await this._model.findAll()
-        return await dataMapper.mapArrayAsync<Model,T>(entities,this._model,this._type)
+        let entities=await this._model.findAll({include:this.GetIncludeForUserId(userId)})
+        const entitiesMap=await dataMapper.mapArrayAsync<Model,T>(entities,this._model,this._type)
+        return this.CheckEntitiesUserId(entitiesMap)
+
     }
     
-    async GetWhereAsync(filter: Partial<T>): Promise<T[]> {
+    async GetWhereAsync(userId:string,filter: Partial<T>): Promise<T[]> {
         await this.CreateTransaction()
-        let entites=await this._model.findAll({where:filter})
-        return await dataMapper.mapArrayAsync<Model,T>(entites,this._model,this._type)
+        const entites=await this._model.findAll({where:filter,include:this.GetIncludeForUserId(userId)})
+        const entitiesMap=await dataMapper.mapArrayAsync<Model,T>(entites,this._model,this._type)
+        return this.CheckEntitiesUserId(entitiesMap)
     }
-    async GetByIdAsync(id: number): Promise<T | null> {
+
+
+    async GetByIdAsync(userId:string,id: number): Promise<T | null> {
         await this.CreateTransaction()
-        let entity=await this._model.findByPk(id)
-        if (entity) return await dataMapper.mapAsync<Model,T>(entity,this._model,this._type)
-        return null
+        let entity=await this._model.findByPk(id,{include:this.GetIncludeForUserId(userId)})
+        if (!entity) return null
+        const entitiesMap=await dataMapper.mapAsync<Model,T>(entity,this._model,this._type)
+        return this.CheckEntityUserId(entitiesMap)
     }
     
     async AddAsync(entities: T[]): Promise<DataInfo<T[] | null>> {

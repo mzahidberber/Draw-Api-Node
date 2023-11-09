@@ -3,7 +3,7 @@ import { sequelize } from '../database'
 import {Point} from '../../../core/models/concrete/Point';
 import { AutoMap } from '@automapper/classes';
 
-class PointModel extends Model implements Point
+class PointModel extends Model
 {
     @AutoMap()
     Id!:number

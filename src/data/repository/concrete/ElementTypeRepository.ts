@@ -4,6 +4,7 @@ import { Model, ModelCtor } from 'sequelize-typescript'
 import {DataTypes} from '../../dependencyresolvers/DataTypes'
 import {ElementType} from '../../../core/models/concrete/ElementType'
 import { IElementTypeRepository } from '../abstract/IElementTypeRepository'
+import { Includeable } from 'sequelize'
 
 @injectable()
 export class ElementTypeRepository extends EntityRepositoryAbstract<ElementType>  implements IElementTypeRepository {

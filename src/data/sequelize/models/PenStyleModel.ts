@@ -4,7 +4,7 @@ import { AutoMap } from '@automapper/classes';
 import {PenStyle} from '../../../core/models/concrete/PenStyle';
 import PenModel from './PenModel';
 
-class PenStyleModel extends Model implements PenStyle
+class PenStyleModel extends Model 
 {
     
     @AutoMap()

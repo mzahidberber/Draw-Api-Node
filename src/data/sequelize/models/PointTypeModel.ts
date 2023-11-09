@@ -4,7 +4,7 @@ import { AutoMap } from '@automapper/classes';
 import {PointType} from '../../../core/models/concrete/PointType';
 import PointModel from './PointModel';
 
-class PointTypeModel extends Model implements PointType
+class PointTypeModel extends Model 
 {
     
     @AutoMap()

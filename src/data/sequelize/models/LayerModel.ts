@@ -4,7 +4,7 @@ import {Layer} from '../../../core/models/concrete/Layer';
 import { AutoMap } from '@automapper/classes';
 import ElementModel from './ElementModel';
 
-class LayerModel extends Model implements Layer
+class LayerModel extends Model
 {
     
     @AutoMap()

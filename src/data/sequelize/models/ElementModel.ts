@@ -5,11 +5,14 @@ import { AutoMap } from '@automapper/classes';
 import PointModel from './PointModel';
 import SSAngleModel from './SSAngleModel';
 import RadiusModel from './RadiusModel';
+import LayerModel from './LayerModel';
 
-class ElementModel extends Model implements Element
+class ElementModel extends Model
 {
     @AutoMap()
     Id!:number
+    @AutoMap(()=>LayerModel)
+    Layer!:LayerModel
     @AutoMap()
     LayerId!:number
     @AutoMap()

@@ -5,7 +5,7 @@ import {Pen} from '../../../core/models/concrete/Pen';
 import {Layer} from '../../../core/models/concrete/Layer';
 import ElementModel from './ElementModel';
 
-class PenModel extends Model implements Pen
+class PenModel extends Model 
 {
     @AutoMap()
     Id!:number

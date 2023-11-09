@@ -3,7 +3,7 @@ import { sequelize } from '../database'
 import { AutoMap } from '@automapper/classes';
 import {SSAngle} from '../../../core/models/concrete/SSAngle';
 
-class SSAngleModel extends Model implements SSAngle
+class SSAngleModel extends Model
 {
     
     

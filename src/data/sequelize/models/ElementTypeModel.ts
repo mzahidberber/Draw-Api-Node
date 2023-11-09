@@ -4,7 +4,7 @@ import { AutoMap } from '@automapper/classes';
 import {ElementType} from '../../../core/models/concrete/ElementType';
 import ElementModel from './ElementModel';
 
-class ElementTypeModel extends Model implements ElementType
+class ElementTypeModel extends Model
 {
     @AutoMap()
     Id!:number

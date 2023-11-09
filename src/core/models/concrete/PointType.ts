@@ -7,7 +7,7 @@ import { Point } from "./Point"
 export class PointType extends EntityAbstract<number>{
     @AutoMap()
     Name!:string
-    @AutoMap()
+    @AutoMap(()=>[Point])
     Points:Point[]
 
     constructor(){

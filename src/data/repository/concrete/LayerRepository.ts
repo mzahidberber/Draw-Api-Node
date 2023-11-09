@@ -6,6 +6,8 @@ import { ILayerRepository } from '../abstract/ILayerRepository'
 import {DataTypes} from '../../dependencyresolvers/DataTypes'
 import ElementModel from '../../sequelize/models/ElementModel'
 import { dataMapper } from '../../mapper/dataMapper'
+import DrawModel from '../../sequelize/models/DrawModel'
+import { Includeable } from 'sequelize'
 
 @injectable()
 export class LayerRepository extends EntityRepositoryAbstract<Layer>  implements ILayerRepository {
@@ -18,5 +20,22 @@ export class LayerRepository extends EntityRepositoryAbstract<Layer>  implements
     async GetAllWithElementsAsync(): Promise<Layer[]> {
         let entities=await this.model.findAll({include:ElementModel})
         return await dataMapper.mapArrayAsync<Model,Layer>(entities,this.model,Layer)
+    }
+
+    public override GetIncludeForUserId(userId:string): Includeable[] {
+        return [{
+            model:DrawModel,
+            attributes:["Id"],
+            where:{
+                UserId:userId
+            },
+        }]
+    }
+    public override CheckEntitiesUserId(entities: Layer[]): Layer[] {
+        return entities.filter(x=>x.Draw!==null)
+    }
+
+    public override CheckEntityUserId(entity: Layer): Layer | null {
+        return entity.Draw ? entity : null
     }
 }

@@ -4,7 +4,7 @@ import {User} from '../../../core/models/concrete/User';
 import { AutoMap } from '@automapper/classes';
 import DrawModel from './DrawModel';
 
-class UserModel extends Model implements User
+class UserModel extends Model
 {
     @AutoMap()
     Id!:string

@@ -6,24 +6,27 @@ import { injectable } from "inversify";
 
 @injectable()
 export class ServiceAbstract{
+    
     protected async BaseGetAllAsync<TDTO,T extends IEntity<any>>(
+        userId:string,
         filter: Partial<TDTO>,
         dal:IEntityRepository<T>,
         type:new()=>T,
         typeDTO:new()=>TDTO):Promise<CustomResponse<TDTO[]>>
     {
-        const entities=await dal.GetWhereAsync(filter)
+        const entities=await dal.GetWhereAsync(userId,filter)
         await dal.CommitAsync(true)
         return CustomResponse.Success(await serviceMapper.mapArrayAsync(entities,type,typeDTO))
     }
 
     protected async BaseGetWhereAsync<TDTO,T extends IEntity<any>>(
+        userId:string,
         filter: Partial<TDTO>,
         dal:IEntityRepository<T>,
         type:new()=>T,
         typeDTO:new()=>TDTO):Promise<CustomResponse<TDTO[]>>
     {
-        const entities=await dal.GetWhereAsync(filter)
+        const entities=await dal.GetWhereAsync(userId,filter)
         await dal.CommitAsync(true)
         return CustomResponse.Success(await serviceMapper.mapArrayAsync(entities,type,typeDTO))
     }
@@ -35,7 +38,7 @@ export class ServiceAbstract{
         type:new()=>T,
         typeDTO:new()=>TDTO):Promise<CustomResponse<TDTO>>
     {
-        const entities=await dal.GetWhereAsync({id:entityId,userId:userId})
+        const entities=await dal.GetWhereAsync(userId,{id:entityId})
         await dal.CommitAsync(true)
         if (entities.length>0)
             return CustomResponse.Success(await serviceMapper.mapAsync(entities[0],type,typeDTO))
@@ -48,7 +51,8 @@ export class ServiceAbstract{
         entities: TDTO[],
         dal:IEntityRepository<T>,
         type:new()=>T,
-        typeDTO:new()=>TDTO):Promise<CustomResponse<TDTO[]>>
+        typeDTO:new()=>TDTO)
+        :Promise<CustomResponse<TDTO[]>>
     {
         const result=await dal.AddAsync(await serviceMapper.mapArrayAsync(entities,typeDTO,type))
         await dal.CommitAsync(result.isSuccess)

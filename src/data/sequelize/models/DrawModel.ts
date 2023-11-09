@@ -4,7 +4,7 @@ import {Draw} from '../../../core/models/concrete/Draw';
 import { AutoMap } from '@automapper/classes';
 import LayerModel from './LayerModel';
 
-class DrawModel extends Model implements Draw
+class DrawModel extends Model
 {
     @AutoMap()
     Id!:number
