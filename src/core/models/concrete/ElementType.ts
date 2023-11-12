@@ -5,6 +5,8 @@ import { Element } from "./Element"
 
 export class ElementType extends EntityAbstract<number>{
     @AutoMap()
+    Id!: number
+    @AutoMap()
     Name!:string
     @AutoMap(()=>[Element])
     Elements: Element[]

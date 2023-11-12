@@ -5,11 +5,13 @@ import { IDTOAbstract } from "../abstract/IDTOAbstract"
 
 export class PointDTO extends IDTOAbstract<number>{
     @AutoMap()
+    Id?: number
+    @AutoMap()
     X?:number
     @AutoMap()
     Y?:number
     @AutoMap()
-    ElementId?:number
+    ElementId!:number
     @AutoMap()
-    PointTypeId?:number
+    PointTypeId!:number
 }

@@ -7,6 +7,8 @@ import { LayerDTO } from "./LayerDTO"
 
 export class PenDTO extends IDTOAbstract<number>{
     @AutoMap()
+    Id?: number
+    @AutoMap()
     Name!:string
     @AutoMap()
     Red!:number

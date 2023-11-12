@@ -6,6 +6,8 @@ import { Element } from "./Element"
 
 export class Point extends EntityAbstract<number>{
     @AutoMap()
+    Id!: number
+    @AutoMap()
     X!:number
     @AutoMap()
     Y!:number

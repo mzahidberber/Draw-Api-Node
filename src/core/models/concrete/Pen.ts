@@ -7,6 +7,8 @@ import { Element } from "./Element"
 
 export class Pen extends EntityAbstract<number>{
     @AutoMap()
+    Id!: number
+    @AutoMap()
     Name!:string
     @AutoMap()
     Red!:number

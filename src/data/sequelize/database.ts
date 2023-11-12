@@ -1,5 +1,5 @@
 import { Dialect, Sequelize } from 'sequelize'
-import configJson from '../../config/config.json'
+import configJson from '../sequelize/config/config.json'
 
 
 const env = process.env.NODE_ENV || 'development'

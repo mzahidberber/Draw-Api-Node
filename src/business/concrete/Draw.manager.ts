@@ -1,10 +1,10 @@
 import { injectable } from "inversify";
 import { CustomResponse } from "../../core/dtos/CustomResponse";
 import { DrawDTO } from "../../core/dtos/concrete/DrawDTO";
-import {DataTypes} from "../../data/dependencyresolvers/DataTypes";
-import {DataContainer} from "../../data/dependencyresolvers/dataInstanceFactory.config";
+import { DataTypes } from "../../data/dependencyresolvers/DataTypes";
+import { DataContainer } from "../../data/dependencyresolvers/dataInstanceFactory.config";
 import { IDrawRepository } from "../../data/repository/abstract/IDrawRepository";
-import { IDrawService } from "../abstract/IDrawService";
+import { IDrawService } from "../abstract/IDraw.service";
 import { ServiceAbstract } from "../abstract/ServiceAbstract";
 import { Draw } from "../../core/models/concrete/Draw";
 
@@ -33,6 +33,7 @@ export class DrawManager extends ServiceAbstract implements IDrawService{
         for (let i = 0; i < entities.length; i++) {
             const element = entities[i]
             element.UserId=userId
+
         }
         return await this.BaseAddAllAsync(entities,this._drawDal,Draw,DrawDTO)
     }

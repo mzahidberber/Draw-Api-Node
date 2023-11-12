@@ -9,6 +9,7 @@ export enum AutorizeRoles {
     Manager="manager"
   }
 
+
 function CheckAutorize(roles:AutorizeRoles[],req: Request, res: Response, next: NextFunction){
     const token=req.headers.authorization?.split(' ')[1]
     if (token) {
@@ -60,7 +61,7 @@ export function AutorizeClass(roles:AutorizeRoles[]=[]) {
 
         methodNames.forEach(methodName => {
             const originalMethod = classPrototype[methodName]
-
+            
             classPrototype[methodName] = async function (req: Request, res: Response, next: NextFunction):Promise<any> {
                 CheckAutorize(roles,req,res,next)
                 if (req.user.authorize) return originalMethod.apply(this, [req, res, next])

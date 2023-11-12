@@ -5,7 +5,7 @@ module.exports = {
   async up (queryInterface, Sequelize) {
     await queryInterface.bulkInsert('Users', [
       {
-        Id:"a",
+        Id:"fdb11409-e937-495e-9053-4d5929566b25",
         FirstName:"zahid",
         LastName:"berber",
         Email:"mzahidberber@gmail.com",
@@ -21,7 +21,7 @@ module.exports = {
         Id:1,
         Name:"test",
         NumberOfLayerElements:0,
-        UserId:"a",
+        UserId:"fdb11409-e937-495e-9053-4d5929566b25",
         createdAt: new Date(),
         updatedAt: new Date()
       }
@@ -42,6 +42,7 @@ module.exports = {
       {
         Id:1,
         Name:"p1",
+        UserId:"fdb11409-e937-495e-9053-4d5929566b25",
         Red:150,
         Blue:150,
         Green:150,

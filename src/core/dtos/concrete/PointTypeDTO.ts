@@ -4,6 +4,8 @@ import { PointDTO } from "./PointDTO"
 
 export class PointTypeDTO extends IDTOAbstract<number>{
     @AutoMap()
+    Id?: number
+    @AutoMap()
     Name!:string
     @AutoMap(()=>[PointDTO])
     Points:PointDTO[]

@@ -8,5 +8,5 @@ export interface IGenericService<T extends IDTO<any>>{
     GetAsync(userId:string,entityId:number):Promise<CustomResponse<T>>
     AddAllAsync(userId:string,entities:T[]):Promise<CustomResponse<T[]>>
     UpdateAllAsync(userId:string,entities:T[]):Promise<CustomResponse<any>>
-    DeleteAllAsync(userId:string,entities:number[]):Promise<CustomResponse<any>>
+    DeleteAllAsync(userId:string,ids:number[]):Promise<CustomResponse<any>>
 }

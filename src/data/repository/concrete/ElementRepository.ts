@@ -24,7 +24,7 @@ export class ElementRepository extends EntityRepositoryAbstract<Element>  implem
         let entities=await this.model.findAll({include:PointModel})
         return await dataMapper.mapArrayAsync<Model,Element>(entities,this.model,Element)
     }
-
+    
     public override GetIncludeForUserId(userId:string): Includeable[] {
         return [{
             model:LayerModel,

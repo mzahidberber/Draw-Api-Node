@@ -18,7 +18,7 @@ class ElementModel extends Model
     @AutoMap()
     PenId!: number;
     @AutoMap()
-    TypeId!: number;
+    ElementTypeId!: number;
     @AutoMap(()=>[PointModel])
     Points: PointModel[]=[]
     @AutoMap(()=>[SSAngleModel])

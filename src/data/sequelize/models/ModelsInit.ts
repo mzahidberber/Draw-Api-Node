@@ -39,6 +39,13 @@ PenModel.hasMany(LayerModel)
 
 //Pen
 
+PenModel.belongsTo(UserModel,{
+    foreignKey:{
+        allowNull:false
+    }
+})
+UserModel.hasMany(PenModel)
+
 PenModel.belongsTo(PenStyleModel,{
     foreignKey:{
         allowNull:false

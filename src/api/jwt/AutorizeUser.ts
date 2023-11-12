@@ -1,5 +1,6 @@
 
 
+
 export class AutorizeUser{
     nameid:string
     email:string

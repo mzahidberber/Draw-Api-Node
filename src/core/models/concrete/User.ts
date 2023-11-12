@@ -5,6 +5,8 @@ import { Draw } from "./Draw"
 
 export class User extends EntityAbstract<string>{
     @AutoMap()
+    Id!: string
+    @AutoMap()
     FirstName!:string
     @AutoMap()
     LastName!:string

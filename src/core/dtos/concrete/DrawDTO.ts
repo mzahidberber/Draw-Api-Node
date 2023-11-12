@@ -4,7 +4,7 @@ import { IDTOAbstract } from "../abstract/IDTOAbstract";
 
 export class DrawDTO extends IDTOAbstract<number>{
     @AutoMap()
-    Id?: number;
+    Id?: number
     @AutoMap()
     Name?:string
     @AutoMap()

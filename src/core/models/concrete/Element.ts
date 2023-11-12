@@ -9,13 +9,15 @@ import { Layer } from "./Layer";
 
 export class Element extends EntityAbstract<number>{
     @AutoMap()
+    Id!: number
+    @AutoMap()
     LayerId!:number
     @AutoMap(()=>Layer)
     Layer!:Layer
     @AutoMap()
     PenId!:number
     @AutoMap()
-    TypeId!:number
+    ElementTypeId!:number
     @AutoMap(()=>[Point])
     Points: Point[]
     @AutoMap(()=>[SSAngle])

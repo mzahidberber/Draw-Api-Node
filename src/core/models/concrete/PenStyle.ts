@@ -5,6 +5,8 @@ import { Pen } from "./Pen"
 
 export class PenStyle extends EntityAbstract<number>{
     @AutoMap()
+    Id!: number
+    @AutoMap()
     Name!:string
     @AutoMap(()=>[Pen])
     Pens:Pen[]

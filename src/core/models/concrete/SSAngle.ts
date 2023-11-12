@@ -6,6 +6,8 @@ import { Element } from "./Element"
 
 export class SSAngle extends EntityAbstract<number>{
     @AutoMap()
+    Id!: number
+    @AutoMap()
     Type!:string
     @AutoMap()
     Value!:number

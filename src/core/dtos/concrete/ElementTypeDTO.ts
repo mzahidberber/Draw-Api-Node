@@ -5,6 +5,8 @@ import { ElementDTO } from "./ElementDTO"
 
 export class ElementTypeDTO extends IDTOAbstract<number>{
     @AutoMap()
+    Id?: number
+    @AutoMap()
     Name!:string
     @AutoMap(()=>[ElementDTO])
     Elements: ElementDTO[]

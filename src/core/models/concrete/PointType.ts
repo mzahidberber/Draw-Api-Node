@@ -6,6 +6,8 @@ import { Point } from "./Point"
 
 export class PointType extends EntityAbstract<number>{
     @AutoMap()
+    Id!: number
+    @AutoMap()
     Name!:string
     @AutoMap(()=>[Point])
     Points:Point[]

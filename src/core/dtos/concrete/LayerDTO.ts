@@ -6,6 +6,8 @@ import { DrawDTO } from "./DrawDTO"
 
 export class LayerDTO extends IDTOAbstract<number>{
     @AutoMap()
+    Id?: number;
+    @AutoMap()
     Name?:string
     @AutoMap()
     Lock?:boolean
