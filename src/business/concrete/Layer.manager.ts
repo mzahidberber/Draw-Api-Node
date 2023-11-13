@@ -8,9 +8,11 @@ import { ServiceAbstract } from "../abstract/ServiceAbstract";
 import { ILayerRepository } from "../../data/repository/abstract/ILayerRepository";
 import { Layer } from "../../core/models/concrete/Layer";
 import { LayerDTO } from "../../core/dtos/concrete/LayerDTO";
+import { LogAspectClass } from "../../core/aspects/Logging/LogAspect";
 
 
 @injectable()
+@LogAspectClass()
 export class LayerManager extends ServiceAbstract implements IDrawService{
     private _layerDal:ILayerRepository
     constructor(){

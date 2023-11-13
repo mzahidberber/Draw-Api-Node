@@ -1,9 +1,11 @@
 import { NextFunction, Router,Request,Response } from 'express';
-import { DrawContoller } from '../controllers/Draw.controller';
+import { DrawContoller } from '../controllers/concrete/Draw.controller';
 import { ControllerTypes, ControllerContainer } from '../dependencyresolvers/controllerInstanceFactory.config';
 import { AutorizeClass } from '../jwt/Authendication';
 import { injectable } from 'inversify';
-
+import { ValidationMethod } from '../validation/Validation';
+import { AddDrawShema, UpdateDrawShema } from '../validation/Shemas/Draw.validation';
+import { IntegerShema } from '../validation/Shemas/All.validation';
 @injectable()
 @AutorizeClass()
 export class DrawRouter{
@@ -30,15 +32,15 @@ export class DrawRouter{
     private async getAsync(req: Request, res: Response, next: NextFunction): Promise<void> {
         await ControllerContainer.get<DrawContoller>(ControllerTypes.DrawController).GetEntityAsync(req, res, next)
     }
-    
+    @ValidationMethod("DrawRouter",AddDrawShema)
     private async addAsync(req: Request, res: Response, next: NextFunction): Promise<void> {
         await ControllerContainer.get<DrawContoller>(ControllerTypes.DrawController).AddEntitiesAsync(req, res, next)
     }
-
+    @ValidationMethod("DrawRouter",IntegerShema)
     private async deleteAsync(req: Request, res: Response, next: NextFunction): Promise<void> {
         await ControllerContainer.get<DrawContoller>(ControllerTypes.DrawController).DeleteDrawsAsync(req, res, next)
     }
-
+    @ValidationMethod("DrawRouter",UpdateDrawShema)
     private async updateAsync(req: Request, res: Response, next: NextFunction): Promise<void> {
         await ControllerContainer.get<DrawContoller>(ControllerTypes.DrawController).UpdateDrawsAsync(req, res, next)
     }

@@ -1,12 +1,12 @@
 import { Container } from "inversify"
 import "reflect-metadata";
-import { DrawContoller } from "../controllers/Draw.controller";
-import { LayerContoller as LayerController } from "../controllers/Layer.controller";
-import { ElementContoller } from "../controllers/Element.controller";
+import { DrawContoller } from "../controllers/concrete/Draw.controller";
+import { LayerContoller as LayerController } from "../controllers/concrete/Layer.controller";
+import { ElementContoller } from "../controllers/concrete/Element.controller";
 import { ServiceContainer } from "../../business/dependencyresolvers/serviceInstanceFactory.config";
-import { PointController } from "../controllers/Point.controller";
-import { RadiusController } from "../controllers/Radius.controller";
-import { SSAngleController } from "../controllers/SSAngle.controller";
+import { PointController } from "../controllers/concrete/Point.controller";
+import { RadiusController } from "../controllers/concrete/Radius.controller";
+import { SSAngleController } from "../controllers/concrete/SSAngle.controller";
 
 export const ControllerTypes = {
     DrawController: Symbol("DrawController"),

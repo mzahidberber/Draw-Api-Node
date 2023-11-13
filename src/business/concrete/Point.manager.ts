@@ -9,8 +9,10 @@ import { IPointRepository } from "../../data/repository/abstract/IPointRepositor
 import { IPointTypeRepository } from "../../data/repository/abstract/IPointTypeRepository";
 import { IPointService } from "../abstract/IPoint.service";
 import { ServiceAbstract } from "../abstract/ServiceAbstract";
+import { LogAspectClass } from "../../core/aspects/Logging/LogAspect";
 
 @injectable()
+@LogAspectClass()
 export class PointManager extends ServiceAbstract implements IPointService{
     private _pointDal:IPointRepository
     private _elementDal:IElementRepository

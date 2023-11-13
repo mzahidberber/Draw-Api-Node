@@ -7,9 +7,11 @@ import { IPenService } from "../abstract/IPen.service";
 import { PenDTO } from "../../core/dtos/concrete/PenDTO";
 import { Pen } from "../../core/models/concrete/Pen";
 import { IPenRepository } from "../../data/repository/abstract/IPenRepository";
+import { LogAspectClass } from "../../core/aspects/Logging/LogAspect";
 
 
 @injectable()
+@LogAspectClass()
 export class PenManager extends ServiceAbstract implements IPenService{
     private _penDal:IPenRepository
     constructor(){

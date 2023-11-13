@@ -8,9 +8,11 @@ import { IElementRepository } from "../../data/repository/abstract/IElementRepos
 import { DataContainer } from "../../data/dependencyresolvers/dataInstanceFactory.config";
 import { DataTypes } from "../../data/dependencyresolvers/DataTypes";
 import { Radius } from "../../core/models/concrete/Radius";
+import { LogAspectClass } from "../../core/aspects/Logging/LogAspect";
 
 
 @injectable()
+@LogAspectClass()
 export class RadiusManager extends ServiceAbstract implements IRadiusService{
     private _radiusDal:IRadiusRepository
     private _elementDal:IElementRepository

@@ -1,8 +1,8 @@
 import { injectable } from "inversify";
-import { CustomResponse } from "../../core/dtos/CustomResponse"
+import { CustomResponse } from "../../../core/dtos/CustomResponse"
 import { NextFunction, Request, Response } from "express";
-import { IGenericService } from "../../business/abstract/IGeneric.service";
-import { IDTO } from "../../core/dtos/abstract/IDTO";
+import { IGenericService } from "../../../business/abstract/IGeneric.service";
+import { IDTO } from "../../../core/dtos/abstract/IDTO";
 
 @injectable()
 export abstract class BaseController<T extends IDTO<any>>{
@@ -11,6 +11,7 @@ export abstract class BaseController<T extends IDTO<any>>{
         this._service=service
     }
 
+    
     protected async CheckEntityIdAsync(entityId:string,res:Response,service:((id:number)=>Promise<void>)){
         const id=parseInt(entityId)
         if(!isNaN(id)){
@@ -25,7 +26,6 @@ export abstract class BaseController<T extends IDTO<any>>{
             res.status(result.statusCode).json(result)
         })
     }
-
 
     async GetEntitiesAsync(req: Request, res: Response, next: NextFunction):Promise<any>{
         const result=await this._service.GetAllAsync(req.user.nameid)

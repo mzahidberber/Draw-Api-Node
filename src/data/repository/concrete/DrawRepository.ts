@@ -12,6 +12,7 @@ export class DrawRepository extends EntityRepositoryAbstract<Draw>  implements I
     constructor(@inject(DataTypes.DrawModel) private model: ModelCtor<Model>,@inject(DataTypes.Draw) private type:new () => Draw ){
         super(model,type)
     }
+    
 
     override async GetWhereAsync(userId:string,filter: Partial<Draw>): Promise<Draw[]> {
         await this.CreateTransaction()

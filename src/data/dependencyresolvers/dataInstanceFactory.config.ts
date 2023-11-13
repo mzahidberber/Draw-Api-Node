@@ -49,6 +49,7 @@ import PointTypeModel from "../sequelize/models/PointTypeModel";
 import RadiusModel from "../sequelize/models/RadiusModel";
 import SSAngleModel from "../sequelize/models/SSAngleModel";
 import UserModel from "../sequelize/models/UserModel";
+import { EntityRepositoryAbstract } from "../repository/abstract/EntityRepositoryAbstract";
 
 
 export const DataContainer = new Container()
@@ -67,7 +68,7 @@ DataContainer.bind<IPointTypeRepository>(DataTypes.IPointTypeRepository).to(Poin
 DataContainer.bind<IRadiusRepository>(DataTypes.IRadiusRepository).to(RadiusRepository)
 DataContainer.bind<ISSAngleRepository>(DataTypes.ISSAngleRepository).to(SSAngleRepository)
 DataContainer.bind<IUserRepository>(DataTypes.IUserRepository).to(UserRepository)
-
+DataContainer.bind<EntityRepositoryAbstract<any>>(DataTypes.EntityRepositoryAbstracy)
 
 
 

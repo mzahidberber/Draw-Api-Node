@@ -10,7 +10,7 @@ export const DataTypes = {
     IRadiusRepository: Symbol("IRadiusRepository"),
     ISSAngleRepository: Symbol("ISSAngleRepository"),
     IUserRepository: Symbol("IUserRepository"),
-    
+    EntityRepositoryAbstracy:Symbol("EntityRepositoryAbstracy"),
     
     //sequalize models
     DrawModel: Symbol("DrawModel"),

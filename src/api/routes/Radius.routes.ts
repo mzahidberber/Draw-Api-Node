@@ -2,8 +2,10 @@ import { Router,Request,Response,NextFunction } from 'express';
 import { ControllerTypes, ControllerContainer } from '../dependencyresolvers/controllerInstanceFactory.config';
 import { AutorizeClass } from '../jwt/Authendication';
 import { injectable } from 'inversify';
-import { RadiusController } from '../controllers/Radius.controller';
-
+import { RadiusController } from '../controllers/concrete/Radius.controller';
+import { ValidationMethod } from '../validation/Validation';
+import { AddRadiusShema, UpdateRadiusShema } from '../validation/Shemas/Radius.validation';
+import { IntegerShema } from '../validation/Shemas/All.validation';
 @injectable()
 @AutorizeClass()
 export class RadiusRouter{
@@ -14,7 +16,7 @@ export class RadiusRouter{
         this.router.post('/add', this.addAsync.bind(this))
         this.router.delete('/delete', this.deleteAsync.bind(this))
         this.router.put('/update', this.updateAsync.bind(this))
-        this.router.get('/layers', this.getAllAsync.bind(this))
+        this.router.get('/radiuses', this.getAllAsync.bind(this))
         this.router.get('/:id', this.getAsync.bind(this))
     }
     
@@ -25,15 +27,15 @@ export class RadiusRouter{
     private async getAsync(req: Request, res: Response, next: NextFunction): Promise<void> {
         await ControllerContainer.get<RadiusController>(ControllerTypes.RadiusController).GetEntityAsync(req, res, next)
     }
-    
+    @ValidationMethod("RadiusRouter",AddRadiusShema)
     private async addAsync(req: Request, res: Response, next: NextFunction): Promise<void> {
         await ControllerContainer.get<RadiusController>(ControllerTypes.RadiusController).AddEntitiesAsync(req, res, next)
     }
-
+    @ValidationMethod("RadiusRouter",IntegerShema)
     private async deleteAsync(req: Request, res: Response, next: NextFunction): Promise<void> {
         await ControllerContainer.get<RadiusController>(ControllerTypes.RadiusController).DeleteDrawsAsync(req, res, next)
     }
-
+    @ValidationMethod("RadiusRouter",UpdateRadiusShema)
     private async updateAsync(req: Request, res: Response, next: NextFunction): Promise<void> {
         await ControllerContainer.get<RadiusController>(ControllerTypes.RadiusController).UpdateDrawsAsync(req, res, next)
     }

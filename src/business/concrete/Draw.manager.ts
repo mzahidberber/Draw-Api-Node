@@ -7,9 +7,11 @@ import { IDrawRepository } from "../../data/repository/abstract/IDrawRepository"
 import { IDrawService } from "../abstract/IDraw.service";
 import { ServiceAbstract } from "../abstract/ServiceAbstract";
 import { Draw } from "../../core/models/concrete/Draw";
+import { LogAspectClass } from "../../core/aspects/Logging/LogAspect";
 
 
 @injectable()
+@LogAspectClass()
 export class DrawManager extends ServiceAbstract implements IDrawService{
     private _drawDal:IDrawRepository
     constructor(){
@@ -23,6 +25,7 @@ export class DrawManager extends ServiceAbstract implements IDrawService{
         filter.UserId=userId
         return await this.BaseGetWhereAsync(userId,filter,this._drawDal,Draw,DrawDTO)
     }
+    
     async GetAllAsync(userId: string): Promise<CustomResponse<DrawDTO[]>> {
         return await this.BaseGetAllAsync(userId,{UserId:userId},this._drawDal,Draw,DrawDTO)
     }

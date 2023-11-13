@@ -8,9 +8,11 @@ import { ISSAngleService } from "../abstract/ISSAngle.service";
 import { SSAngleDTO } from "../../core/dtos/concrete/SSAngleDTO";
 import { SSAngle } from "../../core/models/concrete/SSAngle";
 import { ISSAngleRepository } from "../../data/repository/abstract/ISSAngleRepository";
+import { LogAspectClass } from "../../core/aspects/Logging/LogAspect";
 
 
 @injectable()
+@LogAspectClass()
 export class SSAngleManager extends ServiceAbstract implements ISSAngleService{
     private _ssangleDal:ISSAngleRepository
     private _elementDal:IElementRepository

@@ -1,9 +1,9 @@
 import { inject, injectable} from "inversify";
 import { NextFunction, Request, Response } from "express";
-import  { ServiceTypes } from "../../business/dependencyresolvers/serviceInstanceFactory.config";
-import { BaseController } from "./BaseAbstract.controller";
-import { IElementService } from "../../business/abstract/IElement.service";
-import { ElementDTO } from "../../core/dtos/concrete/ElementDTO";
+import  { ServiceTypes } from "../../../business/dependencyresolvers/serviceInstanceFactory.config";
+import { BaseController } from "../abstract/BaseAbstract.controller";
+import { IElementService } from "../../../business/abstract/IElement.service";
+import { ElementDTO } from "../../../core/dtos/concrete/ElementDTO";
 
 
 @injectable()
