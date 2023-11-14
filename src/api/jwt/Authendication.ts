@@ -1,6 +1,7 @@
 import jwt from 'jsonwebtoken'
 import { NextFunction, Request, Response } from "express";
 import { AutorizeUser } from './AutorizeUser';
+import { Environment } from '../../core/environment/Environment';
 
 
 export enum AutorizeRoles {
@@ -13,8 +14,7 @@ export enum AutorizeRoles {
 function CheckAutorize(roles:AutorizeRoles[],req: Request, res: Response, next: NextFunction){
     const token=req.headers.authorization?.split(' ')[1]
     if (token) {
-        //keyi environmentten al!!
-        const secretKey = 'mysecuritykeyolabildigincekarisikolsun';
+        const secretKey:string = Environment.AUTORIZE_SECRET_KEY ?? ""
         jwt.verify(token, secretKey,{ algorithms: ['HS256'] }, (err, decoded) => {
           if (err) {
             return res.status(403).json({ message: 'Invalid token' });
