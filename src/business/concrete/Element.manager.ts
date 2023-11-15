@@ -10,7 +10,7 @@ import { Element } from "../../core/models/concrete/Element"
 import { ILayerRepository } from "../../data/repository/abstract/ILayerRepository"
 import { IPenRepository } from "../../data/repository/abstract/IPenRepository"
 import { IElementTypeRepository } from "../../data/repository/abstract/IElementTypeRepository"
-import { LogAspectClass } from "../../core/aspects/Logging/LogAspect"
+import { LogAspectClass } from "../../core/aspects/logging/LogAspect"
 
 
 @injectable()

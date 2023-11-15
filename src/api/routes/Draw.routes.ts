@@ -6,6 +6,7 @@ import { injectable } from 'inversify';
 import { ValidationMethod } from '../validation/Validation';
 import { AddDrawShema, UpdateDrawShema } from '../validation/Shemas/Draw.validation';
 import { IntegerShema } from '../validation/Shemas/All.validation';
+import { CacheAspectMethod } from '../../core/aspects/caching/CacheAspect';
 @injectable()
 @AutorizeClass()
 export class DrawRouter{
@@ -22,6 +23,7 @@ export class DrawRouter{
     }
     
     private async getAllAsync(req: Request, res: Response, next: NextFunction): Promise<void> {
+        console.log(req.baseUrl)
         await ControllerContainer.get<DrawContoller>(ControllerTypes.DrawController).GetEntitiesAsync(req, res, next)
     }
 

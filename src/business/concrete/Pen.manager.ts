@@ -7,7 +7,7 @@ import { IPenService } from "../abstract/IPen.service";
 import { PenDTO } from "../../core/dtos/concrete/PenDTO";
 import { Pen } from "../../core/models/concrete/Pen";
 import { IPenRepository } from "../../data/repository/abstract/IPenRepository";
-import { LogAspectClass } from "../../core/aspects/Logging/LogAspect";
+import { LogAspectClass } from "../../core/aspects/logging/LogAspect";
 
 
 @injectable()

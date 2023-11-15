@@ -7,7 +7,7 @@ import { IElementTypeService } from "../abstract/IElementType.service"
 import { ElementTypeDTO } from "../../core/dtos/concrete/ElementTypeDTO"
 import { IElementTypeRepository } from "../../data/repository/abstract/IElementTypeRepository"
 import { ElementType } from "../../core/models/concrete/ElementType"
-import { LogAspectClass } from "../../core/aspects/Logging/LogAspect"
+import { LogAspectClass } from "../../core/aspects/logging/LogAspect"
 
 
 @injectable()

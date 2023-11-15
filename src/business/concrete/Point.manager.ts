@@ -9,7 +9,7 @@ import { IPointRepository } from "../../data/repository/abstract/IPointRepositor
 import { IPointTypeRepository } from "../../data/repository/abstract/IPointTypeRepository";
 import { IPointService } from "../abstract/IPoint.service";
 import { ServiceAbstract } from "../abstract/ServiceAbstract";
-import { LogAspectClass } from "../../core/aspects/Logging/LogAspect";
+import { LogAspectClass } from "../../core/aspects/logging/LogAspect";
 
 @injectable()
 @LogAspectClass()

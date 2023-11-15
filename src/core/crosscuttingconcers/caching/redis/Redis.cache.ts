@@ -2,13 +2,15 @@ import {createClient} from "redis"
 import { ICache } from "../abstract/ICache";
 import { logger } from "../../logging/winston/Logger";
 import { Environment } from "../../../environment/Environment";
+import { injectable } from "inversify";
 
+@injectable()
 export class RedisCache implements ICache{
-    private client:any
+    private client:ReturnType<typeof createClient>
     constructor(){
 
-        if(Environment.NODE_ENV==="development") this.client=createClient()
         if(Environment.NODE_ENV==="production") this.client=createClient({url:Environment.REDIS_URL})
+        else this.client=createClient()
         
         this.client.on("error",(err:any)=>{
             logger.error(err.message)
@@ -18,50 +20,36 @@ export class RedisCache implements ICache{
             logger.info("Success to connect redis server")
         })
     }
-    async addAsync(key: string, value: string | number): Promise<boolean> {
-        const result=await this.client.set(key,value)
+    async addAsync(key: string, value: any, time: number): Promise<boolean> {
+        const result=await this.client.set(key,JSON.stringify(value),{EX:60*time})
         if(result !== 'OK') return false
         return true
     }
-    deleteAsync(key: string): Promise<boolean> {
-        throw new Error("Method not implemented.");
+    async isAddAsync(key: string): Promise<boolean> {
+        const result=await this.client.exists(key)
+        return result===1?true:false
     }
-    updateAsync(key: string, value: any): Promise<boolean> {
-        throw new Error("Method not implemented.");
+    async removeAsync(key: string): Promise<boolean> {
+        const result=await this.client.del([key])
+        return result===1?true:false
     }
-    async getAsync(key: string):Promise<any>{
-        return await this.client.get(key)
+    async removeByPatternAsync(pattern: string): Promise<boolean> {
+        const keys=await this.client.keys(pattern)
+        if(keys.length>0){
+            const result=await this.client.del(keys)
+            return result===1?true:false
+        }
+        return true 
     }
-    getAllAsync(key: string):Promise<any> {
-        throw new Error("Method not implemented.");
+    async clearAsync(): Promise<boolean> {
+        const result=await this.client.flushAll()
+        if(result !== 'OK') return false
+        return true
     }
+    async getAsync(key: string): Promise<string | null> {
+        const result=await this.client.get(key)
+        return result!=null?JSON.parse(result):result
+    }
+    
 
 }
-
-// const client=createClient({
-  
-// })
-// client.on("error",(err)=>{
-//   console.log(err)
-// })
-// client.connect().then(e=>{
-//   client.set("t1","test").then(e=>{
-//     console.log("eklendi")
-//   })
-// });
-
-// client.get("t1").then(e=>{
-//   console.log("data ",e)
-// })
-
-// client.hSet('user-session:123', {
-//   name: 'John',
-//   surname: 'Smith',
-//   company: 'Redis',
-//   age: 29
-// }).then(e=>{
-//    client.hGetAll('user-session:123').then(e=>{
-//     console.log(JSON.stringify(e, null, 2));
-//   })
-  
-// })

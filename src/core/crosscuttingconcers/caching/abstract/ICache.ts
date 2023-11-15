@@ -1,9 +1,10 @@
 
 
 export interface ICache{
-    addAsync(key:string,value:any):Promise<boolean>
-    deleteAsync(key:string):Promise<boolean>
-    updateAsync(key:string,value:any):Promise<boolean>
-    getAsync(key:string):Promise<any>
-    getAllAsync(key:string):Promise<any>
+    addAsync(key:string,value:any,time:number):Promise<boolean>
+    isAddAsync(key:string):Promise<boolean>
+    removeAsync(key:string):Promise<boolean>
+    removeByPatternAsync(pattern:string):Promise<boolean>
+    clearAsync():Promise<boolean>
+    getAsync(key:string):Promise<string | null>
 }
