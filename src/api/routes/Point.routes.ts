@@ -4,7 +4,7 @@ import { AutorizeClass } from '../jwt/Authendication';
 import { injectable } from 'inversify';
 import { PointController } from '../controllers/concrete/Point.controller';
 import { AddPointShema, UpdatePointShema } from '../validation/Shemas/Point.validation';
-import { ValidationMethod } from '../validation/Validation';
+import { ValidationListMethod } from '../validation/Validation';
 import { IntegerShema } from '../validation/Shemas/All.validation';
 @injectable()
 @AutorizeClass()
@@ -27,15 +27,15 @@ export class PointRouter{
     private async getAsync(req: Request, res: Response, next: NextFunction): Promise<void> {
         await ControllerContainer.get<PointController>(ControllerTypes.PointController).GetEntityAsync(req, res, next)
     }
-    @ValidationMethod("PointRouter",AddPointShema)
+    @ValidationListMethod("PointRouter",AddPointShema)
     private async addAsync(req: Request, res: Response, next: NextFunction): Promise<void> {
         await ControllerContainer.get<PointController>(ControllerTypes.PointController).AddEntitiesAsync(req, res, next)
     }
-    @ValidationMethod("PointRouter",IntegerShema)
+    @ValidationListMethod("PointRouter",IntegerShema)
     private async deleteAsync(req: Request, res: Response, next: NextFunction): Promise<void> {
         await ControllerContainer.get<PointController>(ControllerTypes.PointController).DeleteDrawsAsync(req, res, next)
     }
-    @ValidationMethod("PointRouter",UpdatePointShema)
+    @ValidationListMethod("PointRouter",UpdatePointShema)
     private async updateAsync(req: Request, res: Response, next: NextFunction): Promise<void> {
         await ControllerContainer.get<PointController>(ControllerTypes.PointController).UpdateDrawsAsync(req, res, next)
     }

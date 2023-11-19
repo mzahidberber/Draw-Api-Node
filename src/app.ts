@@ -10,8 +10,7 @@ import { RadiusRouter } from './api/routes/Radius.routes';
 import { SSAngleRouter } from './api/routes/SSAngle.routes';
 import { logger } from './core/crosscuttingconcers/logging/winston/Logger';
 import { Environment } from './core/environment/Environment';
-import { CoreContainer, CoreTypes } from './core/dependenctresolvers/controllerInstanceFactory.config';
-import { ICache } from './core/crosscuttingconcers/caching/abstract/ICache';
+import { DrawLayerRouter } from './api/routes/DrawLayer.routes';
 
 declare global {
   namespace Express {
@@ -32,13 +31,18 @@ app.use("/",(req,rest,next)=>{
     next()
 })
 
-app.use("/draw",new DrawRouter().router)
+app.use("/drawbox",new DrawRouter().router)
 app.use("/layer",new LayerRouter().router)
 app.use("/element",new ElementRouter().router)
 app.use("/point",new PointRouter().router)
 app.use("/radius",new RadiusRouter().router)
 app.use("/ssangle",new SSAngleRouter().router)
+app.use("/draw",new DrawLayerRouter().router)
 
 app.listen(Environment.PORT,()=>{
     logger.info(`start app port: ${Environment.PORT} environment : ${Environment.NODE_ENV}`)
 })
+
+
+
+

@@ -4,10 +4,10 @@ import { IEntity } from "./IEntity";
 
 export abstract class EntityAbstract<T> implements IEntity<T>{
     @AutoMap()
-    Id!: T;
+    Id!: T
     @AutoMap()
-    createdAt!: Date;
+    createdAt?: Date
     @AutoMap()
-    updatedAt!: Date;
+    updatedAt?: Date
     
 }

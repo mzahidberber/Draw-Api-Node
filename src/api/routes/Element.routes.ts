@@ -3,7 +3,7 @@ import { ControllerTypes, ControllerContainer } from '../dependencyresolvers/con
 import { ElementContoller } from '../controllers/concrete/Element.controller';
 import { AutorizeClass } from '../jwt/Authendication';
 import { injectable } from 'inversify';
-import { ValidationMethod } from '../validation/Validation';
+import { ValidationListMethod } from '../validation/Validation';
 import { IntegerShema } from '../validation/Shemas/All.validation';
 import { AddElemenetShema, UpdateElemenetShema } from '../validation/Shemas/Element.validation';
 
@@ -29,17 +29,17 @@ export class ElementRouter{
         await ControllerContainer.get<ElementContoller>(ControllerTypes.ElementController).GetEntityAsync(req, res, next)
     }
     
-    @ValidationMethod("ElementRouter",AddElemenetShema)
+    @ValidationListMethod("ElementRouter",AddElemenetShema)
     private async addAsync(req: Request, res: Response, next: NextFunction): Promise<void> {
         await ControllerContainer.get<ElementContoller>(ControllerTypes.ElementController).AddEntitiesAsync(req, res, next)
     }
 
-    @ValidationMethod("ElementRouter",IntegerShema)
+    @ValidationListMethod("ElementRouter",IntegerShema)
     private async deleteAsync(req: Request, res: Response, next: NextFunction): Promise<void> {
         await ControllerContainer.get<ElementContoller>(ControllerTypes.ElementController).DeleteDrawsAsync(req, res, next)
     }
 
-    @ValidationMethod("ElementRouter",UpdateElemenetShema)
+    @ValidationListMethod("ElementRouter",UpdateElemenetShema)
     private async updateAsync(req: Request, res: Response, next: NextFunction): Promise<void> {
         await ControllerContainer.get<ElementContoller>(ControllerTypes.ElementController).UpdateDrawsAsync(req, res, next)
     }

@@ -12,7 +12,7 @@ export class Point extends EntityAbstract<number>{
     @AutoMap()
     Y!:number
     @AutoMap(()=>Element)
-    Element!:Element
+    Element?:Element
     @AutoMap()
     ElementId!:number
     @AutoMap()

@@ -1,6 +1,6 @@
-import { PointGeo } from "./PointGeo"
+import { PointGeo } from "../../../models/others/PointGeo"
 
 export interface RadiusAndCPoint{
-    Radius:number
-    CenterPoint:PointGeo
+    radius:number
+    centerPoint:PointGeo
 }

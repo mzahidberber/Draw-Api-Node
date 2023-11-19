@@ -7,6 +7,7 @@ import { ServiceContainer } from "../../business/dependencyresolvers/serviceInst
 import { PointController } from "../controllers/concrete/Point.controller";
 import { RadiusController } from "../controllers/concrete/Radius.controller";
 import { SSAngleController } from "../controllers/concrete/SSAngle.controller";
+import { DrawLayerContoller } from "../controllers/concrete/DrawLayer.controller";
 
 export const ControllerTypes = {
     DrawController: Symbol("DrawController"),
@@ -14,7 +15,8 @@ export const ControllerTypes = {
     ElementController: Symbol("ElementContoller"),
     PointController: Symbol("PointController"),
     RadiusController: Symbol("RadiusController"),
-    SSAngleController: Symbol("SSAngleController")
+    SSAngleController: Symbol("SSAngleController"),
+    DrawLayerContoller: Symbol("DrawLayerContoller")
 }
 
 export const ControllerContainer = new Container()
@@ -27,5 +29,6 @@ ControllerContainer.bind<ElementContoller>(ControllerTypes.ElementController).to
 ControllerContainer.bind<PointController>(ControllerTypes.PointController).to(PointController).inTransientScope()
 ControllerContainer.bind<RadiusController>(ControllerTypes.RadiusController).to(RadiusController).inTransientScope()
 ControllerContainer.bind<SSAngleController>(ControllerTypes.SSAngleController).to(SSAngleController).inTransientScope()
+ControllerContainer.bind<DrawLayerContoller>(ControllerTypes.DrawLayerContoller).to(DrawLayerContoller).inTransientScope()
 
 

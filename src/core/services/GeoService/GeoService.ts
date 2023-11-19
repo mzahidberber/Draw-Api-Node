@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { PointGeo } from './model/PointGeo'
+import { PointGeo } from '../../models/others/PointGeo'
 import { Environment } from '../../environment/Environment'
 import { logger } from '../../crosscuttingconcers/logging/winston/Logger'
 import { RadiusAndCPoint } from './model/RadiusAndCPoint'

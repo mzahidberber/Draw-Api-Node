@@ -3,7 +3,7 @@ import { ControllerTypes, ControllerContainer } from '../dependencyresolvers/con
 import { AutorizeClass } from '../jwt/Authendication';
 import { injectable } from 'inversify';
 import { SSAngleController } from '../controllers/concrete/SSAngle.controller';
-import { ValidationMethod } from '../validation/Validation';
+import { ValidationListMethod } from '../validation/Validation';
 import { AddSSAngleShema, UpdateSSAngleShema } from '../validation/Shemas/SSAngle.validation';
 import { IntegerShema } from '../validation/Shemas/All.validation';
 @injectable()
@@ -27,15 +27,15 @@ export class SSAngleRouter{
     private async getAsync(req: Request, res: Response, next: NextFunction): Promise<void> {
         await ControllerContainer.get<SSAngleController>(ControllerTypes.SSAngleController).GetEntityAsync(req, res, next)
     }
-    @ValidationMethod("SSAngleRouter",AddSSAngleShema)
+    @ValidationListMethod("SSAngleRouter",AddSSAngleShema)
     private async addAsync(req: Request, res: Response, next: NextFunction): Promise<void> {
         await ControllerContainer.get<SSAngleController>(ControllerTypes.SSAngleController).AddEntitiesAsync(req, res, next)
     }
-    @ValidationMethod("SSAngleRouter",IntegerShema)
+    @ValidationListMethod("SSAngleRouter",IntegerShema)
     private async deleteAsync(req: Request, res: Response, next: NextFunction): Promise<void> {
         await ControllerContainer.get<SSAngleController>(ControllerTypes.SSAngleController).DeleteDrawsAsync(req, res, next)
     }
-    @ValidationMethod("SSAngleRouter",UpdateSSAngleShema)
+    @ValidationListMethod("SSAngleRouter",UpdateSSAngleShema)
     private async updateAsync(req: Request, res: Response, next: NextFunction): Promise<void> {
         await ControllerContainer.get<SSAngleController>(ControllerTypes.SSAngleController).UpdateDrawsAsync(req, res, next)
     }

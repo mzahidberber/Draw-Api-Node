@@ -16,6 +16,8 @@ import { SSAngleManager } from "../concrete/SSAngle.manager copy";
 import { ISSAngleService } from "../abstract/ISSAngle.service";
 import { IRadiusService } from "../abstract/IRadius.service";
 import { IPointService } from "../abstract/IPoint.service";
+import { IDrawLayerService } from "../abstract/IDrawLayer.service";
+import { DrawLayerManager } from "../concrete/DrawLayer.manager";
 
 export const ServiceTypes = {
     IDrawService: Symbol("IDrawService"),
@@ -26,6 +28,7 @@ export const ServiceTypes = {
     IPointService:Symbol('IPointService'),
     IRadiusService:Symbol('IRadiusService'),
     ISSAngleService:Symbol('ISSAngleService'),
+    IDrawLayerService:Symbol('IDrawLayerService'),
     
     //sequalize models
     Draw: Symbol("Draw"),
@@ -45,3 +48,4 @@ ServiceContainer.bind<IPenService>(ServiceTypes.IPenService).to(PenManager).inTr
 ServiceContainer.bind<IPointService>(ServiceTypes.IPointService).to(PointManager).inTransientScope()
 ServiceContainer.bind<IRadiusService>(ServiceTypes.IRadiusService).to(RadiusManager).inTransientScope()
 ServiceContainer.bind<ISSAngleService>(ServiceTypes.ISSAngleService).to(SSAngleManager).inTransientScope()
+ServiceContainer.bind<IDrawLayerService>(ServiceTypes.IDrawLayerService).to(DrawLayerManager).inTransientScope()
