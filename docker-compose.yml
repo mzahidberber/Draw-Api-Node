@@ -1,0 +1,53 @@
+version: '3'
+
+services:
+  database:
+    container_name: data
+    image: mysql
+    ports:
+      - "3307:3306"
+    restart: always
+    environment: 
+      MYSQL_ROOT_PASSWORD : 123456
+    networks:
+      - draw
+    volumes:
+      - .\\mysql_data:/var/lib/mysql
+
+
+  redis:
+    image: "redis:latest"
+    ports:
+      - "6379:6379"
+    environment:
+      - REDIS_PASS=<password>
+    networks:
+      - draw
+      
+  
+  drawapinode:
+    container_name: drawapinode
+    image: drawapinode
+    environment:
+      - PORT=3000
+      - NODE_ENV=production
+      - DBHOST=database
+      - DBUSERNAME=root
+      - DBPASSWORD=123456
+      - DBNAME=drawdbnode
+      - DBDIALECT=mysql
+      - AUTORIZE_SECRET_KEY=<token-secret-key>
+      - REDIS_URL=redis://default:<password>@redis:6379
+      - GEOSERVICE_URL=https://drawprogram.org/geo/
+    ports:
+      - '3000:3000'
+    networks:
+      - draw
+
+
+networks:
+  draw:
+    driver: bridge
+
+
+
