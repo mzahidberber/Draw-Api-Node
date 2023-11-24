@@ -6,7 +6,6 @@ import { injectable } from 'inversify';
 import { ValidationListMethod } from '../validation/Validation';
 import { AddDrawShema, UpdateDrawShema } from '../validation/Shemas/Draw.validation';
 import { IntegerShema } from '../validation/Shemas/All.validation';
-import { CacheAspectMethod } from '../../core/aspects/caching/CacheAspect';
 @injectable()
 @AutorizeClass()
 export class DrawRouter{

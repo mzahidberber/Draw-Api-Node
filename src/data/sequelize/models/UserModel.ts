@@ -1,5 +1,5 @@
 import { DataTypes,Model } from 'sequelize'
-import { sequelize } from '../database'
+import { SequelizeConnect } from '../SequelizeConnect'
 import {User} from '../../../core/models/concrete/User';
 import { AutoMap } from '@automapper/classes';
 import DrawModel from './DrawModel';
@@ -26,39 +26,46 @@ class UserModel extends Model
     readonly updatedAt!: Date
 }
 
-UserModel.init({
-    Id:{
-        type:DataTypes.STRING,
-        allowNull:false,
-        primaryKey:true,
-        unique:true,
-    },
-    FirstName:{
-        type:DataTypes.STRING,
-        allowNull:false
-    },
-    LastName:{
-        type:DataTypes.STRING,
-        allowNull:false
-    },
-    Email:{
-        type:DataTypes.STRING,
-        allowNull:false,
-        unique:true
-    },
-    EmailConfirmed:{
-        type:DataTypes.BOOLEAN,
-        allowNull:false
-    },
-    PasswordHash:{
-        type:DataTypes.STRING,
-        allowNull:false
-    },
-},{
-    sequelize: sequelize,
-    modelName: 'User',
-    tableName: 'Users'
-})
+export function initModel(){
+    UserModel.init({
+        Id:{
+            type:DataTypes.STRING,
+            allowNull:false,
+            primaryKey:true,
+            unique:true,
+        },
+        FirstName:{
+            type:DataTypes.STRING,
+            allowNull:false
+        },
+        LastName:{
+            type:DataTypes.STRING,
+            allowNull:false
+        },
+        Email:{
+            type:DataTypes.STRING,
+            allowNull:false,
+            unique:true
+        },
+        EmailConfirmed:{
+            type:DataTypes.BOOLEAN,
+            allowNull:false
+        },
+        PasswordHash:{
+            type:DataTypes.STRING,
+            allowNull:false
+        },
+    },{
+        sequelize: SequelizeConnect.getInstance().sequelize,
+        modelName: 'User',
+        tableName: 'Users'
+    })
+}
+
+export function createReleationship(){
+}
+
+
 
 
 

@@ -1,8 +1,7 @@
 import { DataTypes,Model } from 'sequelize'
-import { sequelize } from '../database'
 import { AutoMap } from '@automapper/classes';
-import {PenStyle} from '../../../core/models/concrete/PenStyle';
 import PenModel from './PenModel';
+import { SequelizeConnect } from '../SequelizeConnect';
 
 class PenStyleModel extends Model 
 {
@@ -24,23 +23,30 @@ class PenStyleModel extends Model
     }
 }
 
-PenStyleModel.init({
-    Id:{
-        type:DataTypes.INTEGER,
-        autoIncrement:true,
-        allowNull:false,
-        primaryKey:true,
-        unique:true
-    },
-    Name:{
-        type:DataTypes.STRING,
-        allowNull:false
-    }
-},{
-    sequelize: sequelize,
-    modelName: 'PenStyle',
-    tableName: 'PenStyles'
-})
+export function initModel(){
+    PenStyleModel.init({
+        Id:{
+            type:DataTypes.INTEGER,
+            autoIncrement:true,
+            allowNull:false,
+            primaryKey:true,
+            unique:true
+        },
+        Name:{
+            type:DataTypes.STRING,
+            allowNull:false
+        }
+    },{
+        sequelize: SequelizeConnect.getInstance().sequelize,
+        modelName: 'PenStyle',
+        tableName: 'PenStyles'
+    })
+}
+
+export function createReleationship(){
+}
+
+
 
 export default PenStyleModel
 

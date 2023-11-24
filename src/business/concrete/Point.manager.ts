@@ -2,7 +2,7 @@ import { injectable } from "inversify";
 import { CustomResponse } from "../../core/dtos/CustomResponse";
 import { PointDTO } from "../../core/dtos/concrete/PointDTO";
 import { Point } from "../../core/models/concrete/Point";
-import { DataTypes } from "../../data/dependencyresolvers/DataTypes";
+import { DataLayerTypes } from "../../data/dependencyresolvers/DataTypes";
 import { DataContainer } from "../../data/dependencyresolvers/dataInstanceFactory.config";
 import { IElementRepository } from "../../data/repository/abstract/IElementRepository";
 import { IPointRepository } from "../../data/repository/abstract/IPointRepository";
@@ -19,9 +19,9 @@ export class PointManager extends ServiceAbstract implements IPointService{
     private _pointTypeDal:IPointTypeRepository
     constructor() {
         super()
-        this._pointDal=DataContainer.get<IPointRepository>(DataTypes.IPointRepository)
-        this._elementDal=DataContainer.get<IElementRepository>(DataTypes.IElementRepository)
-        this._pointTypeDal=DataContainer.get<IPointTypeRepository>(DataTypes.IPointTypeRepository)
+        this._pointDal=DataContainer.get<IPointRepository>(DataLayerTypes.IPointRepository)
+        this._elementDal=DataContainer.get<IElementRepository>(DataLayerTypes.IElementRepository)
+        this._pointTypeDal=DataContainer.get<IPointTypeRepository>(DataLayerTypes.IPointTypeRepository)
     }
     async GetAllAsync(userId: string): Promise<CustomResponse<PointDTO[]>> {
         return this.BaseGetAllAsync(userId,{},this._pointDal,Point,PointDTO)

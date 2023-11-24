@@ -1,21 +1,21 @@
 
 import { Model, ModelCtor } from 'sequelize-typescript'
-import {Point} from '../../../core/models/concrete/Point'
-import {EntityRepositoryAbstract} from '../abstract/EntityRepositoryAbstract'
+import {Point} from '../../../../core/models/concrete/Point'
+import {EntityRepositoryAbstract} from '../../abstract/sequelize/EntityRepositoryAbstract'
 import { inject, injectable } from 'inversify'
-import { IPointRepository } from '../abstract/IPointRepository'
-import {DataTypes} from '../../dependencyresolvers/DataTypes'
-import ElementModel from '../../sequelize/models/ElementModel'
+import { IPointRepository } from '../../abstract/IPointRepository'
+import {DataLayerTypes} from '../../../dependencyresolvers/DataTypes'
+import ElementModel from '../../../sequelize/models/ElementModel'
 import { Includeable } from 'sequelize'
-import LayerModel from '../../sequelize/models/LayerModel'
-import DrawModel from '../../sequelize/models/DrawModel'
+import LayerModel from '../../../sequelize/models/LayerModel'
+import DrawModel from '../../../sequelize/models/DrawModel'
 
 
 @injectable()
-export class PointRepository extends EntityRepositoryAbstract<Point> implements IPointRepository {
+export class SPointRepository extends EntityRepositoryAbstract<Point> implements IPointRepository {
     constructor(
-        @inject(DataTypes.PointModel) private model: ModelCtor<Model>,
-        @inject(DataTypes.Point) private type:new () => Point ){
+        @inject(DataLayerTypes.SPointModel) private model: ModelCtor<Model>,
+        @inject(DataLayerTypes.Point) private type:new () => Point ){
         super(model,type)
 
     }

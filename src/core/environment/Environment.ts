@@ -13,6 +13,8 @@ export class Environment{
     public static AUTORIZE_SECRET_KEY:string | undefined
     public static REDIS_URL:string | undefined
     public static GEOSERVICE_URL:string | undefined
+    public static DB_TYPE:string | undefined
+    public static MONGODB_CSTR:string | undefined
     
     
     private constructor(){}
@@ -30,9 +32,14 @@ export class Environment{
             Environment.AUTORIZE_SECRET_KEY=process.env.AUTORIZE_SECRET_KEY
             Environment.REDIS_URL=process.env.REDIS_URL
             Environment.GEOSERVICE_URL=process.env.GEOSERVICE_URL
+            Environment.DB_TYPE=process.env.DB_TYPE
+            Environment.MONGODB_CSTR=process.env.MONGODB_CSTR
         }
         return Environment.instance
     }
 
 } 
+
+
+Environment.getInstance()
 

@@ -3,7 +3,7 @@ import { ServiceAbstract } from "../abstract/ServiceAbstract"
 import { IElementService } from "../abstract/IElement.service"
 import { IElementRepository } from "../../data/repository/abstract/IElementRepository"
 import { DataContainer } from "../../data/dependencyresolvers/dataInstanceFactory.config"
-import { DataTypes } from "../../data/dependencyresolvers/DataTypes"
+import { DataLayerTypes } from "../../data/dependencyresolvers/DataTypes"
 import { CustomResponse } from "../../core/dtos/CustomResponse"
 import { ElementDTO } from "../../core/dtos/concrete/ElementDTO"
 import { Element } from "../../core/models/concrete/Element"
@@ -22,10 +22,10 @@ export class ElementManager extends ServiceAbstract implements IElementService{
     private _elementTypeDal:IElementTypeRepository
     constructor(){
         super()
-        this._elementDal=DataContainer.get<IElementRepository>(DataTypes.IElementRepository)
-        this._layerDal=DataContainer.get<ILayerRepository>(DataTypes.ILayerRepository)
-        this._penDal=DataContainer.get<IPenRepository>(DataTypes.IPenRepository)
-        this._elementTypeDal=DataContainer.get<IElementTypeRepository>(DataTypes.IElementTypeRepository)
+        this._elementDal=DataContainer.get<IElementRepository>(DataLayerTypes.IElementRepository)
+        this._layerDal=DataContainer.get<ILayerRepository>(DataLayerTypes.ILayerRepository)
+        this._penDal=DataContainer.get<IPenRepository>(DataLayerTypes.IPenRepository)
+        this._elementTypeDal=DataContainer.get<IElementTypeRepository>(DataLayerTypes.IElementTypeRepository)
     }
 
     async GetAllAsync(userId: string): Promise<CustomResponse<ElementDTO[]>> {

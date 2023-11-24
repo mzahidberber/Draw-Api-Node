@@ -5,6 +5,8 @@ import { RedisCache } from "../crosscuttingconcers/caching/redis/Redis.cache";
 
 export const CoreTypes = {
     ICache: Symbol("ICache"),
+
+    IConnect:Symbol("IConnect")
 }
 
 export const CoreContainer = new Container()

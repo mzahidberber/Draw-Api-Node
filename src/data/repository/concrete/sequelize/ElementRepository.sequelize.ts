@@ -1,23 +1,23 @@
 import { inject, injectable } from 'inversify'
-import {IElementRepository} from '../abstract/IElementRepository'
-import {Element} from '../../../core/models/concrete/Element'
-import {EntityRepositoryAbstract} from '../abstract/EntityRepositoryAbstract'
+import {IElementRepository} from '../../abstract/IElementRepository'
+import {Element} from '../../../../core/models/concrete/Element'
+import {EntityRepositoryAbstract} from '../../abstract/sequelize/EntityRepositoryAbstract'
 import { Model, ModelCtor } from 'sequelize-typescript'
-import {DataTypes} from '../../dependencyresolvers/DataTypes'
-import PointModel from '../../sequelize/models/PointModel'
-import { dataMapper } from '../../mapper/dataMapper'
+import {DataLayerTypes} from '../../../dependencyresolvers/DataTypes'
+import PointModel from '../../../sequelize/models/PointModel'
+import { dataMapper } from '../../../mapper/dataMapper'
 import { Includeable } from 'sequelize'
-import LayerModel from '../../sequelize/models/LayerModel'
-import DrawModel from '../../sequelize/models/DrawModel'
+import LayerModel from '../../../sequelize/models/LayerModel'
+import DrawModel from '../../../sequelize/models/DrawModel'
 
 @injectable()
-export class ElementRepository extends EntityRepositoryAbstract<Element>  implements IElementRepository {
+export class SElementRepository extends EntityRepositoryAbstract<Element>  implements IElementRepository {
     
     
     
     constructor(
-        @inject(DataTypes.ElementModel) private model: ModelCtor<Model>,
-        @inject(DataTypes.Element) private type:new () => Element ){
+        @inject(DataLayerTypes.SElementModel) private model: ModelCtor<Model>,
+        @inject(DataLayerTypes.Element) private type:new () => Element ){
         super(model,type)
     }
     async GetAllWithPointsAsync(): Promise<Element[]> {

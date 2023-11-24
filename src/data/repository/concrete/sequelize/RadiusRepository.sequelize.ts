@@ -1,21 +1,21 @@
 
 import { Model, ModelCtor } from 'sequelize-typescript'
-import {EntityRepositoryAbstract} from '../abstract/EntityRepositoryAbstract'
+import {EntityRepositoryAbstract} from '../../abstract/sequelize/EntityRepositoryAbstract'
 import { inject, injectable } from 'inversify'
-import {DataTypes} from '../../dependencyresolvers/DataTypes'
-import { IRadiusRepository } from '../abstract/IRadiusRepository'
-import {Radius} from '../../../core/models/concrete/Radius'
-import ElementModel from '../../sequelize/models/ElementModel'
-import LayerModel from '../../sequelize/models/LayerModel'
-import DrawModel from '../../sequelize/models/DrawModel'
+import {DataLayerTypes} from '../../../dependencyresolvers/DataTypes'
+import { IRadiusRepository } from '../../abstract/IRadiusRepository'
+import {Radius} from '../../../../core/models/concrete/Radius'
+import ElementModel from '../../../sequelize/models/ElementModel'
+import LayerModel from '../../../sequelize/models/LayerModel'
+import DrawModel from '../../../sequelize/models/DrawModel'
 import { Includeable } from 'sequelize'
 
 
 @injectable()
-export class RadiusRepository extends EntityRepositoryAbstract<Radius> implements IRadiusRepository {
+export class SRadiusRepository extends EntityRepositoryAbstract<Radius> implements IRadiusRepository {
     constructor(
-        @inject(DataTypes.RadiusModel) private model: ModelCtor<Model>,
-        @inject(DataTypes.Radius) private type:new () => Radius ){
+        @inject(DataLayerTypes.SRadiusModel) private model: ModelCtor<Model>,
+        @inject(DataLayerTypes.Radius) private type:new () => Radius ){
         super(model,type)
 
     }

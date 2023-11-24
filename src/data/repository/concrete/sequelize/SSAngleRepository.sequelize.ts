@@ -1,21 +1,21 @@
 
 import { Model, ModelCtor } from 'sequelize-typescript'
-import {EntityRepositoryAbstract} from '../abstract/EntityRepositoryAbstract'
+import {EntityRepositoryAbstract} from '../../abstract/sequelize/EntityRepositoryAbstract'
 import { inject, injectable } from 'inversify'
-import {DataTypes} from '../../dependencyresolvers/DataTypes'
-import { ISSAngleRepository } from '../abstract/ISSAngleRepository'
-import {SSAngle} from '../../../core/models/concrete/SSAngle'
+import {DataLayerTypes} from '../../../dependencyresolvers/DataTypes'
+import { ISSAngleRepository } from '../../abstract/ISSAngleRepository'
+import {SSAngle} from '../../../../core/models/concrete/SSAngle'
 import { Includeable } from 'sequelize'
-import ElementModel from '../../sequelize/models/ElementModel'
-import LayerModel from '../../sequelize/models/LayerModel'
-import DrawModel from '../../sequelize/models/DrawModel'
+import ElementModel from '../../../sequelize/models/ElementModel'
+import LayerModel from '../../../sequelize/models/LayerModel'
+import DrawModel from '../../../sequelize/models/DrawModel'
 
 
 @injectable()
-export class SSAngleRepository extends EntityRepositoryAbstract<SSAngle> implements ISSAngleRepository {
+export class SSSAngleRepository extends EntityRepositoryAbstract<SSAngle> implements ISSAngleRepository {
     constructor(
-        @inject(DataTypes.SSAngleModel) private model: ModelCtor<Model>,
-        @inject(DataTypes.SSAngle) private type:new () => SSAngle ){
+        @inject(DataLayerTypes.SSSAngleModel) private model: ModelCtor<Model>,
+        @inject(DataLayerTypes.SSAngle) private type:new () => SSAngle ){
         super(model,type)
 
     }

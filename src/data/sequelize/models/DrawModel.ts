@@ -1,8 +1,8 @@
 import { DataTypes,Model } from 'sequelize'
-import { sequelize } from '../database'
-import {Draw} from '../../../core/models/concrete/Draw';
 import { AutoMap } from '@automapper/classes';
 import LayerModel from './LayerModel';
+import UserModel from './UserModel';
+import { SequelizeConnect } from '../SequelizeConnect';
 
 class DrawModel extends Model
 {
@@ -20,30 +20,44 @@ class DrawModel extends Model
     readonly createdAt!: Date
     @AutoMap()
     readonly updatedAt!: Date
+    
 }
 
-DrawModel.init({
-    Id:{
-        type:DataTypes.INTEGER,
-        autoIncrement:true,
-        allowNull:false,
-        primaryKey:true,
-        unique:true
-    },
-    Name:{
-        type:DataTypes.STRING,
-        allowNull:false
-    },
-    NumberOfLayerElements:{
-        type:DataTypes.INTEGER,
-        allowNull:false,
-        defaultValue:0
-    },
-},{
-    sequelize: sequelize,
-    modelName: 'Draw',
-    tableName: 'Draws'
-})
+export function initModel(){
+    DrawModel.init({
+        Id:{
+            type:DataTypes.INTEGER,
+            autoIncrement:true,
+            allowNull:false,
+            primaryKey:true,
+            unique:true
+        },
+        Name:{
+            type:DataTypes.STRING,
+            allowNull:false
+        },
+        NumberOfLayerElements:{
+            type:DataTypes.INTEGER,
+            allowNull:false,
+            defaultValue:0
+        },
+    },{
+        sequelize: SequelizeConnect.getInstance().sequelize,
+        modelName: 'Draw',
+        tableName: 'Draws'
+    })
+}
+
+export function createReleationship(){
+    DrawModel.belongsTo(UserModel,{
+      foreignKey:{
+          allowNull:false
+      }
+    })
+    UserModel.hasMany(DrawModel)
+}
+
+
 
 export default DrawModel
 

@@ -1,4 +1,4 @@
-export const DataTypes = {
+export const DataLayerTypes = {
     IDrawRepository: Symbol("IDrawRepository"),
     IElementRepository: Symbol("IElementRepository"),
     IElementTypeRepository: Symbol("IElementTypeRepository"),
@@ -13,17 +13,30 @@ export const DataTypes = {
     EntityRepositoryAbstracy:Symbol("EntityRepositoryAbstracy"),
     
     //sequalize models
-    DrawModel: Symbol("DrawModel"),
-    ElementModel: Symbol("ElementModel"),
-    ElementTypeModel: Symbol("ElementTypeModel"),
-    LayerModel: Symbol("LayerModel"),
-    PenModel: Symbol("PenModel"),
-    PenStyleModel: Symbol("PenStyleModel"),
-    PointModel: Symbol("PointModel"),
-    PointTypeModel: Symbol("PointTypeModel"),
-    RadiusModel: Symbol("RadiusModel"),
-    SSAngleModel: Symbol("SSAngleModel"),
-    UserModel: Symbol("UserModel"),
+    SDrawModel: Symbol("SDrawModel"),
+    SElementModel: Symbol("SElementModel"),
+    SElementTypeModel: Symbol("SElementTypeModel"),
+    SLayerModel: Symbol("SLayerModel"),
+    SPenModel: Symbol("SPenModel"),
+    SPenStyleModel: Symbol("SPenStyleModel"),
+    SPointModel: Symbol("SPointModel"),
+    SPointTypeModel: Symbol("SPointTypeModel"),
+    SRadiusModel: Symbol("SRadiusModel"),
+    SSSAngleModel: Symbol("SSSAngleModel"),
+    SUserModel: Symbol("SUserModel"),
+
+    //mongoose models
+    MDrawModel: Symbol("MDrawModel"),
+    MElementModel: Symbol("MElementModel"),
+    MElementTypeModel: Symbol("MElementTypeModel"),
+    MLayerModel: Symbol("MLayerModel"),
+    MPenModel: Symbol("MPenModel"),
+    MPenStyleModel: Symbol("MPenStyleModel"),
+    MPointModel: Symbol("MPointModel"),
+    MPointTypeModel: Symbol("MPointTypeModel"),
+    MRadiusModel: Symbol("MRadiusModel"),
+    MSSAngleModel: Symbol("MSSAngleModel"),
+    MUserModel: Symbol("MUserModel"),
 
     //models
     Draw:Symbol('Draw'),

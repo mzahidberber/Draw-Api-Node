@@ -3,7 +3,7 @@ import { CustomResponse } from "../../core/dtos/CustomResponse";
 import { ServiceAbstract } from "../abstract/ServiceAbstract";
 import { IElementRepository } from "../../data/repository/abstract/IElementRepository";
 import { DataContainer } from "../../data/dependencyresolvers/dataInstanceFactory.config";
-import { DataTypes } from "../../data/dependencyresolvers/DataTypes";
+import { DataLayerTypes } from "../../data/dependencyresolvers/DataTypes";
 import { ISSAngleService } from "../abstract/ISSAngle.service";
 import { SSAngleDTO } from "../../core/dtos/concrete/SSAngleDTO";
 import { SSAngle } from "../../core/models/concrete/SSAngle";
@@ -18,8 +18,8 @@ export class SSAngleManager extends ServiceAbstract implements ISSAngleService{
     private _elementDal:IElementRepository
     constructor() {
         super()
-        this._ssangleDal=DataContainer.get<ISSAngleRepository>(DataTypes.ISSAngleRepository)
-        this._elementDal=DataContainer.get<IElementRepository>(DataTypes.IElementRepository)
+        this._ssangleDal=DataContainer.get<ISSAngleRepository>(DataLayerTypes.ISSAngleRepository)
+        this._elementDal=DataContainer.get<IElementRepository>(DataLayerTypes.IElementRepository)
     }
     async GetAllAsync(userId: string): Promise<CustomResponse<SSAngleDTO[]>> {
         return this.BaseGetAllAsync(userId,{},this._ssangleDal,SSAngle,SSAngleDTO)

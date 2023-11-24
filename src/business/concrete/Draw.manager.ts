@@ -1,7 +1,7 @@
 import { injectable } from "inversify";
 import { CustomResponse } from "../../core/dtos/CustomResponse";
 import { DrawDTO } from "../../core/dtos/concrete/DrawDTO";
-import { DataTypes } from "../../data/dependencyresolvers/DataTypes";
+import { DataLayerTypes } from "../../data/dependencyresolvers/DataTypes";
 import { DataContainer } from "../../data/dependencyresolvers/dataInstanceFactory.config";
 import { IDrawRepository } from "../../data/repository/abstract/IDrawRepository";
 import { IDrawService } from "../abstract/IDraw.service";
@@ -16,7 +16,7 @@ export class DrawManager extends ServiceAbstract implements IDrawService{
     private _drawDal:IDrawRepository
     constructor(){
         super()
-        this._drawDal=DataContainer.get<IDrawRepository>(DataTypes.IDrawRepository)
+        this._drawDal=DataContainer.get<IDrawRepository>(DataLayerTypes.IDrawRepository)
     }
     async GetLayersAsync(userId: string, drawId: number): Promise<CustomResponse<DrawDTO[]>> {
         throw new Error("Method not implemented.");

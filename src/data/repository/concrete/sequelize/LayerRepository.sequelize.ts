@@ -1,19 +1,19 @@
 import { inject, injectable } from 'inversify'
-import {EntityRepositoryAbstract} from '../abstract/EntityRepositoryAbstract'
+import {EntityRepositoryAbstract} from '../../abstract/sequelize/EntityRepositoryAbstract'
 import { Model, ModelCtor } from 'sequelize-typescript'
-import {Layer} from '../../../core/models/concrete/Layer'
-import { ILayerRepository } from '../abstract/ILayerRepository'
-import {DataTypes} from '../../dependencyresolvers/DataTypes'
-import ElementModel from '../../sequelize/models/ElementModel'
-import { dataMapper } from '../../mapper/dataMapper'
-import DrawModel from '../../sequelize/models/DrawModel'
+import {Layer} from '../../../../core/models/concrete/Layer'
+import { ILayerRepository } from '../../abstract/ILayerRepository'
+import {DataLayerTypes} from '../../../dependencyresolvers/DataTypes'
+import ElementModel from '../../../sequelize/models/ElementModel'
+import { dataMapper } from '../../../mapper/dataMapper'
+import DrawModel from '../../../sequelize/models/DrawModel'
 import { Includeable } from 'sequelize'
 
 @injectable()
-export class LayerRepository extends EntityRepositoryAbstract<Layer>  implements ILayerRepository {
+export class SLayerRepository extends EntityRepositoryAbstract<Layer>  implements ILayerRepository {
     constructor(
-        @inject(DataTypes.LayerModel) private model: ModelCtor<Model>,
-        @inject(DataTypes.Layer) private type:new () => Layer){
+        @inject(DataLayerTypes.SLayerModel) private model: ModelCtor<Model>,
+        @inject(DataLayerTypes.Layer) private type:new () => Layer){
         super(model,type)
 
     }

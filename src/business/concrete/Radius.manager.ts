@@ -6,7 +6,7 @@ import { ServiceAbstract } from "../abstract/ServiceAbstract";
 import { IRadiusRepository } from "../../data/repository/abstract/IRadiusRepository";
 import { IElementRepository } from "../../data/repository/abstract/IElementRepository";
 import { DataContainer } from "../../data/dependencyresolvers/dataInstanceFactory.config";
-import { DataTypes } from "../../data/dependencyresolvers/DataTypes";
+import { DataLayerTypes } from "../../data/dependencyresolvers/DataTypes";
 import { Radius } from "../../core/models/concrete/Radius";
 import { LogAspectClass } from "../../core/aspects/logging/LogAspect";
 
@@ -18,8 +18,8 @@ export class RadiusManager extends ServiceAbstract implements IRadiusService{
     private _elementDal:IElementRepository
     constructor() {
         super()
-        this._radiusDal=DataContainer.get<IRadiusRepository>(DataTypes.IRadiusRepository)
-        this._elementDal=DataContainer.get<IElementRepository>(DataTypes.IElementRepository)
+        this._radiusDal=DataContainer.get<IRadiusRepository>(DataLayerTypes.IRadiusRepository)
+        this._elementDal=DataContainer.get<IElementRepository>(DataLayerTypes.IElementRepository)
     }
     async GetAllAsync(userId: string): Promise<CustomResponse<RadiusDTO[]>> {
         return this.BaseGetAllAsync(userId,{},this._radiusDal,Radius,RadiusDTO)

@@ -1,9 +1,10 @@
 import { DataTypes,Model } from 'sequelize'
-import { sequelize } from '../database'
 import { AutoMap } from '@automapper/classes';
-import {Pen} from '../../../core/models/concrete/Pen';
 import {Layer} from '../../../core/models/concrete/Layer';
 import ElementModel from './ElementModel';
+import { SequelizeConnect } from '../SequelizeConnect';
+import UserModel from './UserModel';
+import PenStyleModel from './PenStyleModel';
 
 class PenModel extends Model 
 {
@@ -32,35 +33,55 @@ class PenModel extends Model
     
 }
 
-PenModel.init({
-    Id:{
-        type:DataTypes.INTEGER,
-        autoIncrement:true,
-        allowNull:false,
-        primaryKey:true,
-        unique:true
-    },
-    Name:{
-        type:DataTypes.STRING,
-        allowNull:false
-    },
-    Red:{
-        type:DataTypes.INTEGER,
-        allowNull:false
-    },
-    Blue:{
-        type:DataTypes.INTEGER,
-        allowNull:false
-    },
-    Green:{
-        type:DataTypes.INTEGER,
-        allowNull:false
-    },
-},{
-    sequelize: sequelize,
-    modelName: 'Pen',
-    tableName: 'Pens'
-})
+export function initModel(){
+    PenModel.init({
+        Id:{
+            type:DataTypes.INTEGER,
+            autoIncrement:true,
+            allowNull:false,
+            primaryKey:true,
+            unique:true
+        },
+        Name:{
+            type:DataTypes.STRING,
+            allowNull:false
+        },
+        Red:{
+            type:DataTypes.INTEGER,
+            allowNull:false
+        },
+        Blue:{
+            type:DataTypes.INTEGER,
+            allowNull:false
+        },
+        Green:{
+            type:DataTypes.INTEGER,
+            allowNull:false
+        },
+    },{
+        sequelize: SequelizeConnect.getInstance().sequelize,
+        modelName: 'Pen',
+        tableName: 'Pens'
+    })
+}
+
+export function createReleationship(){
+    PenModel.belongsTo(UserModel,{
+        foreignKey:{
+            allowNull:false
+        }
+    })
+    UserModel.hasMany(PenModel)
+    
+    PenModel.belongsTo(PenStyleModel,{
+        foreignKey:{
+            allowNull:false
+        }
+    })
+    PenStyleModel.hasMany(PenModel)
+}
+
+
 
 export default PenModel
 

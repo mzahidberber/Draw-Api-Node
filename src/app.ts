@@ -1,6 +1,6 @@
-import './data/sequelize/database'
 import "reflect-metadata";
 import express from 'express';
+import { Environment } from './core/environment/Environment';
 import { DrawRouter } from './api/routes/Draw.routes';
 import { AutorizeUser } from './api/jwt/AutorizeUser';
 import { LayerRouter } from './api/routes/Layer.routes';
@@ -8,9 +8,9 @@ import { ElementRouter } from './api/routes/Element.routes';
 import { PointRouter } from './api/routes/Point.routes';
 import { RadiusRouter } from './api/routes/Radius.routes';
 import { SSAngleRouter } from './api/routes/SSAngle.routes';
-import { logger } from './core/crosscuttingconcers/logging/winston/Logger';
-import { Environment } from './core/environment/Environment';
 import { DrawLayerRouter } from './api/routes/DrawLayer.routes';
+import { logger } from './core/crosscuttingconcers/logging/winston/Logger';
+import { Application } from "./core/application/Application";
 
 declare global {
   namespace Express {
@@ -19,7 +19,6 @@ declare global {
     }
   }
 }
-Environment.getInstance()
 
 const app=express()
 const bodyParser=require('body-parser')
@@ -39,10 +38,9 @@ app.use("/radius",new RadiusRouter().router)
 app.use("/ssangle",new SSAngleRouter().router)
 app.use("/draw",new DrawLayerRouter().router)
 
-app.listen(Environment.PORT,()=>{
-    logger.info(`start app port: ${Environment.PORT} environment : ${Environment.NODE_ENV}`)
+new Application(()=>{
+    app.listen(Environment.PORT,()=>{
+      logger.info(`start app port: ${Environment.PORT} environment : ${Environment.NODE_ENV}`)
+    })
 })
-
-
-
 

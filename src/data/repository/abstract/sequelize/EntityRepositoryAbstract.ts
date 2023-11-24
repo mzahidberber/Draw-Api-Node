@@ -1,11 +1,11 @@
-import { sequelize } from '../../sequelize/database';
 import {  Includeable, Sequelize, Transaction } from 'sequelize';
 import { ModelCtor, Model} from 'sequelize-typescript'
-import { dataMapper } from '../../mapper/dataMapper';
+import { dataMapper } from '../../../mapper/dataMapper';
 import { injectable } from 'inversify';
-import { IEntity } from '../../../core/models/abstract/IEntity';
-import { IEntityRepository } from './IEntityRepository';
-import { DataInfo } from '../../models/DataInfo';
+import { IEntity } from '../../../../core/models/abstract/IEntity';
+import { IEntityRepository } from '../IEntityRepository';
+import { DataInfo } from '../../../models/DataInfo';
+import { SequelizeConnect } from '../../../sequelize/SequelizeConnect';
 
 @injectable()
 export abstract class EntityRepositoryAbstract<T extends IEntity<any>> implements IEntityRepository<T>{
@@ -16,7 +16,7 @@ export abstract class EntityRepositoryAbstract<T extends IEntity<any>> implement
     
     constructor(model:ModelCtor<Model>,type:new ()=>T){
         this._type=type
-        this._context=sequelize
+        this._context=SequelizeConnect.getInstance().sequelize
         this._model=model
     }
 

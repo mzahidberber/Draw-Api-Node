@@ -1,7 +1,7 @@
 import { injectable } from "inversify"
 import { ServiceAbstract } from "../abstract/ServiceAbstract"
 import { DataContainer } from "../../data/dependencyresolvers/dataInstanceFactory.config"
-import { DataTypes } from "../../data/dependencyresolvers/DataTypes"
+import { DataLayerTypes } from "../../data/dependencyresolvers/DataTypes"
 import { CustomResponse } from "../../core/dtos/CustomResponse"
 import { IElementTypeService } from "../abstract/IElementType.service"
 import { ElementTypeDTO } from "../../core/dtos/concrete/ElementTypeDTO"
@@ -16,7 +16,7 @@ export class ElementTypeManager extends ServiceAbstract implements IElementTypeS
     private _elementTypeDal:IElementTypeRepository
     constructor(){
         super()
-        this._elementTypeDal=DataContainer.get<IElementTypeRepository>(DataTypes.IElementTypeRepository)
+        this._elementTypeDal=DataContainer.get<IElementTypeRepository>(DataLayerTypes.IElementTypeRepository)
     }
     async GetAllAsync(userId: string): Promise<CustomResponse<ElementTypeDTO[]>> {
         return await this.BaseGetAllAsync(userId,{},this._elementTypeDal,ElementType,ElementTypeDTO)

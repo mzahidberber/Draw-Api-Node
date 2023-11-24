@@ -1,12 +1,11 @@
 import { DataTypes,Model } from 'sequelize'
-import { sequelize } from '../database'
-import {Layer} from '../../../core/models/concrete/Layer';
+import { SequelizeConnect } from '../SequelizeConnect'
 import { AutoMap } from '@automapper/classes';
 import ElementModel from './ElementModel';
-
+import DrawModel from './DrawModel';
+import PenModel from './PenModel';
 class LayerModel extends Model
 {
-    
     @AutoMap()
     Id!:number
     @AutoMap()
@@ -33,40 +32,60 @@ class LayerModel extends Model
     
 }
 
-LayerModel.init({
-    Id:{
-        type:DataTypes.INTEGER,
-        autoIncrement:true,
-        allowNull:false,
-        primaryKey:true,
-        unique:true
-    },
-    Name:{
-        type:DataTypes.STRING,
-        allowNull:false,
-    },
-    Lock:{
-        type:DataTypes.BOOLEAN,
-        allowNull:false
-    },
-    Visibility:{
-        type:DataTypes.BOOLEAN,
-        allowNull:false
-    },
-    Thickness:{
-        type:DataTypes.DOUBLE,
-        allowNull:false,
-    },
-    NumberOfElements:{
-        type:DataTypes.INTEGER,
-        allowNull:false,
-        defaultValue:0
-    }
-},{
-    sequelize: sequelize,
-    modelName: 'Layer',
-    tableName: 'Layers'
-})
+export function initModel(){
+    LayerModel.init({
+        Id:{
+            type:DataTypes.INTEGER,
+            autoIncrement:true,
+            allowNull:false,
+            primaryKey:true,
+            unique:true
+        },
+        Name:{
+            type:DataTypes.STRING,
+            allowNull:false,
+        },
+        Lock:{
+            type:DataTypes.BOOLEAN,
+            allowNull:false
+        },
+        Visibility:{
+            type:DataTypes.BOOLEAN,
+            allowNull:false
+        },
+        Thickness:{
+            type:DataTypes.DOUBLE,
+            allowNull:false,
+        },
+        NumberOfElements:{
+            type:DataTypes.INTEGER,
+            allowNull:false,
+            defaultValue:0
+        }
+    },{
+        sequelize: SequelizeConnect.getInstance().sequelize,
+        modelName: 'Layer',
+        tableName: 'Layers'
+    })
+}
+
+export function createReleationship(){
+    LayerModel.belongsTo(DrawModel,{
+        foreignKey:{
+            allowNull:false
+        }
+    })
+    DrawModel.hasMany(LayerModel)
+    
+    LayerModel.belongsTo(PenModel,{
+        foreignKey:{
+            allowNull:false
+        }
+    })
+    PenModel.hasMany(LayerModel)
+}
+
+
 
 export default LayerModel
 

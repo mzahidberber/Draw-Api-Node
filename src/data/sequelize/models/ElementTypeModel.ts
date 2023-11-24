@@ -1,9 +1,7 @@
 import { DataTypes,Model } from 'sequelize'
-import { sequelize } from '../database'
 import { AutoMap } from '@automapper/classes';
-import {ElementType} from '../../../core/models/concrete/ElementType';
 import ElementModel from './ElementModel';
-
+import {  SequelizeConnect } from '../SequelizeConnect';
 class ElementTypeModel extends Model
 {
     @AutoMap()
@@ -19,23 +17,31 @@ class ElementTypeModel extends Model
     
 }
 
-ElementTypeModel.init({
-    Id:{
-        type:DataTypes.INTEGER,
-        autoIncrement:true,
-        allowNull:false,
-        primaryKey:true,
-        unique:true
-    },
-    Name:{
-        type:DataTypes.STRING,
-        allowNull:false
-    }
-},{
-    sequelize: sequelize,
-    modelName: 'ElementType',
-    tableName: 'ElementTypes'
-})
+
+
+
+export function initModel(){
+    ElementTypeModel.init({
+        Id:{
+            type:DataTypes.INTEGER,
+            autoIncrement:true,
+            allowNull:false,
+            primaryKey:true,
+            unique:true
+        },
+        Name:{
+            type:DataTypes.STRING,
+            allowNull:false
+        }
+    },{
+        sequelize: SequelizeConnect.getInstance().sequelize,
+        modelName: 'ElementType',
+        tableName: 'ElementTypes'
+    })
+}
+
+export function createReleationship(){
+}
 
 export default ElementTypeModel
 

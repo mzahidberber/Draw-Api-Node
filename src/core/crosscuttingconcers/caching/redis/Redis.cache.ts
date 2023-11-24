@@ -8,16 +8,15 @@ import { injectable } from "inversify";
 export class RedisCache implements ICache{
     private client:ReturnType<typeof createClient>
     constructor(){
-
         if(Environment.NODE_ENV==="production") this.client=createClient({url:Environment.REDIS_URL})
         else this.client=createClient()
         
         this.client.on("error",(err:any)=>{
-            logger.error(err.message)
+            logger.error(`redis : ${err.message}`)
             throw new Error(err.message)
         })
         this.client.connect().then(()=>{
-            logger.info("Success to connect redis server")
+            logger.info("success to connect redis server")
         })
     }
     async addAsync(key: string, value: any, time: number): Promise<boolean> {

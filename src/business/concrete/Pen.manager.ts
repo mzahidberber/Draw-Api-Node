@@ -1,6 +1,6 @@
 import { injectable } from "inversify";
 import { CustomResponse } from "../../core/dtos/CustomResponse";
-import { DataTypes } from "../../data/dependencyresolvers/DataTypes";
+import { DataLayerTypes } from "../../data/dependencyresolvers/DataTypes";
 import { DataContainer } from "../../data/dependencyresolvers/dataInstanceFactory.config";
 import { ServiceAbstract } from "../abstract/ServiceAbstract";
 import { IPenService } from "../abstract/IPen.service";
@@ -16,7 +16,7 @@ export class PenManager extends ServiceAbstract implements IPenService{
     private _penDal:IPenRepository
     constructor(){
         super()
-        this._penDal=DataContainer.get<IPenRepository>(DataTypes.IPenRepository)
+        this._penDal=DataContainer.get<IPenRepository>(DataLayerTypes.IPenRepository)
     }
     async GetWhereAsync(userId: string, filter: Partial<PenDTO>): Promise<CustomResponse<PenDTO[]>> {
         filter.UserId=userId
