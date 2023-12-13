@@ -10,15 +10,15 @@ import ElementTypeModel from './ElementTypeModel';
 class ElementModel extends Model
 {
     @AutoMap()
-    Id!:number
+    id!:string
     @AutoMap(()=>LayerModel)
     Layer!:LayerModel
     @AutoMap()
-    LayerId!:number
+    LayerId!:string
     @AutoMap()
-    PenId!: number;
+    PenId!: string;
     @AutoMap()
-    ElementTypeId!: number;
+    ElementTypeId!: string;
     @AutoMap(()=>[PointModel])
     Points: PointModel[]=[]
     @AutoMap(()=>[SSAngleModel])
@@ -33,9 +33,9 @@ class ElementModel extends Model
 
 export function initModel(){
     ElementModel.init({
-        Id:{
-            type:DataTypes.INTEGER,
-            autoIncrement:true,
+        id:{
+            type:DataTypes.STRING,
+            defaultValue: DataTypes.UUIDV4,
             allowNull:false,
             primaryKey:true,
             unique:true

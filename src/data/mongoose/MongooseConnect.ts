@@ -31,16 +31,6 @@ export class MongooseConnect implements IConnect{
     
 }
 
-// new MDrawModel({Name:"t"})
-//             .save()
-//             .then(e=>{
-//                 console.log("save",e)
-//             }).catch(err=>{
-//                 console.error(err)
-//             })
-        
-//         MDrawModel.find({Name:{$eq:"test"},Id:{}}).then(e=>{
-//             console.log(e)
-//         })
+
 
 

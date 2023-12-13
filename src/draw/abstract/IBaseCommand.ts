@@ -4,10 +4,10 @@ import { ElementInfo } from "../models/ElementInfo"
 
 
 export interface IBaseCommand{
-    selectedElementTypeId:number
-    selectedDrawId:number
-    selectedLayerId:number
-    selectedPenId:number
+    selectedElementTypeId:string
+    selectedDrawId:string
+    selectedLayerId:string
+    selectedPenId:string
     isCompleted:boolean
     pointList:PointGeo[]
     editList:Element[]

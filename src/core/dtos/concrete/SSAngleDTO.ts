@@ -3,13 +3,13 @@ import { IDTOAbstract } from "../abstract/IDTOAbstract"
 
 
 
-export class SSAngleDTO extends IDTOAbstract<number>{
+export class SSAngleDTO extends IDTOAbstract<string>{
     @AutoMap()
-    Id?: number
+    id?: string
     @AutoMap()
     Type!:string
     @AutoMap()
     Value!:number
     @AutoMap()
-    ElementId!:number
+    ElementId!:string
 }

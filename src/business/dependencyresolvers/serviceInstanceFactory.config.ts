@@ -12,7 +12,7 @@ import { PenManager } from "../concrete/Pen.manager";
 import { IPenService } from "../abstract/IPen.service";
 import { PointManager } from "../concrete/Point.manager";
 import { RadiusManager } from "../concrete/Radius.manager";
-import { SSAngleManager } from "../concrete/SSAngle.manager copy";
+import { SSAngleManager } from "../concrete/SSAngle.manager";
 import { ISSAngleService } from "../abstract/ISSAngle.service";
 import { IRadiusService } from "../abstract/IRadius.service";
 import { IPointService } from "../abstract/IPoint.service";

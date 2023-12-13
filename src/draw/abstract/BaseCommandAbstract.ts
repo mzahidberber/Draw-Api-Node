@@ -4,22 +4,23 @@ import { Point } from "../../core/models/concrete/Point";
 import { Radius } from "../../core/models/concrete/Radius";
 import { SSAngle } from "../../core/models/concrete/SSAngle";
 import { PointGeo } from "../../core/models/others/PointGeo";
+import { CommandEnums } from "../concrete/Enums";
 import { ElementInfo } from "../models/ElementInfo";
 import { IBaseCommand } from "./IBaseCommand";
 
 
 export abstract class BaseCommandAbstract implements IBaseCommand{
     public pointList: PointGeo[]=[]
-    public selectedElementTypeId: number=0
-    public selectedDrawId: number;
-    public selectedLayerId: number;
-    public selectedPenId: number;
+    public selectedElementTypeId: string=CommandEnums.line;
+    public selectedDrawId: string;
+    public selectedLayerId: string;
+    public selectedPenId: string;
     public isCompleted:boolean = false
     public editList: Element[]=[];
     public radius:number
     public isFinish: boolean=false
     
-    constructor(radius:number, drawId: number, layerId: number, penId: number){
+    constructor(radius:number, drawId: string, layerId: string, penId: string){
         this.selectedDrawId=drawId
         this.selectedLayerId=layerId
         this.selectedPenId=penId
@@ -46,10 +47,10 @@ export abstract class BaseCommandAbstract implements IBaseCommand{
         this.isCompleted=true
         this.pointList=[]
         this.editList=[]
-        this.selectedElementTypeId=0
+        this.selectedElementTypeId=CommandEnums.line
     }
 
-    protected async createElementManyPointAsync(elementTypeId:number,points:Point[]=[],radiuses:Radius[]=[],ssangles:SSAngle[]=[]):Promise<Element>
+    protected async createElementManyPointAsync(elementTypeId:string,points:Point[]=[],radiuses:Radius[]=[],ssangles:SSAngle[]=[]):Promise<Element>
     {
         let element=new Element()
         element.ElementTypeId=elementTypeId
@@ -61,7 +62,7 @@ export abstract class BaseCommandAbstract implements IBaseCommand{
         return element
     }
 
-    protected async createPointAsync(pX:number,pY:number,pointTypeId:number):Promise<Point> {
+    protected async createPointAsync(pX:number,pY:number,pointTypeId:string):Promise<Point> {
         let point = new Point()
         point.X=pX
         point.Y=pY

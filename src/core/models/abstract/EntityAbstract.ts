@@ -4,7 +4,7 @@ import { IEntity } from "./IEntity";
 
 export abstract class EntityAbstract<T> implements IEntity<T>{
     @AutoMap()
-    Id!: T
+    id!: T
     @AutoMap()
     createdAt?: Date
     @AutoMap()

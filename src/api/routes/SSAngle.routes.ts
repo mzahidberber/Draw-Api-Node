@@ -5,7 +5,7 @@ import { injectable } from 'inversify';
 import { SSAngleController } from '../controllers/concrete/SSAngle.controller';
 import { ValidationListMethod } from '../validation/Validation';
 import { AddSSAngleShema, UpdateSSAngleShema } from '../validation/Shemas/SSAngle.validation';
-import { IntegerShema } from '../validation/Shemas/All.validation';
+import { IntegerShema, StringShema } from '../validation/Shemas/All.validation';
 @injectable()
 @AutorizeClass()
 export class SSAngleRouter{
@@ -31,7 +31,7 @@ export class SSAngleRouter{
     private async addAsync(req: Request, res: Response, next: NextFunction): Promise<void> {
         await ControllerContainer.get<SSAngleController>(ControllerTypes.SSAngleController).AddEntitiesAsync(req, res, next)
     }
-    @ValidationListMethod("SSAngleRouter",IntegerShema)
+    @ValidationListMethod("SSAngleRouter",StringShema)
     private async deleteAsync(req: Request, res: Response, next: NextFunction): Promise<void> {
         await ControllerContainer.get<SSAngleController>(ControllerTypes.SSAngleController).DeleteDrawsAsync(req, res, next)
     }

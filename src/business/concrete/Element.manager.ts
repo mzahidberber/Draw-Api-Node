@@ -36,17 +36,17 @@ export class ElementManager extends ServiceAbstract implements IElementService{
         return this.BaseGetAllAsync(userId,filter,this._elementDal,Element,ElementDTO)
     }
 
-    async GetAsync(userId: string, entityId: number): Promise<CustomResponse<ElementDTO>> {
+    async GetAsync(userId: string, entityId: string): Promise<CustomResponse<ElementDTO>> {
         return this.BaseGetAsync(entityId,userId,this._elementDal,Element,ElementDTO)
     }
 
     async CheckLayerAndPenIds(userId: string, entities: ElementDTO[]):Promise<boolean>{
         const elementTypes=await this._elementTypeDal.GetAllAsync(userId)
-        const elementTypesIds=elementTypes.map(x=>x.Id)
+        const elementTypesIds=elementTypes.map(x=>x.id)
         const layers=await this._layerDal.GetWhereAsync(userId,{Id:entities.map(x=>x.LayerId)})
-        const layerIds=layers.map(x=>x.Id)
+        const layerIds=layers.map(x=>x.id)
         const pens=await this._penDal.GetWhereAsync(userId,{Id:entities.map(x=>x.PenId)})
-        const penIds=pens.map(x=>x.Id)
+        const penIds=pens.map(x=>x.id)
         await this._layerDal.CommitAsync(true)
         await this._penDal.CommitAsync(true)
         await this._elementTypeDal.CommitAsync(true)
@@ -67,13 +67,13 @@ export class ElementManager extends ServiceAbstract implements IElementService{
     async UpdateAllAsync(userId: string, entities: ElementDTO[]): Promise<CustomResponse<any>> {
         if(!await this.CheckLayerAndPenIds(userId,entities)) return CustomResponse.Fail(400,`User havent layer or pen Or there isnt this element type`)
         return await this.BaseUpdateAllAsync(entities,this._elementDal,Element,ElementDTO,async ()=>{
-            const result=await this._elementDal.GetWhereAsync(userId,{Id:entities.map(x=>x.Id)})
+            const result=await this._elementDal.GetWhereAsync(userId,{id:entities.map(x=>x.id)})
             if (result.length != entities.length) return false
             return true
         })
     }
 
-    async DeleteAllAsync(userId: string, ids: number[]): Promise<CustomResponse<any>> {
+    async DeleteAllAsync(userId: string, ids: string[]): Promise<CustomResponse<any>> {
         return await this.BaseDeleteAllAsync(ids,this._elementDal,async ()=>{
             const result=await this._elementDal.GetWhereAsync(userId,{id:ids})
             if (result.length != ids.length) return false

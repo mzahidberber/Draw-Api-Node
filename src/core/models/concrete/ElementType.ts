@@ -3,9 +3,9 @@ import { EntityAbstract } from "../abstract/EntityAbstract"
 import { Element } from "./Element"
 
 
-export class ElementType extends EntityAbstract<number>{
+export class ElementType extends EntityAbstract<string>{
     @AutoMap()
-    Id!: number
+    id!: string
     @AutoMap()
     Name!:string
     @AutoMap(()=>[Element])

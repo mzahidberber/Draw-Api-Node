@@ -7,7 +7,7 @@ class PointTypeModel extends Model
 {
     
     @AutoMap()
-    Id!:number
+    id!:string
     @AutoMap()
     Name!: string;
     @AutoMap(()=>[PointModel])
@@ -26,9 +26,9 @@ class PointTypeModel extends Model
 
 export function initModel(){
     PointTypeModel.init({
-        Id:{
-            type:DataTypes.INTEGER,
-            autoIncrement:true,
+        id:{
+            type:DataTypes.STRING,
+            defaultValue: DataTypes.UUIDV4,
             allowNull:false,
             primaryKey:true,
             unique:true

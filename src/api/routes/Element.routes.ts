@@ -4,7 +4,7 @@ import { ElementContoller } from '../controllers/concrete/Element.controller';
 import { AutorizeClass } from '../jwt/Authendication';
 import { injectable } from 'inversify';
 import { ValidationListMethod } from '../validation/Validation';
-import { IntegerShema } from '../validation/Shemas/All.validation';
+import { IntegerShema, StringShema } from '../validation/Shemas/All.validation';
 import { AddElemenetShema, UpdateElemenetShema } from '../validation/Shemas/Element.validation';
 
 @injectable()
@@ -34,7 +34,7 @@ export class ElementRouter{
         await ControllerContainer.get<ElementContoller>(ControllerTypes.ElementController).AddEntitiesAsync(req, res, next)
     }
 
-    @ValidationListMethod("ElementRouter",IntegerShema)
+    @ValidationListMethod("ElementRouter",StringShema)
     private async deleteAsync(req: Request, res: Response, next: NextFunction): Promise<void> {
         await ControllerContainer.get<ElementContoller>(ControllerTypes.ElementController).DeleteDrawsAsync(req, res, next)
     }

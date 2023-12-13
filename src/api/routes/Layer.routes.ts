@@ -5,7 +5,7 @@ import { injectable } from 'inversify';
 import { LayerContoller } from '../controllers/concrete/Layer.controller';
 import { AddLayerShema, UpdateLayerShema } from '../validation/Shemas/Layer.validation';
 import { ValidationListMethod } from '../validation/Validation';
-import { IntegerShema } from '../validation/Shemas/All.validation';
+import { IntegerShema, StringShema } from '../validation/Shemas/All.validation';
 
 @injectable()
 @AutorizeClass()
@@ -32,7 +32,7 @@ export class LayerRouter{
     private async addAsync(req: Request, res: Response, next: NextFunction): Promise<void> {
         await ControllerContainer.get<LayerContoller>(ControllerTypes.LayerController).AddEntitiesAsync(req, res, next)
     }
-    @ValidationListMethod("LayerRouter",IntegerShema)
+    @ValidationListMethod("LayerRouter",StringShema)
     private async deleteAsync(req: Request, res: Response, next: NextFunction): Promise<void> {
         await ControllerContainer.get<LayerContoller>(ControllerTypes.LayerController).DeleteDrawsAsync(req, res, next)
     }

@@ -4,16 +4,17 @@ import { GeoService } from "../../../core/services/GeoService/GeoService";
 import { RadiusAndCPoint } from "../../../core/services/GeoService/model/RadiusAndCPoint";
 import { BaseCommandAbstract } from "../../abstract/BaseCommandAbstract";
 import { ElementInfo } from "../../models/ElementInfo";
+import { CommandEnums, PointTypeEnum } from "../Enums";
 
 
 export class  CircleTreePoint  extends BaseCommandAbstract{
 
-    constructor(radius:number,drawId: number, layerId: number, penId: number){
+    constructor(radius:number,drawId: string, layerId: string, penId: string){
         super(radius,drawId,layerId,penId)
     }
 
     async controlCommandAsync(): Promise<ElementInfo> {
-        this.selectedElementTypeId=2
+        this.selectedElementTypeId=CommandEnums.circleTreePoint
         return this.pointList.length == 3 ? await this.addCircleAsync() : await this.errorMessageAsync(3)
     }
 
@@ -30,7 +31,7 @@ export class  CircleTreePoint  extends BaseCommandAbstract{
     }
 
     async createElementAsync(centerPandRadius: RadiusAndCPoint):Promise<Element>{
-        const centerPoint=await this.createPointAsync(centerPandRadius.centerPoint.X,centerPandRadius.centerPoint.Y,1)
+        const centerPoint=await this.createPointAsync(centerPandRadius.centerPoint.X,centerPandRadius.centerPoint.Y,PointTypeEnum.end)
         const radius = new Radius()
         radius.Value=centerPandRadius.radius
         return this.createElementManyPointAsync(this.selectedElementTypeId,[centerPoint],[radius])

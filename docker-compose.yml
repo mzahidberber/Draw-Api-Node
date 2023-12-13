@@ -1,18 +1,30 @@
 version: '3'
 
 services:
-  database:
-    container_name: data
+  mysqldb:
+    container_name: mysql
     image: mysql
     ports:
       - "3307:3306"
-    restart: always
     environment: 
       MYSQL_ROOT_PASSWORD : 123456
     networks:
       - draw
     volumes:
       - .\\mysql_data:/var/lib/mysql
+
+  mongodb:
+    image: mongo
+    container_name: mongo
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: 123456
+    networks:
+      - draw
+    volumes:
+      - .\\mongo_data:/data/db
 
 
   redis:
@@ -32,7 +44,8 @@ services:
       - PORT=3000
       - NODE_ENV=production
       - DB_TYPE=nosql
-      - DBHOST=database
+      - MONGODB_CSTR=mongodb://mongodb:27017/drawdbnode
+      - DBHOST=mysqldb
       - DBUSERNAME=root
       - DBPASSWORD=123456
       - DBNAME=drawdbnode

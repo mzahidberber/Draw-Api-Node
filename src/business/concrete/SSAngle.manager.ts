@@ -27,7 +27,7 @@ export class SSAngleManager extends ServiceAbstract implements ISSAngleService{
     async GetWhereAsync(userId: string, filter: Partial<SSAngleDTO>): Promise<CustomResponse<SSAngleDTO[]>> {
         return this.BaseGetWhereAsync(userId,filter,this._ssangleDal,SSAngle,SSAngleDTO)
     }
-    async GetAsync(userId: string, entityId: number): Promise<CustomResponse<SSAngleDTO>> {
+    async GetAsync(userId: string, entityId: string): Promise<CustomResponse<SSAngleDTO>> {
         return this.BaseGetAsync(entityId,userId,this._ssangleDal,SSAngle,SSAngleDTO)
     }
     async AddAllAsync(userId: string, entities: SSAngleDTO[]): Promise<CustomResponse<SSAngleDTO[]>> {
@@ -37,12 +37,12 @@ export class SSAngleManager extends ServiceAbstract implements ISSAngleService{
     async UpdateAllAsync(userId: string, entities: SSAngleDTO[]): Promise<CustomResponse<any>> {
         if(!await this.CheckElementIds(userId,entities)) return CustomResponse.Fail(400,`User havent element`)
         return await this.BaseUpdateAllAsync(entities,this._ssangleDal,SSAngle,SSAngleDTO,async ()=>{
-            const result=await this._ssangleDal.GetWhereAsync(userId,{Id:entities.map(x=>x.Id)})
+            const result=await this._ssangleDal.GetWhereAsync(userId,{Id:entities.map(x=>x.id)})
             if (result.length != entities.length) return false
             return true
         })
     }
-    async DeleteAllAsync(userId: string, ids: number[]): Promise<CustomResponse<any>> {
+    async DeleteAllAsync(userId: string, ids: string[]): Promise<CustomResponse<any>> {
         return await this.BaseDeleteAllAsync(ids,this._ssangleDal,async ()=>{
             const result=await this._ssangleDal.GetWhereAsync(userId,{id:ids})
             if (result.length != ids.length) return false
@@ -52,7 +52,7 @@ export class SSAngleManager extends ServiceAbstract implements ISSAngleService{
 
     async CheckElementIds(userId: string, entities: SSAngleDTO[]):Promise<boolean>{
         const elements=await this._elementDal.GetWhereAsync(userId,{Id:entities.map(x=>x.ElementId)})
-        const elementIds=elements.map(x=>x.Id)
+        const elementIds=elements.map(x=>x.id)
         await this._elementDal.CommitAsync(true)
         for (let i = 0; i < entities.length; i++) {
             const entity = entities[i]

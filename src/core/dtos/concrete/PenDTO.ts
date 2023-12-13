@@ -5,9 +5,9 @@ import { LayerDTO } from "./LayerDTO"
 
 
 
-export class PenDTO extends IDTOAbstract<number>{
+export class PenDTO extends IDTOAbstract<string>{
     @AutoMap()
-    Id?: number
+    id?: string
     @AutoMap()
     Name!:string
     @AutoMap()
@@ -19,7 +19,7 @@ export class PenDTO extends IDTOAbstract<number>{
     @AutoMap()
     UserId!:string
     @AutoMap()
-    PenStyleId!:number
+    PenStyleId!:string
     @AutoMap(()=>[LayerDTO])
     Layers:LayerDTO[]
     @AutoMap(()=>[ElementDTO])

@@ -4,9 +4,9 @@ import { ElementDTO } from "./ElementDTO"
 import { Draw } from "../../models/concrete/Draw"
 import { DrawDTO } from "./DrawDTO"
 
-export class LayerDTO extends IDTOAbstract<number>{
+export class LayerDTO extends IDTOAbstract<string>{
     @AutoMap()
-    Id?: number;
+    id?: string;
     @AutoMap()
     Name?:string
     @AutoMap()
@@ -20,9 +20,9 @@ export class LayerDTO extends IDTOAbstract<number>{
     @AutoMap(()=>DrawDTO)
     Draw?:DrawDTO
     @AutoMap()
-    DrawId?:number
+    DrawId?:string
     @AutoMap()
-    PenId?:number
+    PenId?:string
     @AutoMap(()=>[ElementDTO])
     Elements?:ElementDTO[]
 

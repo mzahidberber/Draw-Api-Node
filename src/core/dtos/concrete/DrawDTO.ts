@@ -2,9 +2,9 @@ import { AutoMap } from "@automapper/classes";
 import { IDTOAbstract } from "../abstract/IDTOAbstract";
 
 
-export class DrawDTO extends IDTOAbstract<number>{
+export class DrawDTO extends IDTOAbstract<string>{
     @AutoMap()
-    Id?: number
+    id?: string
     @AutoMap()
     Name?:string
     @AutoMap()

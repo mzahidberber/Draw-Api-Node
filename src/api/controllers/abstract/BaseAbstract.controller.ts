@@ -17,22 +17,17 @@ export abstract class BaseController<T extends IDTO<any>>{
     }
 
     
-    protected async CheckEntityIdAsync(entityId:string,res:Response,service:((id:number)=>Promise<any>)):Promise<CustomResponse<T>>{
-        const id=parseInt(entityId)
-        if(!isNaN(id)){
-            return await service(id)
-        }else
-            return CustomResponse.Fail(400,"Id must be number",false)
+    protected async CheckEntityIdAsync(entityId:string,res:Response,service:((id:string)=>Promise<any>)):Promise<CustomResponse<T>>{
+        // const id=parseInt(entityId)
+        // if(!isNaN(id)){
+            return await service(entityId)
+        // }else
+        //     return CustomResponse.Fail(400,"Id must be number",false)
     }
 
     @CacheAspectMethod("BaseController",60)
     async GetEntityAsync(req: Request, res: Response, next: NextFunction):Promise<any>{
-        const result=await this.CheckEntityIdAsync(req.params.id,res,async (id) =>{
-            const result=await this._service.GetAsync(req.user.nameid,id)
-            return result
-        })
-        res.status(result.statusCode).json(result)
-        return result
+        await this._service.GetAsync(req.user.nameid,req.params.id)
     }
     
     @CacheAspectMethod("BaseController",60)

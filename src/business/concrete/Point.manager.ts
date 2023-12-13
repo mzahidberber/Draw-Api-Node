@@ -29,7 +29,7 @@ export class PointManager extends ServiceAbstract implements IPointService{
     async GetWhereAsync(userId: string, filter: Partial<PointDTO>): Promise<CustomResponse<PointDTO[]>> {
         return this.BaseGetWhereAsync(userId,filter,this._pointDal,Point,PointDTO)
     }
-    async GetAsync(userId: string, entityId: number): Promise<CustomResponse<PointDTO>> {
+    async GetAsync(userId: string, entityId: string): Promise<CustomResponse<PointDTO>> {
         return this.BaseGetAsync(entityId,userId,this._pointDal,Point,PointDTO)
     }
     async AddAllAsync(userId: string, entities: PointDTO[]): Promise<CustomResponse<PointDTO[]>> {
@@ -39,12 +39,12 @@ export class PointManager extends ServiceAbstract implements IPointService{
     async UpdateAllAsync(userId: string, entities: PointDTO[]): Promise<CustomResponse<any>> {
         if(!await this.CheckElementAndPointTypeIds(userId,entities)) return CustomResponse.Fail(400,`User havent element or pointType`)
         return await this.BaseUpdateAllAsync(entities,this._pointDal,Point,PointDTO,async ()=>{
-            const result=await this._pointDal.GetWhereAsync(userId,{Id:entities.map(x=>x.Id)})
+            const result=await this._pointDal.GetWhereAsync(userId,{Id:entities.map(x=>x.id)})
             if (result.length != entities.length) return false
             return true
         })
     }
-    async DeleteAllAsync(userId: string, ids: number[]): Promise<CustomResponse<any>> {
+    async DeleteAllAsync(userId: string, ids: string[]): Promise<CustomResponse<any>> {
         return await this.BaseDeleteAllAsync(ids,this._pointDal,async ()=>{
             const result=await this._pointDal.GetWhereAsync(userId,{id:ids})
             if (result.length != ids.length) return false
@@ -54,9 +54,9 @@ export class PointManager extends ServiceAbstract implements IPointService{
 
     async CheckElementAndPointTypeIds(userId: string, entities: PointDTO[]):Promise<boolean>{
         const pointTypes=await this._pointTypeDal.GetAllAsync(userId)
-        const pointTypeIds=pointTypes.map(x=>x.Id)
+        const pointTypeIds=pointTypes.map(x=>x.id)
         const elements=await this._elementDal.GetWhereAsync(userId,{Id:entities.map(x=>x.ElementId)})
-        const elementIds=elements.map(x=>x.Id)
+        const elementIds=elements.map(x=>x.id)
         await this._elementDal.CommitAsync(true)
         await this._pointTypeDal.CommitAsync(true)
         for (let i = 0; i < entities.length; i++) {

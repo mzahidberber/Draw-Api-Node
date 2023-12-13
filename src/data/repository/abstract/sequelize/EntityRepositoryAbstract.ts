@@ -62,12 +62,19 @@ export abstract class EntityRepositoryAbstract<T extends IEntity<any>> implement
     }
 
 
-    async GetByIdAsync(userId:string,id: number): Promise<T | null> {
+    async GetByIdAsync(userId:string,id: string): Promise<T | null> {
         await this.CreateTransaction()
         let entity=await this._model.findByPk(id,{include:this.GetIncludeForUserId(userId)})
         if (!entity) return null
         const entitiesMap=await dataMapper.mapAsync<Model,T>(entity,this._model,this._type)
         return this.CheckEntityUserId(entitiesMap)
+    }
+
+    async GetByIdsAsync(userId: string, ids: string[]): Promise<T[]> {
+        await this.CreateTransaction()
+        const entites=await this._model.findAll({where:{id:ids},include:this.GetIncludeForUserId(userId)})
+        const entitiesMap=await dataMapper.mapArrayAsync<Model,T>(entites,this._model,this._type)
+        return this.CheckEntitiesUserId(entitiesMap)
     }
     
     async AddAsync(entities: T[]): Promise<DataInfo<T[] | null>> {
@@ -84,14 +91,14 @@ export abstract class EntityRepositoryAbstract<T extends IEntity<any>> implement
         try {
             for (let i = 0; i < entities.length; i++) {
                 const entity = entities[i];
-                const data= await this._model.update(this.ObjectFromDictionary(entity),{where:{Id:entity.Id},transaction:this._transaction})
+                const data= await this._model.update(this.ObjectFromDictionary(entity),{where:{Id:entity.id},transaction:this._transaction})
             }
             return new DataInfo(true)
         } catch (error:any) {
             return new DataInfo(false,null,error.message)
         }
     }
-    async DeleteAsync(ids: number[]): Promise<boolean> {
+    async DeleteAsync(ids: string[]): Promise<boolean> {
         await this.CreateTransaction()
         try {
             const data= await this._model.destroy({where:{id:ids}})

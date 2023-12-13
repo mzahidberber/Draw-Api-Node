@@ -4,9 +4,9 @@ import { Element } from "./Element"
 
 
 
-export class Point extends EntityAbstract<number>{
+export class Point extends EntityAbstract<string>{
     @AutoMap()
-    Id!: number
+    id!: string
     @AutoMap()
     X!:number
     @AutoMap()
@@ -14,7 +14,7 @@ export class Point extends EntityAbstract<number>{
     @AutoMap(()=>Element)
     Element?:Element
     @AutoMap()
-    ElementId!:number
+    ElementId!:string
     @AutoMap()
-    PointTypeId!:number
+    PointTypeId!:string
 }

@@ -5,17 +5,17 @@ import { SSAngleDTO } from "./SSAngleDTO"
 import { RadiusDTO } from "./RadiusDTO"
 import { LayerDTO } from "./LayerDTO"
 
-export class ElementDTO extends IDTOAbstract<number>{
+export class ElementDTO extends IDTOAbstract<string>{
     @AutoMap()
-    Id?: number
+    id?: string
     // @AutoMap(()=>LayerDTO)
     Layer?:LayerDTO
     @AutoMap()
-    LayerId!:number
+    LayerId!:string
     @AutoMap()
-    PenId!:number
+    PenId!:string
     @AutoMap()
-    ElementTypeId!:number
+    ElementTypeId!:string
     @AutoMap(()=>[PointDTO])
     Points: PointDTO[]
     @AutoMap(()=>[SSAngleDTO])

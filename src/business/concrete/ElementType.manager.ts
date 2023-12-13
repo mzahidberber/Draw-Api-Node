@@ -24,7 +24,7 @@ export class ElementTypeManager extends ServiceAbstract implements IElementTypeS
     async GetWhereAsync(userId: string, filter: Partial<ElementTypeDTO>): Promise<CustomResponse<ElementTypeDTO[]>> {
         return await this.BaseGetWhereAsync(userId,filter,this._elementTypeDal,ElementType,ElementTypeDTO)
     }
-    async GetAsync(userId: string, entityId: number): Promise<CustomResponse<ElementTypeDTO>> {
+    async GetAsync(userId: string, entityId: string): Promise<CustomResponse<ElementTypeDTO>> {
         return await this.BaseGetAsync(entityId,userId,this._elementTypeDal,ElementType,ElementTypeDTO)
     }
     async AddAllAsync(userId: string, entities: ElementTypeDTO[]): Promise<CustomResponse<ElementTypeDTO[]>> {
@@ -32,12 +32,12 @@ export class ElementTypeManager extends ServiceAbstract implements IElementTypeS
     }
     async UpdateAllAsync(userId: string, entities: ElementTypeDTO[]): Promise<CustomResponse<any>> {
         return await this.BaseUpdateAllAsync(entities,this._elementTypeDal,ElementType,ElementTypeDTO,async ()=>{
-            const result=await this._elementTypeDal.GetWhereAsync(userId,{Id:entities.map(x=>x.Id)})
+            const result=await this._elementTypeDal.GetWhereAsync(userId,{Id:entities.map(x=>x.id)})
             if (result.length != entities.length) return false
             return true
         })
     }
-    async DeleteAllAsync(userId: string, ids: number[]): Promise<CustomResponse<any>> {
+    async DeleteAllAsync(userId: string, ids: string[]): Promise<CustomResponse<any>> {
         return await this.BaseDeleteAllAsync(ids,this._elementTypeDal,async ()=>{
             const result=await this._elementTypeDal.GetWhereAsync(userId,{id:ids})
             if (result.length != ids.length) return false

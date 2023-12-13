@@ -7,11 +7,11 @@ class RadiusModel extends Model
 {
     
     @AutoMap()
-    Id!:number
+    id!:string
     @AutoMap()
     Value!: number;
     @AutoMap()
-    ElementId!:number
+    ElementId!:string
     @AutoMap()
     readonly createdAt!: Date;
     @AutoMap()
@@ -20,9 +20,9 @@ class RadiusModel extends Model
 
 export function initModel(){
     RadiusModel.init({
-        Id:{
-            type:DataTypes.INTEGER,
-            autoIncrement:true,
+        id:{
+            type:DataTypes.STRING,
+            defaultValue: DataTypes.UUIDV4,
             allowNull:false,
             primaryKey:true,
             unique:true

@@ -1,17 +1,16 @@
 import { DataTypes,Model } from 'sequelize'
 import { AutoMap } from '@automapper/classes';
 import LayerModel from './LayerModel';
-import UserModel from './UserModel';
 import { SequelizeConnect } from '../SequelizeConnect';
 
 class DrawModel extends Model
 {
     @AutoMap()
-    Id!:number
+    id!:string
     @AutoMap()
-    Name!: string;
+    Name!: string
     @AutoMap()
-    UserId!: string;
+    UserId!: string
     @AutoMap(()=>[LayerModel])
     Layers: LayerModel[]=[]
     @AutoMap()
@@ -25,12 +24,16 @@ class DrawModel extends Model
 
 export function initModel(){
     DrawModel.init({
-        Id:{
-            type:DataTypes.INTEGER,
-            autoIncrement:true,
+        id:{
+            type:DataTypes.STRING,
+            defaultValue: DataTypes.UUIDV4,
             allowNull:false,
             primaryKey:true,
             unique:true
+        },
+        UserId:{
+            type:DataTypes.STRING,
+            allowNull:false
         },
         Name:{
             type:DataTypes.STRING,
@@ -49,12 +52,6 @@ export function initModel(){
 }
 
 export function createReleationship(){
-    DrawModel.belongsTo(UserModel,{
-      foreignKey:{
-          allowNull:false
-      }
-    })
-    UserModel.hasMany(DrawModel)
 }
 
 

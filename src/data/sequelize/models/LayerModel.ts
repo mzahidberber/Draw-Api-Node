@@ -7,7 +7,7 @@ import PenModel from './PenModel';
 class LayerModel extends Model
 {
     @AutoMap()
-    Id!:number
+    id!:string
     @AutoMap()
     Name!: string;
     @AutoMap()
@@ -19,9 +19,9 @@ class LayerModel extends Model
     @AutoMap()
     NumberOfElements!: number;
     @AutoMap()
-    DrawId!: number;
+    DrawId!: string;
     @AutoMap()
-    PenId!: number;
+    PenId!: string;
     @AutoMap(()=>[ElementModel])
     Elements: ElementModel[]=[]
     @AutoMap()
@@ -34,9 +34,9 @@ class LayerModel extends Model
 
 export function initModel(){
     LayerModel.init({
-        Id:{
-            type:DataTypes.INTEGER,
-            autoIncrement:true,
+        id:{
+            type:DataTypes.STRING,
+            defaultValue: DataTypes.UUIDV4,
             allowNull:false,
             primaryKey:true,
             unique:true

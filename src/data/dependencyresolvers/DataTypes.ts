@@ -36,7 +36,6 @@ export const DataLayerTypes = {
     MPointTypeModel: Symbol("MPointTypeModel"),
     MRadiusModel: Symbol("MRadiusModel"),
     MSSAngleModel: Symbol("MSSAngleModel"),
-    MUserModel: Symbol("MUserModel"),
 
     //models
     Draw:Symbol('Draw'),

@@ -2,12 +2,12 @@ import Joi from "joi"
 
 
 export const AddDrawShema=Joi.object().keys({
-    Id:Joi.number().integer().max(0).strict(),
+    Id:Joi.string(),
     Name:Joi.string().required()
 })
 
 export const UpdateDrawShema=Joi.object().keys({
-    Id:Joi.number().integer().min(1).required().strict(),
+    Id:Joi.string(),
     Name:Joi.string(),
     updatedAt:Joi.date()
 })

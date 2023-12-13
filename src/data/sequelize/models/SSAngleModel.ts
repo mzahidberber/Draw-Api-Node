@@ -7,13 +7,13 @@ import ElementModel from './ElementModel';
 class SSAngleModel extends Model
 {
     @AutoMap()
-    Id!:number
+    id!:string
     @AutoMap()
     Type!: string;
     @AutoMap()
     Value!: number;
     @AutoMap()
-    ElementId!:number
+    ElementId!:string
     @AutoMap()
     readonly createdAt!: Date;
     @AutoMap()
@@ -22,9 +22,9 @@ class SSAngleModel extends Model
 
 export function initModel(){
     SSAngleModel.init({
-        Id:{
-            type:DataTypes.INTEGER,
-            autoIncrement:true,
+        id:{
+            type:DataTypes.STRING,
+            defaultValue: DataTypes.UUIDV4,
             allowNull:false,
             primaryKey:true,
             unique:true

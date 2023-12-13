@@ -18,9 +18,10 @@ export class DrawManager extends ServiceAbstract implements IDrawService{
         super()
         this._drawDal=DataContainer.get<IDrawRepository>(DataLayerTypes.IDrawRepository)
     }
-    async GetLayersAsync(userId: string, drawId: number): Promise<CustomResponse<DrawDTO[]>> {
+    async GetLayersAsync(userId: string, drawId: string): Promise<CustomResponse<DrawDTO[]>> {
         throw new Error("Method not implemented.");
     }
+    
     async GetWhereAsync(userId: string, filter: Partial<DrawDTO>): Promise<CustomResponse<DrawDTO[]>> {
         filter.UserId=userId
         return await this.BaseGetWhereAsync(userId,filter,this._drawDal,Draw,DrawDTO)
@@ -29,7 +30,7 @@ export class DrawManager extends ServiceAbstract implements IDrawService{
     async GetAllAsync(userId: string): Promise<CustomResponse<DrawDTO[]>> {
         return await this.BaseGetAllAsync(userId,{UserId:userId},this._drawDal,Draw,DrawDTO)
     }
-    async GetAsync(userId: string, entityId: number): Promise<CustomResponse<DrawDTO>> {
+    async GetAsync(userId: string, entityId: string): Promise<CustomResponse<DrawDTO>> {
         return await this.BaseGetAsync(entityId,userId,this._drawDal,Draw,DrawDTO)
     }
     async AddAllAsync(userId: string, entities: DrawDTO[]): Promise<CustomResponse<DrawDTO[]>> {
@@ -42,14 +43,19 @@ export class DrawManager extends ServiceAbstract implements IDrawService{
     }
     async UpdateAllAsync(userId: string, entities: DrawDTO[]): Promise<CustomResponse<any>> {
         return await this.BaseUpdateAllAsync(entities,this._drawDal,Draw,DrawDTO,async ()=>{
-            const result=await this._drawDal.GetWhereAsync(userId,{Id:entities.map(x=>x.Id)})
+            let ids:string[]=[]
+            for(const i of entities){
+                if(i.id) ids.push(i.id)
+                else return false
+            }
+            const result=await this._drawDal.GetByIdsAsync(userId,ids)
             if (result.length != entities.length) return false
             return true
         })
     }
-    async DeleteAllAsync(userId: string, ids: number[]): Promise<CustomResponse<any>> {
+    async DeleteAllAsync(userId: string, ids: string[]): Promise<CustomResponse<any>> {
         return await this.BaseDeleteAllAsync(ids,this._drawDal,async ()=>{
-            const result=await this._drawDal.GetWhereAsync(userId,{id:ids})
+            const result=await this._drawDal.GetByIdsAsync(userId,ids)
             if (result.length != ids.length) return false
             return true
         })

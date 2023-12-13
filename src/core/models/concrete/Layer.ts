@@ -4,9 +4,9 @@ import { EntityAbstract } from "../abstract/EntityAbstract"
 import { Draw } from "./Draw"
 
 
-export class Layer extends EntityAbstract<number>{
+export class Layer extends EntityAbstract<string>{
     @AutoMap()
-    Id!: number;
+    id!: string;
     @AutoMap()
     Name!:string
     @AutoMap()
@@ -20,9 +20,9 @@ export class Layer extends EntityAbstract<number>{
     @AutoMap(()=>Draw)
     Draw!:Draw
     @AutoMap()
-    DrawId!:number
+    DrawId!:string
     @AutoMap()
-    PenId!:number
+    PenId!:string
     @AutoMap(()=>[Element])
     Elements:Element[]
 

@@ -3,11 +3,11 @@ import { IDTOAbstract } from "../abstract/IDTOAbstract"
 
 
 
-export class RadiusDTO extends IDTOAbstract<number>{
+export class RadiusDTO extends IDTOAbstract<string>{
     @AutoMap()
-    Id?: number
+    id?: string
     @AutoMap()
     Value!:number
     @AutoMap()
-    ElementId!:number
+    ElementId!:string
 }

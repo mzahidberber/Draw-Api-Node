@@ -5,9 +5,9 @@ import { Element } from "./Element"
 
 
 
-export class Pen extends EntityAbstract<number>{
+export class Pen extends EntityAbstract<string>{
     @AutoMap()
-    Id!: number
+    id!: string
     @AutoMap()
     Name!:string
     @AutoMap()
@@ -19,7 +19,7 @@ export class Pen extends EntityAbstract<number>{
     @AutoMap()
     UserId!:string
     @AutoMap()
-    PenStyleId!:number
+    PenStyleId!:string
     @AutoMap(()=>[Layer])
     Layers:Layer[]
     @AutoMap(()=>[Element])

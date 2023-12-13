@@ -2,15 +2,15 @@ import { PointGeo } from "../../core/models/others/PointGeo";
 import { IDrawAdminastor } from "../abstract/IDrawAdminastor";
 import { ElementInfo } from "../models/ElementInfo";
 import { CommandContext } from "./CommandContext";
-import { CommandEnums } from "./CommandEnums";
+import { CommandEnums } from "./Enums";
 
 export class DrawAdminastor implements IDrawAdminastor{
     public useTime: Date
     private _commandContext:CommandContext
     private _isWorkingCommand:boolean=false
-    private _selectedDrawId:number=0
-    private _selectedLayerId:number=0
-    private _selectedPenId:number=0
+    private _selectedDrawId:string=""
+    private _selectedLayerId:string=""
+    private _selectedPenId:string=""
     private _radius:number=30 //tekrar bak
     
     constructor(){
@@ -20,7 +20,7 @@ export class DrawAdminastor implements IDrawAdminastor{
 
     public refreshTime() { this.useTime=new Date() }
 
-    async startCommandAsync(command: CommandEnums,drawId: number=0, layerId: number=0, penId: number=0): Promise<ElementInfo> {
+    async startCommandAsync(command: CommandEnums,drawId: string="", layerId: string="", penId: string=""): Promise<ElementInfo> {
         this.refreshTime()
         if(!this._isWorkingCommand){
             this._selectedDrawId=drawId

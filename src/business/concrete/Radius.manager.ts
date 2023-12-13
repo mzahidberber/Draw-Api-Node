@@ -27,7 +27,7 @@ export class RadiusManager extends ServiceAbstract implements IRadiusService{
     async GetWhereAsync(userId: string, filter: Partial<RadiusDTO>): Promise<CustomResponse<RadiusDTO[]>> {
         return this.BaseGetWhereAsync(userId,filter,this._radiusDal,Radius,RadiusDTO)
     }
-    async GetAsync(userId: string, entityId: number): Promise<CustomResponse<RadiusDTO>> {
+    async GetAsync(userId: string, entityId: string): Promise<CustomResponse<RadiusDTO>> {
         return this.BaseGetAsync(entityId,userId,this._radiusDal,Radius,RadiusDTO)
     }
     async AddAllAsync(userId: string, entities: RadiusDTO[]): Promise<CustomResponse<RadiusDTO[]>> {
@@ -37,12 +37,12 @@ export class RadiusManager extends ServiceAbstract implements IRadiusService{
     async UpdateAllAsync(userId: string, entities: RadiusDTO[]): Promise<CustomResponse<any>> {
         if(!await this.CheckElementIds(userId,entities)) return CustomResponse.Fail(400,`User havent element`)
         return await this.BaseUpdateAllAsync(entities,this._radiusDal,Radius,RadiusDTO,async ()=>{
-            const result=await this._radiusDal.GetWhereAsync(userId,{Id:entities.map(x=>x.Id)})
+            const result=await this._radiusDal.GetWhereAsync(userId,{Id:entities.map(x=>x.id)})
             if (result.length != entities.length) return false
             return true
         })
     }
-    async DeleteAllAsync(userId: string, ids: number[]): Promise<CustomResponse<any>> {
+    async DeleteAllAsync(userId: string, ids: string[]): Promise<CustomResponse<any>> {
         return await this.BaseDeleteAllAsync(ids,this._radiusDal,async ()=>{
             const result=await this._radiusDal.GetWhereAsync(userId,{id:ids})
             if (result.length != ids.length) return false
@@ -52,7 +52,7 @@ export class RadiusManager extends ServiceAbstract implements IRadiusService{
 
     async CheckElementIds(userId: string, entities: RadiusDTO[]):Promise<boolean>{
         const elements=await this._elementDal.GetWhereAsync(userId,{Id:entities.map(x=>x.ElementId)})
-        const elementIds=elements.map(x=>x.Id)
+        const elementIds=elements.map(x=>x.id)
         await this._elementDal.CommitAsync(true)
         for (let i = 0; i < entities.length; i++) {
             const entity = entities[i]

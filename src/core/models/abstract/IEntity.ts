@@ -1,7 +1,7 @@
 
 
 export interface IEntity<T>{
-    Id:T
+    id:T
     createdAt?:Date
     updatedAt?:Date
 }

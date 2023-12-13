@@ -5,7 +5,7 @@ import { AutorizeClass } from '../jwt/Authendication';
 import { injectable } from 'inversify';
 import { ValidationListMethod } from '../validation/Validation';
 import { AddDrawShema, UpdateDrawShema } from '../validation/Shemas/Draw.validation';
-import { IntegerShema } from '../validation/Shemas/All.validation';
+import { IntegerShema, StringShema } from '../validation/Shemas/All.validation';
 @injectable()
 @AutorizeClass()
 export class DrawRouter{
@@ -36,7 +36,7 @@ export class DrawRouter{
     private async addAsync(req: Request, res: Response, next: NextFunction): Promise<void> {
         await ControllerContainer.get<DrawContoller>(ControllerTypes.DrawController).AddEntitiesAsync(req, res, next)
     }
-    @ValidationListMethod("DrawRouter",IntegerShema)
+    @ValidationListMethod("DrawRouter",StringShema)
     private async deleteAsync(req: Request, res: Response, next: NextFunction): Promise<void> {
         await ControllerContainer.get<DrawContoller>(ControllerTypes.DrawController).DeleteDrawsAsync(req, res, next)
     }

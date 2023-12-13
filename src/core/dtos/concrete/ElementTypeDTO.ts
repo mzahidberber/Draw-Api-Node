@@ -3,9 +3,9 @@ import { IDTOAbstract } from "../abstract/IDTOAbstract"
 import { ElementDTO } from "./ElementDTO"
 
 
-export class ElementTypeDTO extends IDTOAbstract<number>{
+export class ElementTypeDTO extends IDTOAbstract<string>{
     @AutoMap()
-    Id?: number
+    id?: string
     @AutoMap()
     Name!:string
     @AutoMap(()=>[ElementDTO])

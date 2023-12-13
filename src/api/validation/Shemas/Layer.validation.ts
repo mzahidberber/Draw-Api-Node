@@ -1,9 +1,9 @@
 import Joi from "joi"
 
 export const AddLayerShema=Joi.object().keys({
-    Id:Joi.number().integer().max(0).strict(),
-    PenId:Joi.number().integer().min(1).required().strict(),
-    DrawId:Joi.number().integer().min(1).required().strict(),
+    Id:Joi.string(),
+    PenId:Joi.string(),
+    DrawId:Joi.string(),
     Name:Joi.string().required(),
     Lock:Joi.boolean().required(),
     Visibility:Joi.boolean().required(),
@@ -13,9 +13,9 @@ export const AddLayerShema=Joi.object().keys({
 })
 
 export const UpdateLayerShema=Joi.object().keys({
-    Id:Joi.number().integer().min(1).required().strict(),
-    PenId:Joi.number().integer().min(1).required().strict(),
-    DrawId:Joi.number().integer().min(1).required().strict(),
+    Id:Joi.string(),
+    PenId:Joi.string(),
+    DrawId:Joi.string(),
     Name:Joi.string(),
     Lock:Joi.boolean(),
     Visibility:Joi.boolean(),

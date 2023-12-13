@@ -4,7 +4,7 @@ import { LogAspectClass } from "../../core/aspects/logging/LogAspect";
 import { IDrawLayerService } from "../abstract/IDrawLayer.service";
 import { ElementDTO } from "../../core/dtos/concrete/ElementDTO";
 import { PointGeo } from "../../core/models/others/PointGeo";
-import { CommandEnums } from "../../draw/concrete/CommandEnums";
+import { CommandEnums } from "../../draw/concrete/Enums";
 import { DrawAdminastorMultiton } from "../../draw/concrete/DrawAdminastorMultiton";
 
 
@@ -19,7 +19,7 @@ export class DrawLayerManager implements IDrawLayerService{
         else
             return CustomResponse.Fail(200,result.message??"",false)
     }
-    async startCommandAsync(userId: string, command: CommandEnums, drawId?: number | undefined, layerId?: number | undefined, penId?: number | undefined): Promise<CustomResponse<boolean>> {
+    async startCommandAsync(userId: string, command: CommandEnums, drawId?: string | undefined, layerId?: string | undefined, penId?: string | undefined): Promise<CustomResponse<boolean>> {
         const drawAdminastor=DrawAdminastorMultiton.getDrawAdminastor(userId)
         const result=await drawAdminastor.startCommandAsync(command,drawId,layerId,penId)
         if(result.isTrue)

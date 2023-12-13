@@ -25,7 +25,7 @@ export class PenManager extends ServiceAbstract implements IPenService{
     async GetAllAsync(userId: string): Promise<CustomResponse<PenDTO[]>> {
         return await this.BaseGetAllAsync(userId,{UserId:userId},this._penDal,Pen,PenDTO)
     }
-    async GetAsync(userId: string, entityId: number): Promise<CustomResponse<PenDTO>> {
+    async GetAsync(userId: string, entityId: string): Promise<CustomResponse<PenDTO>> {
         return await this.BaseGetAsync(entityId,userId,this._penDal,Pen,PenDTO)
     }
     async AddAllAsync(userId: string, entities: PenDTO[]): Promise<CustomResponse<PenDTO[]>> {
@@ -38,12 +38,12 @@ export class PenManager extends ServiceAbstract implements IPenService{
     }
     async UpdateAllAsync(userId: string, entities: PenDTO[]): Promise<CustomResponse<any>> {
         return await this.BaseUpdateAllAsync(entities,this._penDal,Pen,PenDTO,async ()=>{
-            const result=await this._penDal.GetWhereAsync(userId,{Id:entities.map(x=>x.Id)})
+            const result=await this._penDal.GetWhereAsync(userId,{Id:entities.map(x=>x.id)})
             if (result.length != entities.length) return false
             return true
         })
     }
-    async DeleteAllAsync(userId: string, ids: number[]): Promise<CustomResponse<any>> {
+    async DeleteAllAsync(userId: string, ids: string[]): Promise<CustomResponse<any>> {
         return await this.BaseDeleteAllAsync(ids,this._penDal,async ()=>{
             const result=await this._penDal.GetWhereAsync(userId,{id:ids})
             if (result.length != ids.length) return false

@@ -5,7 +5,7 @@ import { injectable } from 'inversify';
 import { PointController } from '../controllers/concrete/Point.controller';
 import { AddPointShema, UpdatePointShema } from '../validation/Shemas/Point.validation';
 import { ValidationListMethod } from '../validation/Validation';
-import { IntegerShema } from '../validation/Shemas/All.validation';
+import { IntegerShema, StringShema } from '../validation/Shemas/All.validation';
 @injectable()
 @AutorizeClass()
 export class PointRouter{
@@ -31,7 +31,7 @@ export class PointRouter{
     private async addAsync(req: Request, res: Response, next: NextFunction): Promise<void> {
         await ControllerContainer.get<PointController>(ControllerTypes.PointController).AddEntitiesAsync(req, res, next)
     }
-    @ValidationListMethod("PointRouter",IntegerShema)
+    @ValidationListMethod("PointRouter",StringShema)
     private async deleteAsync(req: Request, res: Response, next: NextFunction): Promise<void> {
         await ControllerContainer.get<PointController>(ControllerTypes.PointController).DeleteDrawsAsync(req, res, next)
     }

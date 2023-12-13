@@ -9,37 +9,36 @@ import { ILayerRepository } from "../../data/repository/abstract/ILayerRepositor
 import { Layer } from "../../core/models/concrete/Layer";
 import { LayerDTO } from "../../core/dtos/concrete/LayerDTO";
 import { LogAspectClass } from "../../core/aspects/logging/LogAspect";
+import { ILayerService } from "../abstract/ILayer.service";
 
 
 @injectable()
 @LogAspectClass()
-export class LayerManager extends ServiceAbstract implements IDrawService{
+export class LayerManager extends ServiceAbstract implements ILayerService{
     private _layerDal:ILayerRepository
     constructor(){
         super()
         this._layerDal=DataContainer.get<ILayerRepository>(DataLayerTypes.ILayerRepository)
     }
-    GetLayersAsync(userId: string, drawId: number): Promise<CustomResponse<DrawDTO[]>> {
+    GetAllAsync(userId: string): Promise<CustomResponse<LayerDTO[]>> {
         throw new Error("Method not implemented.");
     }
-    async GetAllAsync(userId: string): Promise<CustomResponse<DrawDTO[]>> {
-        return await this.BaseGetAllAsync(userId,{},this._layerDal,Layer,LayerDTO)
-    }
-    GetWhereAsync(userId: string, filter: Partial<DrawDTO>): Promise<CustomResponse<DrawDTO[]>> {
+    GetWhereAsync(userId: string, filter: Partial<LayerDTO>): Promise<CustomResponse<LayerDTO[]>> {
         throw new Error("Method not implemented.");
     }
-    GetAsync(userId: string, entityId: number): Promise<CustomResponse<DrawDTO>> {
+    GetAsync(userId: string, entityId: string): Promise<CustomResponse<LayerDTO>> {
         throw new Error("Method not implemented.");
     }
-    AddAllAsync(userId: string, entities: DrawDTO[]): Promise<CustomResponse<DrawDTO[]>> {
+    async AddAllAsync(userId: string, entities: LayerDTO[]): Promise<CustomResponse<LayerDTO[]>> {
+        return await this.BaseAddAllAsync(entities,this._layerDal,Layer,LayerDTO)
+    }
+    UpdateAllAsync(userId: string, entities: LayerDTO[]): Promise<CustomResponse<any>> {
         throw new Error("Method not implemented.");
     }
-    UpdateAllAsync(userId: string, entities: DrawDTO[]): Promise<CustomResponse<any>> {
+    DeleteAllAsync(userId: string, ids: string[]): Promise<CustomResponse<any>> {
         throw new Error("Method not implemented.");
     }
-    DeleteAllAsync(userId: string, entities: number[]): Promise<CustomResponse<any>> {
-        throw new Error("Method not implemented.");
-    }
+    
     
 
 }

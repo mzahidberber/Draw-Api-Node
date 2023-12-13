@@ -7,7 +7,7 @@ class PenStyleModel extends Model
 {
     
     @AutoMap()
-    Id!:number
+    id!:string
     @AutoMap()
     Name!: string;
     @AutoMap(()=>[PenModel])
@@ -25,9 +25,9 @@ class PenStyleModel extends Model
 
 export function initModel(){
     PenStyleModel.init({
-        Id:{
-            type:DataTypes.INTEGER,
-            autoIncrement:true,
+        id:{
+            type:DataTypes.STRING,
+            defaultValue: DataTypes.UUIDV4,
             allowNull:false,
             primaryKey:true,
             unique:true

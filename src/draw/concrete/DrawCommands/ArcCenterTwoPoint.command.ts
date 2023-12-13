@@ -7,17 +7,17 @@ import { GeoService } from "../../../core/services/GeoService/GeoService";
 import { StartAndStop } from "../../../core/services/GeoService/model/StartAndStop";
 import { BaseCommandAbstract } from "../../abstract/BaseCommandAbstract";
 import { ElementInfo } from "../../models/ElementInfo";
-import { DrawMath } from "../Helpers/DrawMath";
+import { CommandEnums, PointTypeEnum } from "../Enums";
 
 
 export class  ArcCenterTwoPoint  extends BaseCommandAbstract{
 
-    constructor(radius:number,drawId: number, layerId: number, penId: number){
+    constructor(radius:number,drawId: string, layerId: string, penId: string){
         super(radius,drawId,layerId,penId)
     }
 
     async controlCommandAsync(): Promise<ElementInfo> {
-        this.selectedElementTypeId=4
+        this.selectedElementTypeId=CommandEnums.arcCenterTwoPoint
         return this.pointList.length == 3 ? await this.addArcAsync() : await this.errorMessageAsync(3)
     }
 
@@ -59,10 +59,10 @@ export class  ArcCenterTwoPoint  extends BaseCommandAbstract{
     }
 
     async getPoints(ss:StartAndStop,p3Data:PointGeo,p4Data:PointGeo):Promise<Point[]>{
-        const p1=await this.createPointAsync(this.pointList[0].X,this.pointList[1].Y,1)
-        const p2=await this.createPointAsync(this.pointList[1].X,this.pointList[1].Y,1)
-        const p3=await this.createPointAsync(p3Data.X,p3Data.Y,1)
-        const p4=await this.createPointAsync(p4Data.X,p4Data.Y,1)
+        const p1=await this.createPointAsync(this.pointList[0].X,this.pointList[1].Y,PointTypeEnum.end)
+        const p2=await this.createPointAsync(this.pointList[1].X,this.pointList[1].Y,PointTypeEnum.end)
+        const p3=await this.createPointAsync(p3Data.X,p3Data.Y,PointTypeEnum.end)
+        const p4=await this.createPointAsync(p4Data.X,p4Data.Y,PointTypeEnum.end)
         return [p1,p2,p3,p4]
     }
 

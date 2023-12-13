@@ -4,9 +4,9 @@ import { Element } from "./Element"
 
 
 
-export class SSAngle extends EntityAbstract<number>{
+export class SSAngle extends EntityAbstract<string>{
     @AutoMap()
-    Id!: number
+    id!: string
     @AutoMap()
     Type!:string
     @AutoMap()
@@ -14,5 +14,5 @@ export class SSAngle extends EntityAbstract<number>{
     @AutoMap(()=>Element)
     Element!:Element
     @AutoMap()
-    ElementId!:number
+    ElementId!:string
 }

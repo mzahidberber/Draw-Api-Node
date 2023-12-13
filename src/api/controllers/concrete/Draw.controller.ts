@@ -14,11 +14,9 @@ export class DrawContoller extends BaseController<DrawDTO>{
     }
     @CacheAspectMethod("DrawContoller",60)
     async GetDrawLayers(req: Request, res: Response, next: NextFunction):Promise<any>{
-        await this.CheckEntityIdAsync(req.params.id,res,async (id) =>{
-            const result=await this.service.GetLayersAsync(req.user.nameid,id)
-            res.status(result.statusCode).json(result)
-            return result
-        })
+        const result=await this.service.GetLayersAsync(req.user.nameid,req.params.id)
+        res.status(result.statusCode).json(result)
+        return result
     }
 
 } 

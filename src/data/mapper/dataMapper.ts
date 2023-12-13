@@ -4,7 +4,6 @@ import LayerModel from "../sequelize/models/LayerModel";
 import ElementModel from "../sequelize/models/ElementModel";
 import PointModel from "../sequelize/models/PointModel";
 import DrawModel from "../sequelize/models/DrawModel";
-import UserModel from "../sequelize/models/UserModel";
 import ElementTypeModel from "../sequelize/models/ElementTypeModel";
 import PenModel from "../sequelize/models/PenModel";
 import PenStyleModel from "../sequelize/models/PenStyleModel";
@@ -20,8 +19,9 @@ import { Point } from "../../core/models/concrete/Point";
 import { PointType } from "../../core/models/concrete/PointType";
 import { Radius } from "../../core/models/concrete/Radius";
 import { SSAngle } from "../../core/models/concrete/SSAngle";
-import { User } from "../../core/models/concrete/User";
 import { Element } from "../../core/models/concrete/Element";
+import { MDrawModel } from "../mongoose/models/DrawModel.mongoose";
+import { MLayerModel, layerSchema } from "../mongoose/models/LayerModel.mongoose";
 export const dataMapper = createMapper({
     strategyInitializer:sequelize()
 });
@@ -36,4 +36,5 @@ createMap(dataMapper,PointModel,Point)
 createMap(dataMapper,PointTypeModel,PointType)
 createMap(dataMapper,RadiusModel,Radius)
 createMap(dataMapper,SSAngleModel,SSAngle)
-createMap(dataMapper,UserModel,User)
+
+

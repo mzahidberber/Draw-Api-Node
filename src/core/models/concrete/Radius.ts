@@ -4,13 +4,13 @@ import { Element } from "./Element"
 
 
 
-export class Radius extends EntityAbstract<number>{
+export class Radius extends EntityAbstract<string>{
     @AutoMap()
-    Id!: number
+    id!: string
     @AutoMap()
     Value!:number
     @AutoMap(()=>Element)
     Element!:Element
     @AutoMap()
-    ElementId!:number
+    ElementId!:string
 }

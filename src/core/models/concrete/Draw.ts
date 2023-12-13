@@ -3,9 +3,9 @@ import { EntityAbstract } from "../abstract/EntityAbstract"
 import { Layer } from "./Layer"
 
 
-export class Draw extends EntityAbstract<number>{
+export class Draw extends EntityAbstract<string>{
     @AutoMap()
-    Id!: number;
+    id!: string;
     @AutoMap()
     Name!:string
     @AutoMap()

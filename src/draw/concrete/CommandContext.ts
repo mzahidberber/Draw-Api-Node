@@ -5,7 +5,7 @@ import { CircleTreePoint } from "./DrawCommands/CircleTreePoint.command";
 import { CircleTwoPoint } from "./DrawCommands/CircleTwoPoint.command";
 import { Line } from "./DrawCommands/Line.command";
 import { Rectangle } from "./DrawCommands/Rectangle.command";
-import { CommandEnums } from "./CommandEnums";
+import { CommandEnums } from "./Enums";
 import { DefaultCommand } from "./DrawCommands/Default.command";
 import { SPLine } from "./DrawCommands/SPLine.command";
 import { ArcCenterTwoPoint } from "./DrawCommands/ArcCenterTwoPoint.command";
@@ -17,7 +17,7 @@ export class CommandContext{
     private _command : IBaseCommand
     private _defaultCommand:DefaultCommand
 
-    private _commands:{ [name: string]: new (radius:number,drawId: number, layerId: number, penId: number) => IBaseCommand}={
+    private _commands:{ [name: string]: new (radius:number,drawId: string, layerId: string, penId: string) => IBaseCommand}={
         [CommandEnums.line]:Line,
         [CommandEnums.circleCenterPoint]:CircleCenterPoint,
         [CommandEnums.circleCenterRadius]:CircleCenterRadius,
@@ -32,11 +32,11 @@ export class CommandContext{
     }
 
     constructor(){
-        this._defaultCommand=new DefaultCommand(30,0,0,0)
+        this._defaultCommand=new DefaultCommand(30,"","","")
         this._command=this._defaultCommand
     }
 
-    setCommand(command:CommandEnums,radius:number,drawId:number, layerId: number, penId: number):void{
+    setCommand(command:CommandEnums,radius:number,drawId:string, layerId: string, penId: string):void{
         this._command=new this._commands[command](radius,drawId,layerId,penId)
     }
 

@@ -32,16 +32,16 @@ export class ServiceAbstract{
     }
 
     protected async BaseGetAsync<TDTO,T extends IEntity<any>>(
-        entityId: number,
+        entityId: string,
         userId: string,
         dal:IEntityRepository<T>,
         type:new()=>T,
         typeDTO:new()=>TDTO):Promise<CustomResponse<TDTO>>
     {
-        const entities=await dal.GetWhereAsync(userId,{id:entityId})
+        const entity=await dal.GetByIdAsync(userId,entityId)
         await dal.CommitAsync(true)
-        if (entities.length>0)
-            return CustomResponse.Success(await serviceMapper.mapAsync(entities[0],type,typeDTO))
+        if (entity)
+            return CustomResponse.Success(await serviceMapper.mapAsync(entity,type,typeDTO))
         else
             return CustomResponse.Fail(400,"Entity Not Found!")
     }
@@ -84,7 +84,7 @@ export class ServiceAbstract{
         return CustomResponse.Fail(400,result.error??"Entities cant update")
     }
     protected async BaseDeleteAllAsync<TDTO,T extends IEntity<any>>(
-        ids: number[],
+        ids: string[],
         dal:IEntityRepository<T>,
         checkUserIds:(()=>Promise<boolean>) | null = null)
     {

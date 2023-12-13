@@ -3,13 +3,12 @@ import { AutoMap } from '@automapper/classes';
 import {Layer} from '../../../core/models/concrete/Layer';
 import ElementModel from './ElementModel';
 import { SequelizeConnect } from '../SequelizeConnect';
-import UserModel from './UserModel';
 import PenStyleModel from './PenStyleModel';
 
 class PenModel extends Model 
 {
     @AutoMap()
-    Id!:number
+    id!:string
     @AutoMap()
     Name!: string;
     @AutoMap()
@@ -21,7 +20,7 @@ class PenModel extends Model
     @AutoMap()
     UserId!: string;
     @AutoMap()
-    PenStyleId!: number;
+    PenStyleId!: string;
     @AutoMap()
     Layers: Layer[]=[]
     @AutoMap(()=>[ElementModel])
@@ -35,9 +34,9 @@ class PenModel extends Model
 
 export function initModel(){
     PenModel.init({
-        Id:{
-            type:DataTypes.INTEGER,
-            autoIncrement:true,
+        id:{
+            type:DataTypes.STRING,
+            defaultValue: DataTypes.UUIDV4,
             allowNull:false,
             primaryKey:true,
             unique:true
@@ -66,12 +65,6 @@ export function initModel(){
 }
 
 export function createReleationship(){
-    PenModel.belongsTo(UserModel,{
-        foreignKey:{
-            allowNull:false
-        }
-    })
-    UserModel.hasMany(PenModel)
     
     PenModel.belongsTo(PenStyleModel,{
         foreignKey:{
