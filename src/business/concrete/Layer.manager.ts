@@ -8,7 +8,7 @@ import { ServiceAbstract } from "../abstract/ServiceAbstract";
 import { ILayerRepository } from "../../data/repository/abstract/ILayerRepository";
 import { Layer } from "../../core/models/concrete/Layer";
 import { LayerDTO } from "../../core/dtos/concrete/LayerDTO";
-import { LogAspectClass } from "../../core/aspects/logging/LogAspect";
+import { LogAspectClass } from "../../core/aspects/Logging/LogAspect";
 import { ILayerService } from "../abstract/ILayer.service";
 
 

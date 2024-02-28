@@ -8,7 +8,7 @@ import { ISSAngleService } from "../abstract/ISSAngle.service";
 import { SSAngleDTO } from "../../core/dtos/concrete/SSAngleDTO";
 import { SSAngle } from "../../core/models/concrete/SSAngle";
 import { ISSAngleRepository } from "../../data/repository/abstract/ISSAngleRepository";
-import { LogAspectClass } from "../../core/aspects/logging/LogAspect";
+import { LogAspectClass } from "../../core/aspects/Logging/LogAspect";
 
 
 @injectable()

@@ -1,6 +1,6 @@
 import { injectable } from "inversify";
 import { CustomResponse } from "../../core/dtos/CustomResponse";
-import { LogAspectClass } from "../../core/aspects/logging/LogAspect";
+import { LogAspectClass } from "../../core/aspects/Logging/LogAspect";
 import { IDrawLayerService } from "../abstract/IDrawLayer.service";
 import { ElementDTO } from "../../core/dtos/concrete/ElementDTO";
 import { PointGeo } from "../../core/models/others/PointGeo";

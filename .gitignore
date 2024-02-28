@@ -2,3 +2,5 @@
 /node_modules
 /.vscode
 /logs
+/mongo_data
+/mysql_data

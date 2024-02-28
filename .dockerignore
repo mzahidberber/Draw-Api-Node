@@ -1,0 +1,6 @@
+.git
+node_modules
+mongo_data
+mysql_data
+logs
+dist

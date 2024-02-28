@@ -8,7 +8,7 @@ import { IElementRepository } from "../../data/repository/abstract/IElementRepos
 import { DataContainer } from "../../data/dependencyresolvers/dataInstanceFactory.config";
 import { DataLayerTypes } from "../../data/dependencyresolvers/DataTypes";
 import { Radius } from "../../core/models/concrete/Radius";
-import { LogAspectClass } from "../../core/aspects/logging/LogAspect";
+import { LogAspectClass } from "../../core/aspects/Logging/LogAspect";
 
 
 @injectable()

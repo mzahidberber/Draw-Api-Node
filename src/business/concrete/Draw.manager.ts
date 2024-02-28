@@ -7,7 +7,7 @@ import { IDrawRepository } from "../../data/repository/abstract/IDrawRepository"
 import { IDrawService } from "../abstract/IDraw.service";
 import { ServiceAbstract } from "../abstract/ServiceAbstract";
 import { Draw } from "../../core/models/concrete/Draw";
-import { LogAspectClass } from "../../core/aspects/logging/LogAspect";
+import { LogAspectClass } from "../../core/aspects/Logging/LogAspect";
 
 
 @injectable()
